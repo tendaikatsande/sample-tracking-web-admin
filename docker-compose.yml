@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+  sampletracking:
+    restart: unless-stopped
+    container_name: sampletracking
+    image: springboot-docker-compose-app:1
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - '/etc/timezone:/etc/timezone:ro'
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://192.168.0.40:5432/sample_tracking
+    ports:
+      - '80:80'
+    networks:
+      - sampletrackingnet
+
+networks:
+  sampletrackingnet:
+    driver: bridge
