@@ -1,0 +1,155 @@
+<div>
+  <h2 id="page-heading" data-cy="ShipmentHeading">
+    <span jhiTranslate="sampleTrackingApp.shipment.home.title">Shipments</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="sampleTrackingApp.shipment.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-shipment"
+        [routerLink]="['/shipment/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="sampleTrackingApp.shipment.home.createLabel"> Create a new Shipment </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="shipments?.length === 0">
+    <span jhiTranslate="sampleTrackingApp.shipment.home.notFound">No shipments found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="shipments && shipments.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="sampleTrackingApp.shipment.id">Id</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="appId">
+            <span jhiTranslate="sampleTrackingApp.shipment.appId">App Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="description">
+            <span jhiTranslate="sampleTrackingApp.shipment.description">Description</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="clientId">
+            <span jhiTranslate="sampleTrackingApp.shipment.clientId">Client Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="samples">
+            <span jhiTranslate="sampleTrackingApp.shipment.samples">Samples</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <span jhiTranslate="sampleTrackingApp.shipment.status">Status</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateCreated">
+            <span jhiTranslate="sampleTrackingApp.shipment.dateCreated">Date Created</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateModified">
+            <span jhiTranslate="sampleTrackingApp.shipment.dateModified">Date Modified</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="riderId">
+            <span jhiTranslate="sampleTrackingApp.shipment.riderId">Rider Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="riderName">
+            <span jhiTranslate="sampleTrackingApp.shipment.riderName">Rider Name</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="destination">
+            <span jhiTranslate="sampleTrackingApp.shipment.destination">Destination</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="clusterClientId">
+            <span jhiTranslate="sampleTrackingApp.shipment.clusterClientId">Cluster Client Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="temperatureOrigin">
+            <span jhiTranslate="sampleTrackingApp.shipment.temperatureOrigin">Temperature Origin</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="temperatureDestination">
+            <span jhiTranslate="sampleTrackingApp.shipment.temperatureDestination">Temperature Destination</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="createdBy">
+            <span jhiTranslate="sampleTrackingApp.shipment.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="modifiedBy">
+            <span jhiTranslate="sampleTrackingApp.shipment.modifiedBy">Modified By</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let shipment of shipments; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/shipment', shipment.id, 'view']">{{ shipment.id }}</a>
+          </td>
+          <td>{{ shipment.appId }}</td>
+          <td>{{ shipment.description }}</td>
+          <td>{{ shipment.clientId }}</td>
+          <td>{{ shipment.samples }}</td>
+          <td>{{ shipment.status }}</td>
+          <td>{{ shipment.dateCreated }}</td>
+          <td>{{ shipment.dateModified | formatMediumDatetime }}</td>
+          <td>{{ shipment.riderId }}</td>
+          <td>{{ shipment.riderName }}</td>
+          <td>{{ shipment.destination }}</td>
+          <td>{{ shipment.clusterClientId }}</td>
+          <td>{{ shipment.temperatureOrigin }}</td>
+          <td>{{ shipment.temperatureDestination }}</td>
+          <td>{{ shipment.createdBy }}</td>
+          <td>{{ shipment.modifiedBy | formatMediumDatetime }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/shipment', shipment.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/shipment', shipment.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(shipment)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="shipments && shipments.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

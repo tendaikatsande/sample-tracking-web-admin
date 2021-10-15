@@ -1,0 +1,48 @@
+{
+  "sampleTrackingApp": {
+    "sample": {
+      "home": {
+        "title": "Samples",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Sample",
+        "createOrEditLabel": "Create or edit a Sample",
+        "notFound": "No Samples found"
+      },
+      "created": "A new Sample is created with identifier {{ param }}",
+      "updated": "A Sample is updated with identifier {{ param }}",
+      "deleted": "A Sample is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Sample {{ id }}?"
+      },
+      "detail": {
+        "title": "Sample"
+      },
+      "id": "Id",
+      "appId": "App Id",
+      "clientSampleId": "Client Sample Id",
+      "clientPatientId": "Client Patient Id",
+      "labId": "Lab Id",
+      "clientId": "Client Id",
+      "sampleType": "Sample Type",
+      "testId": "Test Id",
+      "dateCollected": "Date Collected",
+      "collectedBy": "Collected By",
+      "status": "Status",
+      "comment": "Comment",
+      "synced": "Synced",
+      "dateSynced": "Date Synced",
+      "labReferenceId": "Lab Reference Id",
+      "location": "Location",
+      "result": "Result",
+      "resultReceivedBy": "Result Received By",
+      "shipmentId": "Shipment Id",
+      "clientContact": "Client Contact",
+      "temperatureAtHub": "Temperature At Hub",
+      "temperatureAtLab": "Temperature At Lab",
+      "createdBy": "Created By",
+      "modifiedBy": "Modified By",
+      "dateCreated": "Date Created",
+      "dateModified": "Date Modified"
+    }
+  }
+}

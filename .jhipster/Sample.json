@@ -1,0 +1,120 @@
+{
+  "name": "Sample",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "appId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "clientSampleId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "clientPatientId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "labId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "clientId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "sampleType",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "testId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateCollected",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "collectedBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "comment",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "synced",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "dateSynced",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "labReferenceId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "location",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "result",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "resultReceivedBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "shipmentId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "clientContact",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "temperatureAtHub",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "temperatureAtLab",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "modifiedBy",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "dateCreated",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateModified",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [],
+  "entityTableName": "sample",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211015090533"
+}

@@ -1,0 +1,80 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="patient">
+      <h2 data-cy="patientDetailsHeading"><span jhiTranslate="sampleTrackingApp.patient.detail.title">Patient</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="sampleTrackingApp.patient.id">Id</span></dt>
+        <dd>
+          <span>{{ patient.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.patient.appId">App Id</span></dt>
+        <dd>
+          <span>{{ patient.appId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.patient.firstName">First Name</span></dt>
+        <dd>
+          <span>{{ patient.firstName }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.patient.lastName">Last Name</span></dt>
+        <dd>
+          <span>{{ patient.lastName }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.patient.gender">Gender</span></dt>
+        <dd>
+          <span>{{ patient.gender }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.patient.dob">Dob</span></dt>
+        <dd>
+          <span>{{ patient.dob }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.patient.client">Client</span></dt>
+        <dd>
+          <span>{{ patient.client }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.patient.clientPatientId">Client Patient Id</span></dt>
+        <dd>
+          <span>{{ patient.clientPatientId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.patient.cohortNumber">Cohort Number</span></dt>
+        <dd>
+          <span>{{ patient.cohortNumber }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.patient.dateCreated">Date Created</span></dt>
+        <dd>
+          <span>{{ patient.dateCreated }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.patient.dateModified">Date Modified</span></dt>
+        <dd>
+          <span>{{ patient.dateModified | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.patient.phoneNumber">Phone Number</span></dt>
+        <dd>
+          <span>{{ patient.phoneNumber }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.patient.createdBy">Created By</span></dt>
+        <dd>
+          <span>{{ patient.createdBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.patient.modifiedBy">Modified By</span></dt>
+        <dd>
+          <span>{{ patient.modifiedBy | formatMediumDatetime }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/patient', patient.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

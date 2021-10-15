@@ -1,0 +1,302 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-sample-heading" data-cy="SampleCreateUpdateHeading" jhiTranslate="sampleTrackingApp.sample.home.createOrEditLabel">
+        Create or edit a Sample
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.sample.id" for="field_id">Id</label>
+          <input
+            type="text"
+            class="form-control"
+            name="id"
+            id="field_id"
+            data-cy="id"
+            formControlName="id"
+            [readonly]="editForm.get('id')!.value != null"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.sample.appId" for="field_appId">App Id</label>
+          <input type="text" class="form-control" name="appId" id="field_appId" data-cy="appId" formControlName="appId" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.sample.clientSampleId" for="field_clientSampleId"
+            >Client Sample Id</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="clientSampleId"
+            id="field_clientSampleId"
+            data-cy="clientSampleId"
+            formControlName="clientSampleId"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.sample.clientPatientId" for="field_clientPatientId"
+            >Client Patient Id</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="clientPatientId"
+            id="field_clientPatientId"
+            data-cy="clientPatientId"
+            formControlName="clientPatientId"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.sample.labId" for="field_labId">Lab Id</label>
+          <input type="text" class="form-control" name="labId" id="field_labId" data-cy="labId" formControlName="labId" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.sample.clientId" for="field_clientId">Client Id</label>
+          <input type="text" class="form-control" name="clientId" id="field_clientId" data-cy="clientId" formControlName="clientId" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.sample.sampleType" for="field_sampleType">Sample Type</label>
+          <input
+            type="text"
+            class="form-control"
+            name="sampleType"
+            id="field_sampleType"
+            data-cy="sampleType"
+            formControlName="sampleType"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.sample.testId" for="field_testId">Test Id</label>
+          <input type="text" class="form-control" name="testId" id="field_testId" data-cy="testId" formControlName="testId" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.sample.dateCollected" for="field_dateCollected"
+            >Date Collected</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dateCollected"
+              data-cy="dateCollected"
+              type="datetime-local"
+              class="form-control"
+              name="dateCollected"
+              formControlName="dateCollected"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.sample.collectedBy" for="field_collectedBy">Collected By</label>
+          <input
+            type="text"
+            class="form-control"
+            name="collectedBy"
+            id="field_collectedBy"
+            data-cy="collectedBy"
+            formControlName="collectedBy"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.sample.status" for="field_status">Status</label>
+          <input type="text" class="form-control" name="status" id="field_status" data-cy="status" formControlName="status" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.sample.comment" for="field_comment">Comment</label>
+          <input type="text" class="form-control" name="comment" id="field_comment" data-cy="comment" formControlName="comment" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.sample.synced" for="field_synced">Synced</label>
+          <input type="checkbox" class="form-check" name="synced" id="field_synced" data-cy="synced" formControlName="synced" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.sample.dateSynced" for="field_dateSynced">Date Synced</label>
+          <div class="d-flex">
+            <input
+              id="field_dateSynced"
+              data-cy="dateSynced"
+              type="datetime-local"
+              class="form-control"
+              name="dateSynced"
+              formControlName="dateSynced"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.sample.labReferenceId" for="field_labReferenceId"
+            >Lab Reference Id</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="labReferenceId"
+            id="field_labReferenceId"
+            data-cy="labReferenceId"
+            formControlName="labReferenceId"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.sample.location" for="field_location">Location</label>
+          <input type="text" class="form-control" name="location" id="field_location" data-cy="location" formControlName="location" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.sample.result" for="field_result">Result</label>
+          <input type="text" class="form-control" name="result" id="field_result" data-cy="result" formControlName="result" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.sample.resultReceivedBy" for="field_resultReceivedBy"
+            >Result Received By</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="resultReceivedBy"
+            id="field_resultReceivedBy"
+            data-cy="resultReceivedBy"
+            formControlName="resultReceivedBy"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.sample.shipmentId" for="field_shipmentId">Shipment Id</label>
+          <input
+            type="text"
+            class="form-control"
+            name="shipmentId"
+            id="field_shipmentId"
+            data-cy="shipmentId"
+            formControlName="shipmentId"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.sample.clientContact" for="field_clientContact"
+            >Client Contact</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="clientContact"
+            id="field_clientContact"
+            data-cy="clientContact"
+            formControlName="clientContact"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.sample.temperatureAtHub" for="field_temperatureAtHub"
+            >Temperature At Hub</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="temperatureAtHub"
+            id="field_temperatureAtHub"
+            data-cy="temperatureAtHub"
+            formControlName="temperatureAtHub"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.sample.temperatureAtLab" for="field_temperatureAtLab"
+            >Temperature At Lab</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="temperatureAtLab"
+            id="field_temperatureAtLab"
+            data-cy="temperatureAtLab"
+            formControlName="temperatureAtLab"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.sample.createdBy" for="field_createdBy">Created By</label>
+          <input type="text" class="form-control" name="createdBy" id="field_createdBy" data-cy="createdBy" formControlName="createdBy" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.sample.modifiedBy" for="field_modifiedBy">Modified By</label>
+          <div class="d-flex">
+            <input
+              id="field_modifiedBy"
+              data-cy="modifiedBy"
+              type="datetime-local"
+              class="form-control"
+              name="modifiedBy"
+              formControlName="modifiedBy"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.sample.dateCreated" for="field_dateCreated">Date Created</label>
+          <input
+            type="text"
+            class="form-control"
+            name="dateCreated"
+            id="field_dateCreated"
+            data-cy="dateCreated"
+            formControlName="dateCreated"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.sample.dateModified" for="field_dateModified"
+            >Date Modified</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dateModified"
+              data-cy="dateModified"
+              type="datetime-local"
+              class="form-control"
+              name="dateModified"
+              formControlName="dateModified"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

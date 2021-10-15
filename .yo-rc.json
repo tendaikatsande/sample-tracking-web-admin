@@ -44,7 +44,9 @@
     "clientTheme": "none",
     "clientThemeVariant": "",
     "reactive": false,
-    "enableGradleEnterprise": false
+    "enableGradleEnterprise": false,
+    "entities": ["Sample", "Shipment", "Patient", "Laboratory", "Client", "SampleType", "TestType"],
+    "lastLiquibaseTimestamp": 1634288739000
   },
   "git-provider": "GitHub",
   "git-company": "tendaikatsande",
