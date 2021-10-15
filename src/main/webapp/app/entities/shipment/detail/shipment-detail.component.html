@@ -1,0 +1,88 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="shipment">
+      <h2 data-cy="shipmentDetailsHeading"><span jhiTranslate="sampleTrackingApp.shipment.detail.title">Shipment</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="sampleTrackingApp.shipment.id">Id</span></dt>
+        <dd>
+          <span>{{ shipment.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.shipment.appId">App Id</span></dt>
+        <dd>
+          <span>{{ shipment.appId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.shipment.description">Description</span></dt>
+        <dd>
+          <span>{{ shipment.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.shipment.clientId">Client Id</span></dt>
+        <dd>
+          <span>{{ shipment.clientId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.shipment.samples">Samples</span></dt>
+        <dd>
+          <span>{{ shipment.samples }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.shipment.status">Status</span></dt>
+        <dd>
+          <span>{{ shipment.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.shipment.dateCreated">Date Created</span></dt>
+        <dd>
+          <span>{{ shipment.dateCreated }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.shipment.dateModified">Date Modified</span></dt>
+        <dd>
+          <span>{{ shipment.dateModified | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.shipment.riderId">Rider Id</span></dt>
+        <dd>
+          <span>{{ shipment.riderId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.shipment.riderName">Rider Name</span></dt>
+        <dd>
+          <span>{{ shipment.riderName }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.shipment.destination">Destination</span></dt>
+        <dd>
+          <span>{{ shipment.destination }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.shipment.clusterClientId">Cluster Client Id</span></dt>
+        <dd>
+          <span>{{ shipment.clusterClientId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.shipment.temperatureOrigin">Temperature Origin</span></dt>
+        <dd>
+          <span>{{ shipment.temperatureOrigin }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.shipment.temperatureDestination">Temperature Destination</span></dt>
+        <dd>
+          <span>{{ shipment.temperatureDestination }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.shipment.createdBy">Created By</span></dt>
+        <dd>
+          <span>{{ shipment.createdBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.shipment.modifiedBy">Modified By</span></dt>
+        <dd>
+          <span>{{ shipment.modifiedBy | formatMediumDatetime }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/shipment', shipment.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

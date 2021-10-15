@@ -1,0 +1,52 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="testType">
+      <h2 data-cy="testTypeDetailsHeading"><span jhiTranslate="sampleTrackingApp.testType.detail.title">Test Type</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="sampleTrackingApp.testType.id">Id</span></dt>
+        <dd>
+          <span>{{ testType.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.testType.name">Name</span></dt>
+        <dd>
+          <span>{{ testType.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.testType.prefix">Prefix</span></dt>
+        <dd>
+          <span>{{ testType.prefix }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.testType.createdBy">Created By</span></dt>
+        <dd>
+          <span>{{ testType.createdBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.testType.createdDate">Created Date</span></dt>
+        <dd>
+          <span>{{ testType.createdDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.testType.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+          <span>{{ testType.lastModifiedBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.testType.lastModifiedDate">Last Modified Date</span></dt>
+        <dd>
+          <span>{{ testType.lastModifiedDate | formatMediumDatetime }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/test-type', testType.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

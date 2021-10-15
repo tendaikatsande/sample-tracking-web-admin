@@ -1,0 +1,29 @@
+{
+  "sampleTrackingApp": {
+    "sampleType": {
+      "home": {
+        "title": "Sample Types",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Sample Type",
+        "createOrEditLabel": "Create or edit a Sample Type",
+        "notFound": "No Sample Types found"
+      },
+      "created": "A new Sample Type is created with identifier {{ param }}",
+      "updated": "A Sample Type is updated with identifier {{ param }}",
+      "deleted": "A Sample Type is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Sample Type {{ id }}?"
+      },
+      "detail": {
+        "title": "Sample Type"
+      },
+      "id": "Id",
+      "name": "Name",
+      "prefix": "Prefix",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified Date"
+    }
+  }
+}

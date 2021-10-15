@@ -1,0 +1,184 @@
+<div>
+  <h2 id="page-heading" data-cy="SampleHeading">
+    <span jhiTranslate="sampleTrackingApp.sample.home.title">Samples</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="sampleTrackingApp.sample.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-sample"
+        [routerLink]="['/sample/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="sampleTrackingApp.sample.home.createLabel"> Create a new Sample </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="samples?.length === 0">
+    <span jhiTranslate="sampleTrackingApp.sample.home.notFound">No samples found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="samples && samples.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="sampleTrackingApp.sample.id">Id</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="appId">
+            <span jhiTranslate="sampleTrackingApp.sample.appId">App Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="clientSampleId">
+            <span jhiTranslate="sampleTrackingApp.sample.clientSampleId">Client Sample Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="clientPatientId">
+            <span jhiTranslate="sampleTrackingApp.sample.clientPatientId">Client Patient Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="labId">
+            <span jhiTranslate="sampleTrackingApp.sample.labId">Lab Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="clientId">
+            <span jhiTranslate="sampleTrackingApp.sample.clientId">Client Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="sampleType">
+            <span jhiTranslate="sampleTrackingApp.sample.sampleType">Sample Type</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="testId">
+            <span jhiTranslate="sampleTrackingApp.sample.testId">Test Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateCollected">
+            <span jhiTranslate="sampleTrackingApp.sample.dateCollected">Date Collected</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="collectedBy">
+            <span jhiTranslate="sampleTrackingApp.sample.collectedBy">Collected By</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <span jhiTranslate="sampleTrackingApp.sample.status">Status</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="comment">
+            <span jhiTranslate="sampleTrackingApp.sample.comment">Comment</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="synced">
+            <span jhiTranslate="sampleTrackingApp.sample.synced">Synced</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateSynced">
+            <span jhiTranslate="sampleTrackingApp.sample.dateSynced">Date Synced</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="labReferenceId">
+            <span jhiTranslate="sampleTrackingApp.sample.labReferenceId">Lab Reference Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="location">
+            <span jhiTranslate="sampleTrackingApp.sample.location">Location</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="result">
+            <span jhiTranslate="sampleTrackingApp.sample.result">Result</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="resultReceivedBy">
+            <span jhiTranslate="sampleTrackingApp.sample.resultReceivedBy">Result Received By</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="shipmentId">
+            <span jhiTranslate="sampleTrackingApp.sample.shipmentId">Shipment Id</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="clientContact">
+            <span jhiTranslate="sampleTrackingApp.sample.clientContact">Client Contact</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="temperatureAtHub">
+            <span jhiTranslate="sampleTrackingApp.sample.temperatureAtHub">Temperature At Hub</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="temperatureAtLab">
+            <span jhiTranslate="sampleTrackingApp.sample.temperatureAtLab">Temperature At Lab</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="createdBy">
+            <span jhiTranslate="sampleTrackingApp.sample.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="modifiedBy">
+            <span jhiTranslate="sampleTrackingApp.sample.modifiedBy">Modified By</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateCreated">
+            <span jhiTranslate="sampleTrackingApp.sample.dateCreated">Date Created</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateModified">
+            <span jhiTranslate="sampleTrackingApp.sample.dateModified">Date Modified</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sample of samples; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/sample', sample.id, 'view']">{{ sample.id }}</a>
+          </td>
+          <td>{{ sample.appId }}</td>
+          <td>{{ sample.clientSampleId }}</td>
+          <td>{{ sample.clientPatientId }}</td>
+          <td>{{ sample.labId }}</td>
+          <td>{{ sample.clientId }}</td>
+          <td>{{ sample.sampleType }}</td>
+          <td>{{ sample.testId }}</td>
+          <td>{{ sample.dateCollected | formatMediumDatetime }}</td>
+          <td>{{ sample.collectedBy }}</td>
+          <td>{{ sample.status }}</td>
+          <td>{{ sample.comment }}</td>
+          <td>{{ sample.synced }}</td>
+          <td>{{ sample.dateSynced | formatMediumDatetime }}</td>
+          <td>{{ sample.labReferenceId }}</td>
+          <td>{{ sample.location }}</td>
+          <td>{{ sample.result }}</td>
+          <td>{{ sample.resultReceivedBy }}</td>
+          <td>{{ sample.shipmentId }}</td>
+          <td>{{ sample.clientContact }}</td>
+          <td>{{ sample.temperatureAtHub }}</td>
+          <td>{{ sample.temperatureAtLab }}</td>
+          <td>{{ sample.createdBy }}</td>
+          <td>{{ sample.modifiedBy | formatMediumDatetime }}</td>
+          <td>{{ sample.dateCreated }}</td>
+          <td>{{ sample.dateModified | formatMediumDatetime }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/sample', sample.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/sample', sample.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(sample)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="samples && samples.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

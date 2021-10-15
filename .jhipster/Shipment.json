@@ -1,0 +1,81 @@
+{
+  "name": "Shipment",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "appId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "clientId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "samples",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateCreated",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateModified",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "riderId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "riderName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "destination",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "clusterClientId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "temperatureOrigin",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "temperatureDestination",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "modifiedBy",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [],
+  "entityTableName": "shipment",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211015090534"
+}

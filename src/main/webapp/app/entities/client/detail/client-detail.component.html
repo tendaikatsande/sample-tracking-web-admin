@@ -1,0 +1,76 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="client">
+      <h2 data-cy="clientDetailsHeading"><span jhiTranslate="sampleTrackingApp.client.detail.title">Client</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ client.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.client.clientUid">Client Uid</span></dt>
+        <dd>
+          <span>{{ client.clientUid }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.client.clientId">Client Id</span></dt>
+        <dd>
+          <span>{{ client.clientId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.client.name">Name</span></dt>
+        <dd>
+          <span>{{ client.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.client.phone">Phone</span></dt>
+        <dd>
+          <span>{{ client.phone }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.client.districtId">District Id</span></dt>
+        <dd>
+          <span>{{ client.districtId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.client.districtName">District Name</span></dt>
+        <dd>
+          <span>{{ client.districtName }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.client.provinceId">Province Id</span></dt>
+        <dd>
+          <span>{{ client.provinceId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.client.provinceName">Province Name</span></dt>
+        <dd>
+          <span>{{ client.provinceName }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.client.createdBy">Created By</span></dt>
+        <dd>
+          <span>{{ client.createdBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.client.createdDate">Created Date</span></dt>
+        <dd>
+          <span>{{ client.createdDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.client.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+          <span>{{ client.lastModifiedBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.client.lastModifiedDate">Last Modified Date</span></dt>
+        <dd>
+          <span>{{ client.lastModifiedDate | formatMediumDatetime }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/client', client.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

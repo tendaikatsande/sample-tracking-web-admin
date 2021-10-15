@@ -1,0 +1,196 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-shipment-heading" data-cy="ShipmentCreateUpdateHeading" jhiTranslate="sampleTrackingApp.shipment.home.createOrEditLabel">
+        Create or edit a Shipment
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.shipment.id" for="field_id">Id</label>
+          <input
+            type="text"
+            class="form-control"
+            name="id"
+            id="field_id"
+            data-cy="id"
+            formControlName="id"
+            [readonly]="editForm.get('id')!.value != null"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.shipment.appId" for="field_appId">App Id</label>
+          <input type="text" class="form-control" name="appId" id="field_appId" data-cy="appId" formControlName="appId" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.shipment.description" for="field_description"
+            >Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.shipment.clientId" for="field_clientId">Client Id</label>
+          <input type="text" class="form-control" name="clientId" id="field_clientId" data-cy="clientId" formControlName="clientId" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.shipment.samples" for="field_samples">Samples</label>
+          <textarea class="form-control" name="samples" id="field_samples" data-cy="samples" formControlName="samples"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.shipment.status" for="field_status">Status</label>
+          <input type="text" class="form-control" name="status" id="field_status" data-cy="status" formControlName="status" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.shipment.dateCreated" for="field_dateCreated"
+            >Date Created</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="dateCreated"
+            id="field_dateCreated"
+            data-cy="dateCreated"
+            formControlName="dateCreated"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.shipment.dateModified" for="field_dateModified"
+            >Date Modified</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dateModified"
+              data-cy="dateModified"
+              type="datetime-local"
+              class="form-control"
+              name="dateModified"
+              formControlName="dateModified"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.shipment.riderId" for="field_riderId">Rider Id</label>
+          <input type="text" class="form-control" name="riderId" id="field_riderId" data-cy="riderId" formControlName="riderId" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.shipment.riderName" for="field_riderName">Rider Name</label>
+          <input type="text" class="form-control" name="riderName" id="field_riderName" data-cy="riderName" formControlName="riderName" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.shipment.destination" for="field_destination"
+            >Destination</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="destination"
+            id="field_destination"
+            data-cy="destination"
+            formControlName="destination"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.shipment.clusterClientId" for="field_clusterClientId"
+            >Cluster Client Id</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="clusterClientId"
+            id="field_clusterClientId"
+            data-cy="clusterClientId"
+            formControlName="clusterClientId"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.shipment.temperatureOrigin" for="field_temperatureOrigin"
+            >Temperature Origin</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="temperatureOrigin"
+            id="field_temperatureOrigin"
+            data-cy="temperatureOrigin"
+            formControlName="temperatureOrigin"
+          />
+        </div>
+
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            jhiTranslate="sampleTrackingApp.shipment.temperatureDestination"
+            for="field_temperatureDestination"
+            >Temperature Destination</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="temperatureDestination"
+            id="field_temperatureDestination"
+            data-cy="temperatureDestination"
+            formControlName="temperatureDestination"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.shipment.createdBy" for="field_createdBy">Created By</label>
+          <input type="text" class="form-control" name="createdBy" id="field_createdBy" data-cy="createdBy" formControlName="createdBy" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.shipment.modifiedBy" for="field_modifiedBy">Modified By</label>
+          <div class="d-flex">
+            <input
+              id="field_modifiedBy"
+              data-cy="modifiedBy"
+              type="datetime-local"
+              class="form-control"
+              name="modifiedBy"
+              formControlName="modifiedBy"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

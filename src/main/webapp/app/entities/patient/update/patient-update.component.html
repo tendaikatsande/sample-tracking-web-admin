@@ -1,0 +1,165 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-patient-heading" data-cy="PatientCreateUpdateHeading" jhiTranslate="sampleTrackingApp.patient.home.createOrEditLabel">
+        Create or edit a Patient
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.patient.id" for="field_id">Id</label>
+          <input
+            type="text"
+            class="form-control"
+            name="id"
+            id="field_id"
+            data-cy="id"
+            formControlName="id"
+            [readonly]="editForm.get('id')!.value != null"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.patient.appId" for="field_appId">App Id</label>
+          <input type="text" class="form-control" name="appId" id="field_appId" data-cy="appId" formControlName="appId" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.patient.firstName" for="field_firstName">First Name</label>
+          <input type="text" class="form-control" name="firstName" id="field_firstName" data-cy="firstName" formControlName="firstName" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.patient.lastName" for="field_lastName">Last Name</label>
+          <input type="text" class="form-control" name="lastName" id="field_lastName" data-cy="lastName" formControlName="lastName" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.patient.gender" for="field_gender">Gender</label>
+          <input type="text" class="form-control" name="gender" id="field_gender" data-cy="gender" formControlName="gender" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.patient.dob" for="field_dob">Dob</label>
+          <input type="text" class="form-control" name="dob" id="field_dob" data-cy="dob" formControlName="dob" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.patient.client" for="field_client">Client</label>
+          <input type="text" class="form-control" name="client" id="field_client" data-cy="client" formControlName="client" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.patient.clientPatientId" for="field_clientPatientId"
+            >Client Patient Id</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="clientPatientId"
+            id="field_clientPatientId"
+            data-cy="clientPatientId"
+            formControlName="clientPatientId"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.patient.cohortNumber" for="field_cohortNumber"
+            >Cohort Number</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="cohortNumber"
+            id="field_cohortNumber"
+            data-cy="cohortNumber"
+            formControlName="cohortNumber"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.patient.dateCreated" for="field_dateCreated"
+            >Date Created</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="dateCreated"
+            id="field_dateCreated"
+            data-cy="dateCreated"
+            formControlName="dateCreated"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.patient.dateModified" for="field_dateModified"
+            >Date Modified</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_dateModified"
+              data-cy="dateModified"
+              type="datetime-local"
+              class="form-control"
+              name="dateModified"
+              formControlName="dateModified"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.patient.phoneNumber" for="field_phoneNumber"
+            >Phone Number</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="phoneNumber"
+            id="field_phoneNumber"
+            data-cy="phoneNumber"
+            formControlName="phoneNumber"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.patient.createdBy" for="field_createdBy">Created By</label>
+          <input type="text" class="form-control" name="createdBy" id="field_createdBy" data-cy="createdBy" formControlName="createdBy" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.patient.modifiedBy" for="field_modifiedBy">Modified By</label>
+          <div class="d-flex">
+            <input
+              id="field_modifiedBy"
+              data-cy="modifiedBy"
+              type="datetime-local"
+              class="form-control"
+              name="modifiedBy"
+              formControlName="modifiedBy"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

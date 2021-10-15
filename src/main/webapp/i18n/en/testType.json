@@ -1,0 +1,29 @@
+{
+  "sampleTrackingApp": {
+    "testType": {
+      "home": {
+        "title": "Test Types",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Test Type",
+        "createOrEditLabel": "Create or edit a Test Type",
+        "notFound": "No Test Types found"
+      },
+      "created": "A new Test Type is created with identifier {{ param }}",
+      "updated": "A Test Type is updated with identifier {{ param }}",
+      "deleted": "A Test Type is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Test Type {{ id }}?"
+      },
+      "detail": {
+        "title": "Test Type"
+      },
+      "id": "Id",
+      "name": "Name",
+      "prefix": "Prefix",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified Date"
+    }
+  }
+}

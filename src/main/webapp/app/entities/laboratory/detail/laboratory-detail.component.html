@@ -1,0 +1,56 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="laboratory">
+      <h2 data-cy="laboratoryDetailsHeading"><span jhiTranslate="sampleTrackingApp.laboratory.detail.title">Laboratory</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="sampleTrackingApp.laboratory.id">Id</span></dt>
+        <dd>
+          <span>{{ laboratory.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.laboratory.name">Name</span></dt>
+        <dd>
+          <span>{{ laboratory.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.laboratory.type">Type</span></dt>
+        <dd>
+          <span>{{ laboratory.type }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.laboratory.code">Code</span></dt>
+        <dd>
+          <span>{{ laboratory.code }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.laboratory.createdBy">Created By</span></dt>
+        <dd>
+          <span>{{ laboratory.createdBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.laboratory.createdDate">Created Date</span></dt>
+        <dd>
+          <span>{{ laboratory.createdDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.laboratory.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+          <span>{{ laboratory.lastModifiedBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.laboratory.lastModifiedDate">Last Modified Date</span></dt>
+        <dd>
+          <span>{{ laboratory.lastModifiedDate | formatMediumDatetime }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/laboratory', laboratory.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

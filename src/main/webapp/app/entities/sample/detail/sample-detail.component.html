@@ -1,0 +1,128 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="sample">
+      <h2 data-cy="sampleDetailsHeading"><span jhiTranslate="sampleTrackingApp.sample.detail.title">Sample</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="sampleTrackingApp.sample.id">Id</span></dt>
+        <dd>
+          <span>{{ sample.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.sample.appId">App Id</span></dt>
+        <dd>
+          <span>{{ sample.appId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.sample.clientSampleId">Client Sample Id</span></dt>
+        <dd>
+          <span>{{ sample.clientSampleId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.sample.clientPatientId">Client Patient Id</span></dt>
+        <dd>
+          <span>{{ sample.clientPatientId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.sample.labId">Lab Id</span></dt>
+        <dd>
+          <span>{{ sample.labId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.sample.clientId">Client Id</span></dt>
+        <dd>
+          <span>{{ sample.clientId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.sample.sampleType">Sample Type</span></dt>
+        <dd>
+          <span>{{ sample.sampleType }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.sample.testId">Test Id</span></dt>
+        <dd>
+          <span>{{ sample.testId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.sample.dateCollected">Date Collected</span></dt>
+        <dd>
+          <span>{{ sample.dateCollected | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.sample.collectedBy">Collected By</span></dt>
+        <dd>
+          <span>{{ sample.collectedBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.sample.status">Status</span></dt>
+        <dd>
+          <span>{{ sample.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.sample.comment">Comment</span></dt>
+        <dd>
+          <span>{{ sample.comment }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.sample.synced">Synced</span></dt>
+        <dd>
+          <span>{{ sample.synced }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.sample.dateSynced">Date Synced</span></dt>
+        <dd>
+          <span>{{ sample.dateSynced | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.sample.labReferenceId">Lab Reference Id</span></dt>
+        <dd>
+          <span>{{ sample.labReferenceId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.sample.location">Location</span></dt>
+        <dd>
+          <span>{{ sample.location }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.sample.result">Result</span></dt>
+        <dd>
+          <span>{{ sample.result }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.sample.resultReceivedBy">Result Received By</span></dt>
+        <dd>
+          <span>{{ sample.resultReceivedBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.sample.shipmentId">Shipment Id</span></dt>
+        <dd>
+          <span>{{ sample.shipmentId }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.sample.clientContact">Client Contact</span></dt>
+        <dd>
+          <span>{{ sample.clientContact }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.sample.temperatureAtHub">Temperature At Hub</span></dt>
+        <dd>
+          <span>{{ sample.temperatureAtHub }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.sample.temperatureAtLab">Temperature At Lab</span></dt>
+        <dd>
+          <span>{{ sample.temperatureAtLab }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.sample.createdBy">Created By</span></dt>
+        <dd>
+          <span>{{ sample.createdBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.sample.modifiedBy">Modified By</span></dt>
+        <dd>
+          <span>{{ sample.modifiedBy | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.sample.dateCreated">Date Created</span></dt>
+        <dd>
+          <span>{{ sample.dateCreated }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.sample.dateModified">Date Modified</span></dt>
+        <dd>
+          <span>{{ sample.dateModified | formatMediumDatetime }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/sample', sample.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

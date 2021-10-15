@@ -1,0 +1,35 @@
+{
+  "sampleTrackingApp": {
+    "client": {
+      "home": {
+        "title": "Clients",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Client",
+        "createOrEditLabel": "Create or edit a Client",
+        "notFound": "No Clients found"
+      },
+      "created": "A new Client is created with identifier {{ param }}",
+      "updated": "A Client is updated with identifier {{ param }}",
+      "deleted": "A Client is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Client {{ id }}?"
+      },
+      "detail": {
+        "title": "Client"
+      },
+      "id": "ID",
+      "clientUid": "Client Uid",
+      "clientId": "Client Id",
+      "name": "Name",
+      "phone": "Phone",
+      "districtId": "District Id",
+      "districtName": "District Name",
+      "provinceId": "Province Id",
+      "provinceName": "Province Name",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified Date"
+    }
+  }
+}
