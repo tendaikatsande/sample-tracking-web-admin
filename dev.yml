@@ -7,7 +7,7 @@ services:
     image: springboot-docker-compose-app:1
     build:
       context: ./
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - '/etc/timezone:/etc/timezone:ro'
@@ -15,7 +15,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://192.168.0.40:5432/sample_tracking
       - JVM_OPTS=-Xmx2g -Xms2g -XX:MaxPermSize=1024m
     ports:
-      - '80:80'
+      - '80:8080'
     networks:
       - sampletrackingnet
 
