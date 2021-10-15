@@ -33,9 +33,9 @@ spring:
       enabled: false
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5432/sampleTracking
-    username: sampleTracking
-    password:
+    url: jdbc:postgresql://localhost:5432/sample_tracking
+    username: nmrl
+    password: password
     hikari:
       poolName: Hikari
       auto-commit: false
