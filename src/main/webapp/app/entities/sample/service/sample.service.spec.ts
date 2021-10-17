@@ -46,6 +46,10 @@ describe('Sample Service', () => {
       clientContact: 'AAAAAAA',
       temperatureAtHub: 'AAAAAAA',
       temperatureAtLab: 'AAAAAAA',
+      isModifiedByHub: false,
+      isModifiedByFacility: false,
+      isModifiedByLaboratory: false,
+      isModifiedByCourrier: false,
       createdBy: 'AAAAAAA',
       modifiedBy: currentDate,
       dateCreated: 'AAAAAAA',
@@ -126,6 +130,10 @@ describe('Sample Service', () => {
           clientContact: 'BBBBBB',
           temperatureAtHub: 'BBBBBB',
           temperatureAtLab: 'BBBBBB',
+          isModifiedByHub: true,
+          isModifiedByFacility: true,
+          isModifiedByLaboratory: true,
+          isModifiedByCourrier: true,
           createdBy: 'BBBBBB',
           modifiedBy: currentDate.format(DATE_TIME_FORMAT),
           dateCreated: 'BBBBBB',
@@ -165,9 +173,12 @@ describe('Sample Service', () => {
           resultReceivedBy: 'BBBBBB',
           clientContact: 'BBBBBB',
           temperatureAtLab: 'BBBBBB',
+          isModifiedByHub: true,
+          isModifiedByFacility: true,
+          isModifiedByLaboratory: true,
           createdBy: 'BBBBBB',
-          modifiedBy: currentDate.format(DATE_TIME_FORMAT),
           dateCreated: 'BBBBBB',
+          dateModified: currentDate.format(DATE_TIME_FORMAT),
         },
         new Sample()
       );
@@ -216,6 +227,10 @@ describe('Sample Service', () => {
           clientContact: 'BBBBBB',
           temperatureAtHub: 'BBBBBB',
           temperatureAtLab: 'BBBBBB',
+          isModifiedByHub: true,
+          isModifiedByFacility: true,
+          isModifiedByLaboratory: true,
+          isModifiedByCourrier: true,
           createdBy: 'BBBBBB',
           modifiedBy: currentDate.format(DATE_TIME_FORMAT),
           dateCreated: 'BBBBBB',
@@ -279,7 +294,7 @@ describe('Sample Service', () => {
       });
 
       it('should add only unique Sample to an array', () => {
-        const sampleArray: ISample[] = [{ id: 'ABC' }, { id: 'CBA' }, { id: 'e6cbfab2-92bf-4dd3-84cd-7b4f5672c37c' }];
+        const sampleArray: ISample[] = [{ id: 'ABC' }, { id: 'CBA' }, { id: 'fab292bf-dd34-44cd-bb4f-5672c37cc37d' }];
         const sampleCollection: ISample[] = [{ id: 'ABC' }];
         expectedResult = service.addSampleToCollectionIfMissing(sampleCollection, ...sampleArray);
         expect(expectedResult).toHaveLength(3);

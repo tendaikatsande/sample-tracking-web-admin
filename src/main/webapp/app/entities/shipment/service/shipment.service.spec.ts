@@ -38,6 +38,10 @@ describe('Shipment Service', () => {
       clusterClientId: 'AAAAAAA',
       temperatureOrigin: 'AAAAAAA',
       temperatureDestination: 'AAAAAAA',
+      isModifiedByHub: false,
+      isModifiedByFacility: false,
+      isModifiedByLaboratory: false,
+      isModifiedByCourrier: false,
       createdBy: 'AAAAAAA',
       modifiedBy: currentDate,
     };
@@ -102,6 +106,10 @@ describe('Shipment Service', () => {
           clusterClientId: 'BBBBBB',
           temperatureOrigin: 'BBBBBB',
           temperatureDestination: 'BBBBBB',
+          isModifiedByHub: true,
+          isModifiedByFacility: true,
+          isModifiedByLaboratory: true,
+          isModifiedByCourrier: true,
           createdBy: 'BBBBBB',
           modifiedBy: currentDate.format(DATE_TIME_FORMAT),
         },
@@ -136,7 +144,10 @@ describe('Shipment Service', () => {
           destination: 'BBBBBB',
           temperatureOrigin: 'BBBBBB',
           temperatureDestination: 'BBBBBB',
-          modifiedBy: currentDate.format(DATE_TIME_FORMAT),
+          isModifiedByFacility: true,
+          isModifiedByLaboratory: true,
+          isModifiedByCourrier: true,
+          createdBy: 'BBBBBB',
         },
         new Shipment()
       );
@@ -175,6 +186,10 @@ describe('Shipment Service', () => {
           clusterClientId: 'BBBBBB',
           temperatureOrigin: 'BBBBBB',
           temperatureDestination: 'BBBBBB',
+          isModifiedByHub: true,
+          isModifiedByFacility: true,
+          isModifiedByLaboratory: true,
+          isModifiedByCourrier: true,
           createdBy: 'BBBBBB',
           modifiedBy: currentDate.format(DATE_TIME_FORMAT),
         },
@@ -234,7 +249,7 @@ describe('Shipment Service', () => {
       });
 
       it('should add only unique Shipment to an array', () => {
-        const shipmentArray: IShipment[] = [{ id: 'ABC' }, { id: 'CBA' }, { id: 'bac01252-2474-4f05-aa4c-39765fe34e4c' }];
+        const shipmentArray: IShipment[] = [{ id: 'ABC' }, { id: 'CBA' }, { id: '12522474-f052-4a4c-b976-5fe34e4c0758' }];
         const shipmentCollection: IShipment[] = [{ id: 'ABC' }];
         expectedResult = service.addShipmentToCollectionIfMissing(shipmentCollection, ...shipmentArray);
         expect(expectedResult).toHaveLength(3);

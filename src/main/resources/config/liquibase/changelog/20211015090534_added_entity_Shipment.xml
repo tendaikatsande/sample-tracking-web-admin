@@ -53,6 +53,18 @@
             <column name="temperature_destination" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="is_modified_by_hub" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="is_modified_by_facility" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="is_modified_by_laboratory" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="is_modified_by_courrier" type="boolean">
+                <constraints nullable="true" />
+            </column>
             <column name="created_by" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -95,6 +107,10 @@
             <column name="cluster_client_id" type="string"/>
             <column name="temperature_origin" type="string"/>
             <column name="temperature_destination" type="string"/>
+            <column name="is_modified_by_hub" type="boolean"/>
+            <column name="is_modified_by_facility" type="boolean"/>
+            <column name="is_modified_by_laboratory" type="boolean"/>
+            <column name="is_modified_by_courrier" type="boolean"/>
             <column name="created_by" type="string"/>
             <column name="modified_by" type="date"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->

@@ -36,6 +36,10 @@ export class ShipmentUpdateComponent implements OnInit {
     clusterClientId: [],
     temperatureOrigin: [],
     temperatureDestination: [],
+    isModifiedByHub: [],
+    isModifiedByFacility: [],
+    isModifiedByLaboratory: [],
+    isModifiedByCourrier: [],
     createdBy: [],
     modifiedBy: [],
   });
@@ -124,6 +128,10 @@ export class ShipmentUpdateComponent implements OnInit {
       clusterClientId: shipment.clusterClientId,
       temperatureOrigin: shipment.temperatureOrigin,
       temperatureDestination: shipment.temperatureDestination,
+      isModifiedByHub: shipment.isModifiedByHub,
+      isModifiedByFacility: shipment.isModifiedByFacility,
+      isModifiedByLaboratory: shipment.isModifiedByLaboratory,
+      isModifiedByCourrier: shipment.isModifiedByCourrier,
       createdBy: shipment.createdBy,
       modifiedBy: shipment.modifiedBy ? shipment.modifiedBy.format(DATE_TIME_FORMAT) : null,
     });
@@ -148,6 +156,10 @@ export class ShipmentUpdateComponent implements OnInit {
       clusterClientId: this.editForm.get(['clusterClientId'])!.value,
       temperatureOrigin: this.editForm.get(['temperatureOrigin'])!.value,
       temperatureDestination: this.editForm.get(['temperatureDestination'])!.value,
+      isModifiedByHub: this.editForm.get(['isModifiedByHub'])!.value,
+      isModifiedByFacility: this.editForm.get(['isModifiedByFacility'])!.value,
+      isModifiedByLaboratory: this.editForm.get(['isModifiedByLaboratory'])!.value,
+      isModifiedByCourrier: this.editForm.get(['isModifiedByCourrier'])!.value,
       createdBy: this.editForm.get(['createdBy'])!.value,
       modifiedBy: this.editForm.get(['modifiedBy'])!.value ? dayjs(this.editForm.get(['modifiedBy'])!.value, DATE_TIME_FORMAT) : undefined,
     };

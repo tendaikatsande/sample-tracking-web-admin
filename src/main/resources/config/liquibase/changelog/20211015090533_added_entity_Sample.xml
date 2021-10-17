@@ -77,6 +77,18 @@
             <column name="temperature_at_lab" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+            <column name="is_modified_by_hub" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="is_modified_by_facility" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="is_modified_by_laboratory" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="is_modified_by_courrier" type="boolean">
+                <constraints nullable="true" />
+            </column>
             <column name="created_by" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -135,6 +147,10 @@
             <column name="client_contact" type="string"/>
             <column name="temperature_at_hub" type="string"/>
             <column name="temperature_at_lab" type="string"/>
+            <column name="is_modified_by_hub" type="boolean"/>
+            <column name="is_modified_by_facility" type="boolean"/>
+            <column name="is_modified_by_laboratory" type="boolean"/>
+            <column name="is_modified_by_courrier" type="boolean"/>
             <column name="created_by" type="string"/>
             <column name="modified_by" type="date"/>
             <column name="date_created" type="string"/>

@@ -59,6 +59,22 @@
       "fieldType": "String"
     },
     {
+      "fieldName": "isModifiedByHub",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "isModifiedByFacility",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "isModifiedByLaboratory",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "isModifiedByCourrier",
+      "fieldType": "Boolean"
+    },
+    {
       "fieldName": "createdBy",
       "fieldType": "String"
     },

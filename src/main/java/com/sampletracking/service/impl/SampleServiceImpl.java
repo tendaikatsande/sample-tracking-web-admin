@@ -102,6 +102,18 @@ public class SampleServiceImpl implements SampleService {
                 if (sample.getTemperatureAtLab() != null) {
                     existingSample.setTemperatureAtLab(sample.getTemperatureAtLab());
                 }
+                if (sample.getIsModifiedByHub() != null) {
+                    existingSample.setIsModifiedByHub(sample.getIsModifiedByHub());
+                }
+                if (sample.getIsModifiedByFacility() != null) {
+                    existingSample.setIsModifiedByFacility(sample.getIsModifiedByFacility());
+                }
+                if (sample.getIsModifiedByLaboratory() != null) {
+                    existingSample.setIsModifiedByLaboratory(sample.getIsModifiedByLaboratory());
+                }
+                if (sample.getIsModifiedByCourrier() != null) {
+                    existingSample.setIsModifiedByCourrier(sample.getIsModifiedByCourrier());
+                }
                 if (sample.getCreatedBy() != null) {
                     existingSample.setCreatedBy(sample.getCreatedBy());
                 }
