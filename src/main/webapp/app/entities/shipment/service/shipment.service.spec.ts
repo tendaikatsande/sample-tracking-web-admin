@@ -31,15 +31,21 @@ describe('Shipment Service', () => {
       samples: 'AAAAAAA',
       status: 'AAAAAAA',
       dateCreated: 'AAAAAAA',
-      dateModified: currentDate,
+      dateModified: 'AAAAAAA',
       riderId: 'AAAAAAA',
       riderName: 'AAAAAAA',
       destination: 'AAAAAAA',
       clusterClientId: 'AAAAAAA',
       temperatureOrigin: 'AAAAAAA',
       temperatureDestination: 'AAAAAAA',
+      isModifiedByHub: false,
+      isModifiedByFacility: false,
+      isModifiedByLaboratory: false,
+      isModifiedByCourrier: false,
       createdBy: 'AAAAAAA',
-      modifiedBy: currentDate,
+      createdDate: currentDate,
+      lastModifiedBy: 'AAAAAAA',
+      lastModifiedDate: currentDate,
     };
   });
 
@@ -47,8 +53,8 @@ describe('Shipment Service', () => {
     it('should find an element', () => {
       const returnedFromService = Object.assign(
         {
-          dateModified: currentDate.format(DATE_TIME_FORMAT),
-          modifiedBy: currentDate.format(DATE_TIME_FORMAT),
+          createdDate: currentDate.format(DATE_TIME_FORMAT),
+          lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
         },
         elemDefault
       );
@@ -64,16 +70,16 @@ describe('Shipment Service', () => {
       const returnedFromService = Object.assign(
         {
           id: 'ID',
-          dateModified: currentDate.format(DATE_TIME_FORMAT),
-          modifiedBy: currentDate.format(DATE_TIME_FORMAT),
+          createdDate: currentDate.format(DATE_TIME_FORMAT),
+          lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
         },
         elemDefault
       );
 
       const expected = Object.assign(
         {
-          dateModified: currentDate,
-          modifiedBy: currentDate,
+          createdDate: currentDate,
+          lastModifiedDate: currentDate,
         },
         returnedFromService
       );
@@ -95,23 +101,29 @@ describe('Shipment Service', () => {
           samples: 'BBBBBB',
           status: 'BBBBBB',
           dateCreated: 'BBBBBB',
-          dateModified: currentDate.format(DATE_TIME_FORMAT),
+          dateModified: 'BBBBBB',
           riderId: 'BBBBBB',
           riderName: 'BBBBBB',
           destination: 'BBBBBB',
           clusterClientId: 'BBBBBB',
           temperatureOrigin: 'BBBBBB',
           temperatureDestination: 'BBBBBB',
+          isModifiedByHub: true,
+          isModifiedByFacility: true,
+          isModifiedByLaboratory: true,
+          isModifiedByCourrier: true,
           createdBy: 'BBBBBB',
-          modifiedBy: currentDate.format(DATE_TIME_FORMAT),
+          createdDate: currentDate.format(DATE_TIME_FORMAT),
+          lastModifiedBy: 'BBBBBB',
+          lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
         },
         elemDefault
       );
 
       const expected = Object.assign(
         {
-          dateModified: currentDate,
-          modifiedBy: currentDate,
+          createdDate: currentDate,
+          lastModifiedDate: currentDate,
         },
         returnedFromService
       );
@@ -130,13 +142,16 @@ describe('Shipment Service', () => {
           description: 'BBBBBB',
           clientId: 'BBBBBB',
           dateCreated: 'BBBBBB',
-          dateModified: currentDate.format(DATE_TIME_FORMAT),
+          dateModified: 'BBBBBB',
           riderId: 'BBBBBB',
           riderName: 'BBBBBB',
           destination: 'BBBBBB',
           temperatureOrigin: 'BBBBBB',
           temperatureDestination: 'BBBBBB',
-          modifiedBy: currentDate.format(DATE_TIME_FORMAT),
+          isModifiedByFacility: true,
+          isModifiedByLaboratory: true,
+          isModifiedByCourrier: true,
+          createdBy: 'BBBBBB',
         },
         new Shipment()
       );
@@ -145,8 +160,8 @@ describe('Shipment Service', () => {
 
       const expected = Object.assign(
         {
-          dateModified: currentDate,
-          modifiedBy: currentDate,
+          createdDate: currentDate,
+          lastModifiedDate: currentDate,
         },
         returnedFromService
       );
@@ -168,23 +183,29 @@ describe('Shipment Service', () => {
           samples: 'BBBBBB',
           status: 'BBBBBB',
           dateCreated: 'BBBBBB',
-          dateModified: currentDate.format(DATE_TIME_FORMAT),
+          dateModified: 'BBBBBB',
           riderId: 'BBBBBB',
           riderName: 'BBBBBB',
           destination: 'BBBBBB',
           clusterClientId: 'BBBBBB',
           temperatureOrigin: 'BBBBBB',
           temperatureDestination: 'BBBBBB',
+          isModifiedByHub: true,
+          isModifiedByFacility: true,
+          isModifiedByLaboratory: true,
+          isModifiedByCourrier: true,
           createdBy: 'BBBBBB',
-          modifiedBy: currentDate.format(DATE_TIME_FORMAT),
+          createdDate: currentDate.format(DATE_TIME_FORMAT),
+          lastModifiedBy: 'BBBBBB',
+          lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
         },
         elemDefault
       );
 
       const expected = Object.assign(
         {
-          dateModified: currentDate,
-          modifiedBy: currentDate,
+          createdDate: currentDate,
+          lastModifiedDate: currentDate,
         },
         returnedFromService
       );
@@ -234,7 +255,7 @@ describe('Shipment Service', () => {
       });
 
       it('should add only unique Shipment to an array', () => {
-        const shipmentArray: IShipment[] = [{ id: 'ABC' }, { id: 'CBA' }, { id: 'bac01252-2474-4f05-aa4c-39765fe34e4c' }];
+        const shipmentArray: IShipment[] = [{ id: 'ABC' }, { id: 'CBA' }, { id: '522474f0-52a4-4c39-b65f-e34e4c07587b' }];
         const shipmentCollection: IShipment[] = [{ id: 'ABC' }];
         expectedResult = service.addShipmentToCollectionIfMissing(shipmentCollection, ...shipmentArray);
         expect(expectedResult).toHaveLength(3);

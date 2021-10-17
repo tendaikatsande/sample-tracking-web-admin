@@ -1,0 +1,149 @@
+
+entity Sample {
+  id  String
+  appId String
+  clientSampleId   String
+  clientPatientId  String
+  labId  String
+  clientId  String
+  sampleType  String
+  testId  String
+  dateCollected Instant
+  collectedBy  String
+  status  String
+  comment  String
+  synced  Boolean
+  dateSynced  Instant
+  labReferenceId  String
+  location  String
+  result  String
+  resultReceivedBy  String
+  shipmentId  String
+  clientContact  String
+  temperatureAtHub  String
+  temperatureAtLab  String
+  
+    isModifiedByHub Boolean
+   isModifiedByFacility Boolean
+   isModifiedByLaboratory Boolean
+   isModifiedByCourrier Boolean
+  
+  
+  createdBy String
+    createdDate Instant
+    lastModifiedBy String
+    lastModifiedDate Instant
+}
+
+entity Shipment{
+  id  String
+  appId String
+  description  String
+  clientId  String
+  samples  TextBlob
+  status  String
+  dateCreated  String
+  dateModified  String
+  riderId  String
+  riderName  String
+  destination  String
+  clusterClientId  String
+  temperatureOrigin  String
+  temperatureDestination  String
+  
+     isModifiedByHub Boolean
+   isModifiedByFacility Boolean
+   isModifiedByLaboratory Boolean
+   isModifiedByCourrier Boolean
+   
+ createdBy String
+    createdDate Instant
+    lastModifiedBy String
+    lastModifiedDate Instant
+}
+
+entity Patient{
+  id String
+  appId String
+  firstName String
+  lastName String
+  gender String
+  dob String
+  client String
+  clientPatientId String
+  cohortNumber String
+  dateCreated String
+  dateModified String
+  phoneNumber String
+ createdBy String
+    createdDate Instant
+    lastModifiedBy String
+    lastModifiedDate Instant
+}
+
+entity Laboratory{
+    id String
+    name String
+    type String
+    code String
+    createdBy String
+    createdDate Instant
+    lastModifiedBy String
+    lastModifiedDate Instant
+}
+
+
+entity Client{
+    clientUid  String
+    clientId  String
+    name  String
+    phone  String
+    districtId  String
+    districtName  String
+    provinceId  String
+    provinceName  String
+    createdBy  String
+    createdDate  Instant
+    lastModifiedBy  String
+    lastModifiedDate  Instant
+}
+
+
+entity SampleType{
+   id  String
+   name  String
+   prefix  String
+   createdBy  String
+   createdDate  Instant
+   lastModifiedBy  String
+   lastModifiedDate  Instant
+}
+
+entity TestType{
+   id  String
+   name  String
+   prefix  String
+  createdBy String
+  modifiedBy String
+  dateCreated Instant
+  dateModified Instant
+}
+
+enum Language {
+    FRENCH, ENGLISH, SPANISH
+}
+
+// Set pagination options
+//paginate Sample, Shipment, Patient, with infinite-scroll
+paginate Sample, Shipment, Patient, Laboratory, Client, SampleType, TestType with pagination
+
+// Use Data Transfer Objects (DTO)
+// dto * with mapstruct
+
+dto * with no
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

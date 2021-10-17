@@ -39,14 +39,14 @@ class TestTypeResourceIT {
     private static final String DEFAULT_CREATED_BY = "AAAAAAAAAA";
     private static final String UPDATED_CREATED_BY = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_CREATED_DATE = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_CREATED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final String DEFAULT_MODIFIED_BY = "AAAAAAAAAA";
+    private static final String UPDATED_MODIFIED_BY = "BBBBBBBBBB";
 
-    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
-    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
+    private static final Instant DEFAULT_DATE_CREATED = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_DATE_CREATED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final Instant DEFAULT_LAST_MODIFIED_DATE = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_LAST_MODIFIED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_DATE_MODIFIED = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_DATE_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final String ENTITY_API_URL = "/api/test-types";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -73,9 +73,9 @@ class TestTypeResourceIT {
             .name(DEFAULT_NAME)
             .prefix(DEFAULT_PREFIX)
             .createdBy(DEFAULT_CREATED_BY)
-            .createdDate(DEFAULT_CREATED_DATE)
-            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
-            .lastModifiedDate(DEFAULT_LAST_MODIFIED_DATE);
+            .modifiedBy(DEFAULT_MODIFIED_BY)
+            .dateCreated(DEFAULT_DATE_CREATED)
+            .dateModified(DEFAULT_DATE_MODIFIED);
         return testType;
     }
 
@@ -90,9 +90,9 @@ class TestTypeResourceIT {
             .name(UPDATED_NAME)
             .prefix(UPDATED_PREFIX)
             .createdBy(UPDATED_CREATED_BY)
-            .createdDate(UPDATED_CREATED_DATE)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE);
+            .modifiedBy(UPDATED_MODIFIED_BY)
+            .dateCreated(UPDATED_DATE_CREATED)
+            .dateModified(UPDATED_DATE_MODIFIED);
         return testType;
     }
 
@@ -117,9 +117,9 @@ class TestTypeResourceIT {
         assertThat(testTestType.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testTestType.getPrefix()).isEqualTo(DEFAULT_PREFIX);
         assertThat(testTestType.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
-        assertThat(testTestType.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
-        assertThat(testTestType.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
-        assertThat(testTestType.getLastModifiedDate()).isEqualTo(DEFAULT_LAST_MODIFIED_DATE);
+        assertThat(testTestType.getModifiedBy()).isEqualTo(DEFAULT_MODIFIED_BY);
+        assertThat(testTestType.getDateCreated()).isEqualTo(DEFAULT_DATE_CREATED);
+        assertThat(testTestType.getDateModified()).isEqualTo(DEFAULT_DATE_MODIFIED);
     }
 
     @Test
@@ -156,9 +156,9 @@ class TestTypeResourceIT {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].prefix").value(hasItem(DEFAULT_PREFIX)))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
-            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
-            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
-            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())));
+            .andExpect(jsonPath("$.[*].modifiedBy").value(hasItem(DEFAULT_MODIFIED_BY)))
+            .andExpect(jsonPath("$.[*].dateCreated").value(hasItem(DEFAULT_DATE_CREATED.toString())))
+            .andExpect(jsonPath("$.[*].dateModified").value(hasItem(DEFAULT_DATE_MODIFIED.toString())));
     }
 
     @Test
@@ -177,9 +177,9 @@ class TestTypeResourceIT {
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.prefix").value(DEFAULT_PREFIX))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
-            .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
-            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY))
-            .andExpect(jsonPath("$.lastModifiedDate").value(DEFAULT_LAST_MODIFIED_DATE.toString()));
+            .andExpect(jsonPath("$.modifiedBy").value(DEFAULT_MODIFIED_BY))
+            .andExpect(jsonPath("$.dateCreated").value(DEFAULT_DATE_CREATED.toString()))
+            .andExpect(jsonPath("$.dateModified").value(DEFAULT_DATE_MODIFIED.toString()));
     }
 
     @Test
@@ -206,9 +206,9 @@ class TestTypeResourceIT {
             .name(UPDATED_NAME)
             .prefix(UPDATED_PREFIX)
             .createdBy(UPDATED_CREATED_BY)
-            .createdDate(UPDATED_CREATED_DATE)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE);
+            .modifiedBy(UPDATED_MODIFIED_BY)
+            .dateCreated(UPDATED_DATE_CREATED)
+            .dateModified(UPDATED_DATE_MODIFIED);
 
         restTestTypeMockMvc
             .perform(
@@ -225,9 +225,9 @@ class TestTypeResourceIT {
         assertThat(testTestType.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testTestType.getPrefix()).isEqualTo(UPDATED_PREFIX);
         assertThat(testTestType.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
-        assertThat(testTestType.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
-        assertThat(testTestType.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testTestType.getLastModifiedDate()).isEqualTo(UPDATED_LAST_MODIFIED_DATE);
+        assertThat(testTestType.getModifiedBy()).isEqualTo(UPDATED_MODIFIED_BY);
+        assertThat(testTestType.getDateCreated()).isEqualTo(UPDATED_DATE_CREATED);
+        assertThat(testTestType.getDateModified()).isEqualTo(UPDATED_DATE_MODIFIED);
     }
 
     @Test
@@ -299,10 +299,7 @@ class TestTypeResourceIT {
         TestType partialUpdatedTestType = new TestType();
         partialUpdatedTestType.setId(testType.getId());
 
-        partialUpdatedTestType
-            .createdBy(UPDATED_CREATED_BY)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE);
+        partialUpdatedTestType.createdBy(UPDATED_CREATED_BY).dateCreated(UPDATED_DATE_CREATED).dateModified(UPDATED_DATE_MODIFIED);
 
         restTestTypeMockMvc
             .perform(
@@ -319,9 +316,9 @@ class TestTypeResourceIT {
         assertThat(testTestType.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testTestType.getPrefix()).isEqualTo(DEFAULT_PREFIX);
         assertThat(testTestType.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
-        assertThat(testTestType.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
-        assertThat(testTestType.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testTestType.getLastModifiedDate()).isEqualTo(UPDATED_LAST_MODIFIED_DATE);
+        assertThat(testTestType.getModifiedBy()).isEqualTo(DEFAULT_MODIFIED_BY);
+        assertThat(testTestType.getDateCreated()).isEqualTo(UPDATED_DATE_CREATED);
+        assertThat(testTestType.getDateModified()).isEqualTo(UPDATED_DATE_MODIFIED);
     }
 
     @Test
@@ -341,9 +338,9 @@ class TestTypeResourceIT {
             .name(UPDATED_NAME)
             .prefix(UPDATED_PREFIX)
             .createdBy(UPDATED_CREATED_BY)
-            .createdDate(UPDATED_CREATED_DATE)
-            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
-            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE);
+            .modifiedBy(UPDATED_MODIFIED_BY)
+            .dateCreated(UPDATED_DATE_CREATED)
+            .dateModified(UPDATED_DATE_MODIFIED);
 
         restTestTypeMockMvc
             .perform(
@@ -360,9 +357,9 @@ class TestTypeResourceIT {
         assertThat(testTestType.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testTestType.getPrefix()).isEqualTo(UPDATED_PREFIX);
         assertThat(testTestType.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
-        assertThat(testTestType.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
-        assertThat(testTestType.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
-        assertThat(testTestType.getLastModifiedDate()).isEqualTo(UPDATED_LAST_MODIFIED_DATE);
+        assertThat(testTestType.getModifiedBy()).isEqualTo(UPDATED_MODIFIED_BY);
+        assertThat(testTestType.getDateCreated()).isEqualTo(UPDATED_DATE_CREATED);
+        assertThat(testTestType.getDateModified()).isEqualTo(UPDATED_DATE_MODIFIED);
     }
 
     @Test

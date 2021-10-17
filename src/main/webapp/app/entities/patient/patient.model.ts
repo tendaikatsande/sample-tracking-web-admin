@@ -11,10 +11,12 @@ export interface IPatient {
   clientPatientId?: string | null;
   cohortNumber?: string | null;
   dateCreated?: string | null;
-  dateModified?: dayjs.Dayjs | null;
+  dateModified?: string | null;
   phoneNumber?: string | null;
   createdBy?: string | null;
-  modifiedBy?: dayjs.Dayjs | null;
+  createdDate?: dayjs.Dayjs | null;
+  lastModifiedBy?: string | null;
+  lastModifiedDate?: dayjs.Dayjs | null;
 }
 
 export class Patient implements IPatient {
@@ -29,10 +31,12 @@ export class Patient implements IPatient {
     public clientPatientId?: string | null,
     public cohortNumber?: string | null,
     public dateCreated?: string | null,
-    public dateModified?: dayjs.Dayjs | null,
+    public dateModified?: string | null,
     public phoneNumber?: string | null,
     public createdBy?: string | null,
-    public modifiedBy?: dayjs.Dayjs | null
+    public createdDate?: dayjs.Dayjs | null,
+    public lastModifiedBy?: string | null,
+    public lastModifiedDate?: dayjs.Dayjs | null
   ) {}
 }
 

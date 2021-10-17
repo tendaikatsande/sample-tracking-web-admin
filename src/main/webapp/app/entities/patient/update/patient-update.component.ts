@@ -32,7 +32,9 @@ export class PatientUpdateComponent implements OnInit {
     dateModified: [],
     phoneNumber: [],
     createdBy: [],
-    modifiedBy: [],
+    createdDate: [],
+    lastModifiedBy: [],
+    lastModifiedDate: [],
   });
 
   constructor(protected patientService: PatientService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
@@ -41,8 +43,8 @@ export class PatientUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ patient }) => {
       if (patient.id === undefined) {
         const today = dayjs().startOf('day');
-        patient.dateModified = today;
-        patient.modifiedBy = today;
+        patient.createdDate = today;
+        patient.lastModifiedDate = today;
       }
 
       this.updateForm(patient);
@@ -94,10 +96,12 @@ export class PatientUpdateComponent implements OnInit {
       clientPatientId: patient.clientPatientId,
       cohortNumber: patient.cohortNumber,
       dateCreated: patient.dateCreated,
-      dateModified: patient.dateModified ? patient.dateModified.format(DATE_TIME_FORMAT) : null,
+      dateModified: patient.dateModified,
       phoneNumber: patient.phoneNumber,
       createdBy: patient.createdBy,
-      modifiedBy: patient.modifiedBy ? patient.modifiedBy.format(DATE_TIME_FORMAT) : null,
+      createdDate: patient.createdDate ? patient.createdDate.format(DATE_TIME_FORMAT) : null,
+      lastModifiedBy: patient.lastModifiedBy,
+      lastModifiedDate: patient.lastModifiedDate ? patient.lastModifiedDate.format(DATE_TIME_FORMAT) : null,
     });
   }
 
@@ -114,12 +118,16 @@ export class PatientUpdateComponent implements OnInit {
       clientPatientId: this.editForm.get(['clientPatientId'])!.value,
       cohortNumber: this.editForm.get(['cohortNumber'])!.value,
       dateCreated: this.editForm.get(['dateCreated'])!.value,
-      dateModified: this.editForm.get(['dateModified'])!.value
-        ? dayjs(this.editForm.get(['dateModified'])!.value, DATE_TIME_FORMAT)
-        : undefined,
+      dateModified: this.editForm.get(['dateModified'])!.value,
       phoneNumber: this.editForm.get(['phoneNumber'])!.value,
       createdBy: this.editForm.get(['createdBy'])!.value,
-      modifiedBy: this.editForm.get(['modifiedBy'])!.value ? dayjs(this.editForm.get(['modifiedBy'])!.value, DATE_TIME_FORMAT) : undefined,
+      createdDate: this.editForm.get(['createdDate'])!.value
+        ? dayjs(this.editForm.get(['createdDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
+      lastModifiedBy: this.editForm.get(['lastModifiedBy'])!.value,
+      lastModifiedDate: this.editForm.get(['lastModifiedDate'])!.value
+        ? dayjs(this.editForm.get(['lastModifiedDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
     };
   }
 }

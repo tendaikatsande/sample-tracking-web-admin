@@ -67,8 +67,14 @@
           <th scope="col" jhiSortBy="createdBy">
             <span jhiTranslate="sampleTrackingApp.patient.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="modifiedBy">
-            <span jhiTranslate="sampleTrackingApp.patient.modifiedBy">Modified By</span> <fa-icon icon="sort"></fa-icon>
+          <th scope="col" jhiSortBy="createdDate">
+            <span jhiTranslate="sampleTrackingApp.patient.createdDate">Created Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="lastModifiedBy">
+            <span jhiTranslate="sampleTrackingApp.patient.lastModifiedBy">Last Modified By</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="lastModifiedDate">
+            <span jhiTranslate="sampleTrackingApp.patient.lastModifiedDate">Last Modified Date</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col"></th>
         </tr>
@@ -87,10 +93,12 @@
           <td>{{ patient.clientPatientId }}</td>
           <td>{{ patient.cohortNumber }}</td>
           <td>{{ patient.dateCreated }}</td>
-          <td>{{ patient.dateModified | formatMediumDatetime }}</td>
+          <td>{{ patient.dateModified }}</td>
           <td>{{ patient.phoneNumber }}</td>
           <td>{{ patient.createdBy }}</td>
-          <td>{{ patient.modifiedBy | formatMediumDatetime }}</td>
+          <td>{{ patient.createdDate | formatMediumDatetime }}</td>
+          <td>{{ patient.lastModifiedBy }}</td>
+          <td>{{ patient.lastModifiedDate | formatMediumDatetime }}</td>
           <td class="text-right">
             <div class="btn-group">
               <button

@@ -36,8 +36,14 @@ export class ShipmentUpdateComponent implements OnInit {
     clusterClientId: [],
     temperatureOrigin: [],
     temperatureDestination: [],
+    isModifiedByHub: [],
+    isModifiedByFacility: [],
+    isModifiedByLaboratory: [],
+    isModifiedByCourrier: [],
     createdBy: [],
-    modifiedBy: [],
+    createdDate: [],
+    lastModifiedBy: [],
+    lastModifiedDate: [],
   });
 
   constructor(
@@ -52,8 +58,8 @@ export class ShipmentUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ shipment }) => {
       if (shipment.id === undefined) {
         const today = dayjs().startOf('day');
-        shipment.dateModified = today;
-        shipment.modifiedBy = today;
+        shipment.createdDate = today;
+        shipment.lastModifiedDate = today;
       }
 
       this.updateForm(shipment);
@@ -117,15 +123,21 @@ export class ShipmentUpdateComponent implements OnInit {
       samples: shipment.samples,
       status: shipment.status,
       dateCreated: shipment.dateCreated,
-      dateModified: shipment.dateModified ? shipment.dateModified.format(DATE_TIME_FORMAT) : null,
+      dateModified: shipment.dateModified,
       riderId: shipment.riderId,
       riderName: shipment.riderName,
       destination: shipment.destination,
       clusterClientId: shipment.clusterClientId,
       temperatureOrigin: shipment.temperatureOrigin,
       temperatureDestination: shipment.temperatureDestination,
+      isModifiedByHub: shipment.isModifiedByHub,
+      isModifiedByFacility: shipment.isModifiedByFacility,
+      isModifiedByLaboratory: shipment.isModifiedByLaboratory,
+      isModifiedByCourrier: shipment.isModifiedByCourrier,
       createdBy: shipment.createdBy,
-      modifiedBy: shipment.modifiedBy ? shipment.modifiedBy.format(DATE_TIME_FORMAT) : null,
+      createdDate: shipment.createdDate ? shipment.createdDate.format(DATE_TIME_FORMAT) : null,
+      lastModifiedBy: shipment.lastModifiedBy,
+      lastModifiedDate: shipment.lastModifiedDate ? shipment.lastModifiedDate.format(DATE_TIME_FORMAT) : null,
     });
   }
 
@@ -139,17 +151,25 @@ export class ShipmentUpdateComponent implements OnInit {
       samples: this.editForm.get(['samples'])!.value,
       status: this.editForm.get(['status'])!.value,
       dateCreated: this.editForm.get(['dateCreated'])!.value,
-      dateModified: this.editForm.get(['dateModified'])!.value
-        ? dayjs(this.editForm.get(['dateModified'])!.value, DATE_TIME_FORMAT)
-        : undefined,
+      dateModified: this.editForm.get(['dateModified'])!.value,
       riderId: this.editForm.get(['riderId'])!.value,
       riderName: this.editForm.get(['riderName'])!.value,
       destination: this.editForm.get(['destination'])!.value,
       clusterClientId: this.editForm.get(['clusterClientId'])!.value,
       temperatureOrigin: this.editForm.get(['temperatureOrigin'])!.value,
       temperatureDestination: this.editForm.get(['temperatureDestination'])!.value,
+      isModifiedByHub: this.editForm.get(['isModifiedByHub'])!.value,
+      isModifiedByFacility: this.editForm.get(['isModifiedByFacility'])!.value,
+      isModifiedByLaboratory: this.editForm.get(['isModifiedByLaboratory'])!.value,
+      isModifiedByCourrier: this.editForm.get(['isModifiedByCourrier'])!.value,
       createdBy: this.editForm.get(['createdBy'])!.value,
-      modifiedBy: this.editForm.get(['modifiedBy'])!.value ? dayjs(this.editForm.get(['modifiedBy'])!.value, DATE_TIME_FORMAT) : undefined,
+      createdDate: this.editForm.get(['createdDate'])!.value
+        ? dayjs(this.editForm.get(['createdDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
+      lastModifiedBy: this.editForm.get(['lastModifiedBy'])!.value,
+      lastModifiedDate: this.editForm.get(['lastModifiedDate'])!.value
+        ? dayjs(this.editForm.get(['lastModifiedDate'])!.value, DATE_TIME_FORMAT)
+        : undefined,
     };
   }
 }

@@ -97,17 +97,14 @@
           <label class="form-control-label" jhiTranslate="sampleTrackingApp.patient.dateModified" for="field_dateModified"
             >Date Modified</label
           >
-          <div class="d-flex">
-            <input
-              id="field_dateModified"
-              data-cy="dateModified"
-              type="datetime-local"
-              class="form-control"
-              name="dateModified"
-              formControlName="dateModified"
-              placeholder="YYYY-MM-DD HH:mm"
-            />
-          </div>
+          <input
+            type="text"
+            class="form-control"
+            name="dateModified"
+            id="field_dateModified"
+            data-cy="dateModified"
+            formControlName="dateModified"
+          />
         </div>
 
         <div class="form-group">
@@ -130,15 +127,48 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" jhiTranslate="sampleTrackingApp.patient.modifiedBy" for="field_modifiedBy">Modified By</label>
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.patient.createdDate" for="field_createdDate"
+            >Created Date</label
+          >
           <div class="d-flex">
             <input
-              id="field_modifiedBy"
-              data-cy="modifiedBy"
+              id="field_createdDate"
+              data-cy="createdDate"
               type="datetime-local"
               class="form-control"
-              name="modifiedBy"
-              formControlName="modifiedBy"
+              name="createdDate"
+              formControlName="createdDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.patient.lastModifiedBy" for="field_lastModifiedBy"
+            >Last Modified By</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="lastModifiedBy"
+            id="field_lastModifiedBy"
+            data-cy="lastModifiedBy"
+            formControlName="lastModifiedBy"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="sampleTrackingApp.patient.lastModifiedDate" for="field_lastModifiedDate"
+            >Last Modified Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_lastModifiedDate"
+              data-cy="lastModifiedDate"
+              type="datetime-local"
+              class="form-control"
+              name="lastModifiedDate"
+              formControlName="lastModifiedDate"
               placeholder="YYYY-MM-DD HH:mm"
             />
           </div>

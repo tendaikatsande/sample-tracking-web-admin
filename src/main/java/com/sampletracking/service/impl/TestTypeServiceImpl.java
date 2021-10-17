@@ -48,14 +48,14 @@ public class TestTypeServiceImpl implements TestTypeService {
                 if (testType.getCreatedBy() != null) {
                     existingTestType.setCreatedBy(testType.getCreatedBy());
                 }
-                if (testType.getCreatedDate() != null) {
-                    existingTestType.setCreatedDate(testType.getCreatedDate());
+                if (testType.getModifiedBy() != null) {
+                    existingTestType.setModifiedBy(testType.getModifiedBy());
                 }
-                if (testType.getLastModifiedBy() != null) {
-                    existingTestType.setLastModifiedBy(testType.getLastModifiedBy());
+                if (testType.getDateCreated() != null) {
+                    existingTestType.setDateCreated(testType.getDateCreated());
                 }
-                if (testType.getLastModifiedDate() != null) {
-                    existingTestType.setLastModifiedDate(testType.getLastModifiedDate());
+                if (testType.getDateModified() != null) {
+                    existingTestType.setDateModified(testType.getDateModified());
                 }
 
                 return existingTestType;

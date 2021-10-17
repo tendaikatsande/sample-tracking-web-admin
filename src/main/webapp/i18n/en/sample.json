@@ -39,10 +39,14 @@
       "clientContact": "Client Contact",
       "temperatureAtHub": "Temperature At Hub",
       "temperatureAtLab": "Temperature At Lab",
+      "isModifiedByHub": "Is Modified By Hub",
+      "isModifiedByFacility": "Is Modified By Facility",
+      "isModifiedByLaboratory": "Is Modified By Laboratory",
+      "isModifiedByCourrier": "Is Modified By Courrier",
       "createdBy": "Created By",
-      "modifiedBy": "Modified By",
-      "dateCreated": "Date Created",
-      "dateModified": "Date Modified"
+      "createdDate": "Created Date",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified Date"
     }
   }
 }

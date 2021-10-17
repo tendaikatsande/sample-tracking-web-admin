@@ -96,17 +96,32 @@
           <th scope="col" jhiSortBy="temperatureAtLab">
             <span jhiTranslate="sampleTrackingApp.sample.temperatureAtLab">Temperature At Lab</span> <fa-icon icon="sort"></fa-icon>
           </th>
+          <th scope="col" jhiSortBy="isModifiedByHub">
+            <span jhiTranslate="sampleTrackingApp.sample.isModifiedByHub">Is Modified By Hub</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="isModifiedByFacility">
+            <span jhiTranslate="sampleTrackingApp.sample.isModifiedByFacility">Is Modified By Facility</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="isModifiedByLaboratory">
+            <span jhiTranslate="sampleTrackingApp.sample.isModifiedByLaboratory">Is Modified By Laboratory</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="isModifiedByCourrier">
+            <span jhiTranslate="sampleTrackingApp.sample.isModifiedByCourrier">Is Modified By Courrier</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col" jhiSortBy="createdBy">
             <span jhiTranslate="sampleTrackingApp.sample.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="modifiedBy">
-            <span jhiTranslate="sampleTrackingApp.sample.modifiedBy">Modified By</span> <fa-icon icon="sort"></fa-icon>
+          <th scope="col" jhiSortBy="createdDate">
+            <span jhiTranslate="sampleTrackingApp.sample.createdDate">Created Date</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="dateCreated">
-            <span jhiTranslate="sampleTrackingApp.sample.dateCreated">Date Created</span> <fa-icon icon="sort"></fa-icon>
+          <th scope="col" jhiSortBy="lastModifiedBy">
+            <span jhiTranslate="sampleTrackingApp.sample.lastModifiedBy">Last Modified By</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="dateModified">
-            <span jhiTranslate="sampleTrackingApp.sample.dateModified">Date Modified</span> <fa-icon icon="sort"></fa-icon>
+          <th scope="col" jhiSortBy="lastModifiedDate">
+            <span jhiTranslate="sampleTrackingApp.sample.lastModifiedDate">Last Modified Date</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col"></th>
         </tr>
@@ -137,10 +152,14 @@
           <td>{{ sample.clientContact }}</td>
           <td>{{ sample.temperatureAtHub }}</td>
           <td>{{ sample.temperatureAtLab }}</td>
+          <td>{{ sample.isModifiedByHub }}</td>
+          <td>{{ sample.isModifiedByFacility }}</td>
+          <td>{{ sample.isModifiedByLaboratory }}</td>
+          <td>{{ sample.isModifiedByCourrier }}</td>
           <td>{{ sample.createdBy }}</td>
-          <td>{{ sample.modifiedBy | formatMediumDatetime }}</td>
-          <td>{{ sample.dateCreated }}</td>
-          <td>{{ sample.dateModified | formatMediumDatetime }}</td>
+          <td>{{ sample.createdDate | formatMediumDatetime }}</td>
+          <td>{{ sample.lastModifiedBy }}</td>
+          <td>{{ sample.lastModifiedDate | formatMediumDatetime }}</td>
           <td class="text-right">
             <div class="btn-group">
               <button type="submit" [routerLink]="['/sample', sample.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">

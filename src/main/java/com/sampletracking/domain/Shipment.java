@@ -42,7 +42,7 @@ public class Shipment implements Serializable {
     private String dateCreated;
 
     @Column(name = "date_modified")
-    private Instant dateModified;
+    private String dateModified;
 
     @Column(name = "rider_id")
     private String riderId;
@@ -62,11 +62,29 @@ public class Shipment implements Serializable {
     @Column(name = "temperature_destination")
     private String temperatureDestination;
 
+    @Column(name = "is_modified_by_hub")
+    private Boolean isModifiedByHub;
+
+    @Column(name = "is_modified_by_facility")
+    private Boolean isModifiedByFacility;
+
+    @Column(name = "is_modified_by_laboratory")
+    private Boolean isModifiedByLaboratory;
+
+    @Column(name = "is_modified_by_courrier")
+    private Boolean isModifiedByCourrier;
+
     @Column(name = "created_by")
     private String createdBy;
 
-    @Column(name = "modified_by")
-    private Instant modifiedBy;
+    @Column(name = "created_date")
+    private Instant createdDate;
+
+    @Column(name = "last_modified_by")
+    private String lastModifiedBy;
+
+    @Column(name = "last_modified_date")
+    private Instant lastModifiedDate;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -161,16 +179,16 @@ public class Shipment implements Serializable {
         this.dateCreated = dateCreated;
     }
 
-    public Instant getDateModified() {
+    public String getDateModified() {
         return this.dateModified;
     }
 
-    public Shipment dateModified(Instant dateModified) {
+    public Shipment dateModified(String dateModified) {
         this.setDateModified(dateModified);
         return this;
     }
 
-    public void setDateModified(Instant dateModified) {
+    public void setDateModified(String dateModified) {
         this.dateModified = dateModified;
     }
 
@@ -252,6 +270,58 @@ public class Shipment implements Serializable {
         this.temperatureDestination = temperatureDestination;
     }
 
+    public Boolean getIsModifiedByHub() {
+        return this.isModifiedByHub;
+    }
+
+    public Shipment isModifiedByHub(Boolean isModifiedByHub) {
+        this.setIsModifiedByHub(isModifiedByHub);
+        return this;
+    }
+
+    public void setIsModifiedByHub(Boolean isModifiedByHub) {
+        this.isModifiedByHub = isModifiedByHub;
+    }
+
+    public Boolean getIsModifiedByFacility() {
+        return this.isModifiedByFacility;
+    }
+
+    public Shipment isModifiedByFacility(Boolean isModifiedByFacility) {
+        this.setIsModifiedByFacility(isModifiedByFacility);
+        return this;
+    }
+
+    public void setIsModifiedByFacility(Boolean isModifiedByFacility) {
+        this.isModifiedByFacility = isModifiedByFacility;
+    }
+
+    public Boolean getIsModifiedByLaboratory() {
+        return this.isModifiedByLaboratory;
+    }
+
+    public Shipment isModifiedByLaboratory(Boolean isModifiedByLaboratory) {
+        this.setIsModifiedByLaboratory(isModifiedByLaboratory);
+        return this;
+    }
+
+    public void setIsModifiedByLaboratory(Boolean isModifiedByLaboratory) {
+        this.isModifiedByLaboratory = isModifiedByLaboratory;
+    }
+
+    public Boolean getIsModifiedByCourrier() {
+        return this.isModifiedByCourrier;
+    }
+
+    public Shipment isModifiedByCourrier(Boolean isModifiedByCourrier) {
+        this.setIsModifiedByCourrier(isModifiedByCourrier);
+        return this;
+    }
+
+    public void setIsModifiedByCourrier(Boolean isModifiedByCourrier) {
+        this.isModifiedByCourrier = isModifiedByCourrier;
+    }
+
     public String getCreatedBy() {
         return this.createdBy;
     }
@@ -265,17 +335,43 @@ public class Shipment implements Serializable {
         this.createdBy = createdBy;
     }
 
-    public Instant getModifiedBy() {
-        return this.modifiedBy;
+    public Instant getCreatedDate() {
+        return this.createdDate;
     }
 
-    public Shipment modifiedBy(Instant modifiedBy) {
-        this.setModifiedBy(modifiedBy);
+    public Shipment createdDate(Instant createdDate) {
+        this.setCreatedDate(createdDate);
         return this;
     }
 
-    public void setModifiedBy(Instant modifiedBy) {
-        this.modifiedBy = modifiedBy;
+    public void setCreatedDate(Instant createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public String getLastModifiedBy() {
+        return this.lastModifiedBy;
+    }
+
+    public Shipment lastModifiedBy(String lastModifiedBy) {
+        this.setLastModifiedBy(lastModifiedBy);
+        return this;
+    }
+
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+    }
+
+    public Instant getLastModifiedDate() {
+        return this.lastModifiedDate;
+    }
+
+    public Shipment lastModifiedDate(Instant lastModifiedDate) {
+        this.setLastModifiedDate(lastModifiedDate);
+        return this;
+    }
+
+    public void setLastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -315,8 +411,14 @@ public class Shipment implements Serializable {
             ", clusterClientId='" + getClusterClientId() + "'" +
             ", temperatureOrigin='" + getTemperatureOrigin() + "'" +
             ", temperatureDestination='" + getTemperatureDestination() + "'" +
+            ", isModifiedByHub='" + getIsModifiedByHub() + "'" +
+            ", isModifiedByFacility='" + getIsModifiedByFacility() + "'" +
+            ", isModifiedByLaboratory='" + getIsModifiedByLaboratory() + "'" +
+            ", isModifiedByCourrier='" + getIsModifiedByCourrier() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
-            ", modifiedBy='" + getModifiedBy() + "'" +
+            ", createdDate='" + getCreatedDate() + "'" +
+            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
+            ", lastModifiedDate='" + getLastModifiedDate() + "'" +
             "}";
     }
 }

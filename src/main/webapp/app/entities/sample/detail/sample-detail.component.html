@@ -98,21 +98,37 @@
         <dd>
           <span>{{ sample.temperatureAtLab }}</span>
         </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.sample.isModifiedByHub">Is Modified By Hub</span></dt>
+        <dd>
+          <span>{{ sample.isModifiedByHub }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.sample.isModifiedByFacility">Is Modified By Facility</span></dt>
+        <dd>
+          <span>{{ sample.isModifiedByFacility }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.sample.isModifiedByLaboratory">Is Modified By Laboratory</span></dt>
+        <dd>
+          <span>{{ sample.isModifiedByLaboratory }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.sample.isModifiedByCourrier">Is Modified By Courrier</span></dt>
+        <dd>
+          <span>{{ sample.isModifiedByCourrier }}</span>
+        </dd>
         <dt><span jhiTranslate="sampleTrackingApp.sample.createdBy">Created By</span></dt>
         <dd>
           <span>{{ sample.createdBy }}</span>
         </dd>
-        <dt><span jhiTranslate="sampleTrackingApp.sample.modifiedBy">Modified By</span></dt>
+        <dt><span jhiTranslate="sampleTrackingApp.sample.createdDate">Created Date</span></dt>
         <dd>
-          <span>{{ sample.modifiedBy | formatMediumDatetime }}</span>
+          <span>{{ sample.createdDate | formatMediumDatetime }}</span>
         </dd>
-        <dt><span jhiTranslate="sampleTrackingApp.sample.dateCreated">Date Created</span></dt>
+        <dt><span jhiTranslate="sampleTrackingApp.sample.lastModifiedBy">Last Modified By</span></dt>
         <dd>
-          <span>{{ sample.dateCreated }}</span>
+          <span>{{ sample.lastModifiedBy }}</span>
         </dd>
-        <dt><span jhiTranslate="sampleTrackingApp.sample.dateModified">Date Modified</span></dt>
+        <dt><span jhiTranslate="sampleTrackingApp.sample.lastModifiedDate">Last Modified Date</span></dt>
         <dd>
-          <span>{{ sample.dateModified | formatMediumDatetime }}</span>
+          <span>{{ sample.lastModifiedDate | formatMediumDatetime }}</span>
         </dd>
       </dl>
 

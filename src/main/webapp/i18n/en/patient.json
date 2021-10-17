@@ -30,7 +30,9 @@
       "dateModified": "Date Modified",
       "phoneNumber": "Phone Number",
       "createdBy": "Created By",
-      "modifiedBy": "Modified By"
+      "createdDate": "Created Date",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified Date"
     }
   }
 }

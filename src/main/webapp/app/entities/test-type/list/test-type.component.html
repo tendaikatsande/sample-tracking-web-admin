@@ -42,14 +42,14 @@
           <th scope="col" jhiSortBy="createdBy">
             <span jhiTranslate="sampleTrackingApp.testType.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="createdDate">
-            <span jhiTranslate="sampleTrackingApp.testType.createdDate">Created Date</span> <fa-icon icon="sort"></fa-icon>
+          <th scope="col" jhiSortBy="modifiedBy">
+            <span jhiTranslate="sampleTrackingApp.testType.modifiedBy">Modified By</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="lastModifiedBy">
-            <span jhiTranslate="sampleTrackingApp.testType.lastModifiedBy">Last Modified By</span> <fa-icon icon="sort"></fa-icon>
+          <th scope="col" jhiSortBy="dateCreated">
+            <span jhiTranslate="sampleTrackingApp.testType.dateCreated">Date Created</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="lastModifiedDate">
-            <span jhiTranslate="sampleTrackingApp.testType.lastModifiedDate">Last Modified Date</span> <fa-icon icon="sort"></fa-icon>
+          <th scope="col" jhiSortBy="dateModified">
+            <span jhiTranslate="sampleTrackingApp.testType.dateModified">Date Modified</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col"></th>
         </tr>
@@ -62,9 +62,9 @@
           <td>{{ testType.name }}</td>
           <td>{{ testType.prefix }}</td>
           <td>{{ testType.createdBy }}</td>
-          <td>{{ testType.createdDate | formatMediumDatetime }}</td>
-          <td>{{ testType.lastModifiedBy }}</td>
-          <td>{{ testType.lastModifiedDate | formatMediumDatetime }}</td>
+          <td>{{ testType.modifiedBy }}</td>
+          <td>{{ testType.dateCreated | formatMediumDatetime }}</td>
+          <td>{{ testType.dateModified | formatMediumDatetime }}</td>
           <td class="text-right">
             <div class="btn-group">
               <button

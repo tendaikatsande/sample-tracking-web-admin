@@ -75,15 +75,15 @@ export class ShipmentService {
 
   protected convertDateFromClient(shipment: IShipment): IShipment {
     return Object.assign({}, shipment, {
-      dateModified: shipment.dateModified?.isValid() ? shipment.dateModified.toJSON() : undefined,
-      modifiedBy: shipment.modifiedBy?.isValid() ? shipment.modifiedBy.toJSON() : undefined,
+      createdDate: shipment.createdDate?.isValid() ? shipment.createdDate.toJSON() : undefined,
+      lastModifiedDate: shipment.lastModifiedDate?.isValid() ? shipment.lastModifiedDate.toJSON() : undefined,
     });
   }
 
   protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
     if (res.body) {
-      res.body.dateModified = res.body.dateModified ? dayjs(res.body.dateModified) : undefined;
-      res.body.modifiedBy = res.body.modifiedBy ? dayjs(res.body.modifiedBy) : undefined;
+      res.body.createdDate = res.body.createdDate ? dayjs(res.body.createdDate) : undefined;
+      res.body.lastModifiedDate = res.body.lastModifiedDate ? dayjs(res.body.lastModifiedDate) : undefined;
     }
     return res;
   }
@@ -91,8 +91,8 @@ export class ShipmentService {
   protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
     if (res.body) {
       res.body.forEach((shipment: IShipment) => {
-        shipment.dateModified = shipment.dateModified ? dayjs(shipment.dateModified) : undefined;
-        shipment.modifiedBy = shipment.modifiedBy ? dayjs(shipment.modifiedBy) : undefined;
+        shipment.createdDate = shipment.createdDate ? dayjs(shipment.createdDate) : undefined;
+        shipment.lastModifiedDate = shipment.lastModifiedDate ? dayjs(shipment.lastModifiedDate) : undefined;
       });
     }
     return res;

@@ -46,10 +46,14 @@ describe('Sample Service', () => {
       clientContact: 'AAAAAAA',
       temperatureAtHub: 'AAAAAAA',
       temperatureAtLab: 'AAAAAAA',
+      isModifiedByHub: false,
+      isModifiedByFacility: false,
+      isModifiedByLaboratory: false,
+      isModifiedByCourrier: false,
       createdBy: 'AAAAAAA',
-      modifiedBy: currentDate,
-      dateCreated: 'AAAAAAA',
-      dateModified: currentDate,
+      createdDate: currentDate,
+      lastModifiedBy: 'AAAAAAA',
+      lastModifiedDate: currentDate,
     };
   });
 
@@ -59,8 +63,8 @@ describe('Sample Service', () => {
         {
           dateCollected: currentDate.format(DATE_TIME_FORMAT),
           dateSynced: currentDate.format(DATE_TIME_FORMAT),
-          modifiedBy: currentDate.format(DATE_TIME_FORMAT),
-          dateModified: currentDate.format(DATE_TIME_FORMAT),
+          createdDate: currentDate.format(DATE_TIME_FORMAT),
+          lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
         },
         elemDefault
       );
@@ -78,8 +82,8 @@ describe('Sample Service', () => {
           id: 'ID',
           dateCollected: currentDate.format(DATE_TIME_FORMAT),
           dateSynced: currentDate.format(DATE_TIME_FORMAT),
-          modifiedBy: currentDate.format(DATE_TIME_FORMAT),
-          dateModified: currentDate.format(DATE_TIME_FORMAT),
+          createdDate: currentDate.format(DATE_TIME_FORMAT),
+          lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
         },
         elemDefault
       );
@@ -88,8 +92,8 @@ describe('Sample Service', () => {
         {
           dateCollected: currentDate,
           dateSynced: currentDate,
-          modifiedBy: currentDate,
-          dateModified: currentDate,
+          createdDate: currentDate,
+          lastModifiedDate: currentDate,
         },
         returnedFromService
       );
@@ -126,10 +130,14 @@ describe('Sample Service', () => {
           clientContact: 'BBBBBB',
           temperatureAtHub: 'BBBBBB',
           temperatureAtLab: 'BBBBBB',
+          isModifiedByHub: true,
+          isModifiedByFacility: true,
+          isModifiedByLaboratory: true,
+          isModifiedByCourrier: true,
           createdBy: 'BBBBBB',
-          modifiedBy: currentDate.format(DATE_TIME_FORMAT),
-          dateCreated: 'BBBBBB',
-          dateModified: currentDate.format(DATE_TIME_FORMAT),
+          createdDate: currentDate.format(DATE_TIME_FORMAT),
+          lastModifiedBy: 'BBBBBB',
+          lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
         },
         elemDefault
       );
@@ -138,8 +146,8 @@ describe('Sample Service', () => {
         {
           dateCollected: currentDate,
           dateSynced: currentDate,
-          modifiedBy: currentDate,
-          dateModified: currentDate,
+          createdDate: currentDate,
+          lastModifiedDate: currentDate,
         },
         returnedFromService
       );
@@ -165,9 +173,12 @@ describe('Sample Service', () => {
           resultReceivedBy: 'BBBBBB',
           clientContact: 'BBBBBB',
           temperatureAtLab: 'BBBBBB',
+          isModifiedByHub: true,
+          isModifiedByFacility: true,
+          isModifiedByLaboratory: true,
           createdBy: 'BBBBBB',
-          modifiedBy: currentDate.format(DATE_TIME_FORMAT),
-          dateCreated: 'BBBBBB',
+          lastModifiedBy: 'BBBBBB',
+          lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
         },
         new Sample()
       );
@@ -178,8 +189,8 @@ describe('Sample Service', () => {
         {
           dateCollected: currentDate,
           dateSynced: currentDate,
-          modifiedBy: currentDate,
-          dateModified: currentDate,
+          createdDate: currentDate,
+          lastModifiedDate: currentDate,
         },
         returnedFromService
       );
@@ -216,10 +227,14 @@ describe('Sample Service', () => {
           clientContact: 'BBBBBB',
           temperatureAtHub: 'BBBBBB',
           temperatureAtLab: 'BBBBBB',
+          isModifiedByHub: true,
+          isModifiedByFacility: true,
+          isModifiedByLaboratory: true,
+          isModifiedByCourrier: true,
           createdBy: 'BBBBBB',
-          modifiedBy: currentDate.format(DATE_TIME_FORMAT),
-          dateCreated: 'BBBBBB',
-          dateModified: currentDate.format(DATE_TIME_FORMAT),
+          createdDate: currentDate.format(DATE_TIME_FORMAT),
+          lastModifiedBy: 'BBBBBB',
+          lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
         },
         elemDefault
       );
@@ -228,8 +243,8 @@ describe('Sample Service', () => {
         {
           dateCollected: currentDate,
           dateSynced: currentDate,
-          modifiedBy: currentDate,
-          dateModified: currentDate,
+          createdDate: currentDate,
+          lastModifiedDate: currentDate,
         },
         returnedFromService
       );
@@ -279,7 +294,7 @@ describe('Sample Service', () => {
       });
 
       it('should add only unique Sample to an array', () => {
-        const sampleArray: ISample[] = [{ id: 'ABC' }, { id: 'CBA' }, { id: 'e6cbfab2-92bf-4dd3-84cd-7b4f5672c37c' }];
+        const sampleArray: ISample[] = [{ id: 'ABC' }, { id: 'CBA' }, { id: 'fab292bf-dd34-44cd-bb4f-5672c37cc37d' }];
         const sampleCollection: ISample[] = [{ id: 'ABC' }];
         expectedResult = service.addSampleToCollectionIfMissing(sampleCollection, ...sampleArray);
         expect(expectedResult).toHaveLength(3);
