@@ -49,8 +49,8 @@ class ShipmentResourceIT {
     private static final String DEFAULT_DATE_CREATED = "AAAAAAAAAA";
     private static final String UPDATED_DATE_CREATED = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_DATE_MODIFIED = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_DATE_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final String DEFAULT_DATE_MODIFIED = "AAAAAAAAAA";
+    private static final String UPDATED_DATE_MODIFIED = "BBBBBBBBBB";
 
     private static final String DEFAULT_RIDER_ID = "AAAAAAAAAA";
     private static final String UPDATED_RIDER_ID = "BBBBBBBBBB";
@@ -85,8 +85,14 @@ class ShipmentResourceIT {
     private static final String DEFAULT_CREATED_BY = "AAAAAAAAAA";
     private static final String UPDATED_CREATED_BY = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_MODIFIED_BY = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_MODIFIED_BY = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_CREATED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_CREATED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
+    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
+
+    private static final Instant DEFAULT_LAST_MODIFIED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LAST_MODIFIED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final String ENTITY_API_URL = "/api/shipments";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -128,7 +134,9 @@ class ShipmentResourceIT {
             .isModifiedByLaboratory(DEFAULT_IS_MODIFIED_BY_LABORATORY)
             .isModifiedByCourrier(DEFAULT_IS_MODIFIED_BY_COURRIER)
             .createdBy(DEFAULT_CREATED_BY)
-            .modifiedBy(DEFAULT_MODIFIED_BY);
+            .createdDate(DEFAULT_CREATED_DATE)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
+            .lastModifiedDate(DEFAULT_LAST_MODIFIED_DATE);
         return shipment;
     }
 
@@ -158,7 +166,9 @@ class ShipmentResourceIT {
             .isModifiedByLaboratory(UPDATED_IS_MODIFIED_BY_LABORATORY)
             .isModifiedByCourrier(UPDATED_IS_MODIFIED_BY_COURRIER)
             .createdBy(UPDATED_CREATED_BY)
-            .modifiedBy(UPDATED_MODIFIED_BY);
+            .createdDate(UPDATED_CREATED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE);
         return shipment;
     }
 
@@ -198,7 +208,9 @@ class ShipmentResourceIT {
         assertThat(testShipment.getIsModifiedByLaboratory()).isEqualTo(DEFAULT_IS_MODIFIED_BY_LABORATORY);
         assertThat(testShipment.getIsModifiedByCourrier()).isEqualTo(DEFAULT_IS_MODIFIED_BY_COURRIER);
         assertThat(testShipment.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
-        assertThat(testShipment.getModifiedBy()).isEqualTo(DEFAULT_MODIFIED_BY);
+        assertThat(testShipment.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
+        assertThat(testShipment.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
+        assertThat(testShipment.getLastModifiedDate()).isEqualTo(DEFAULT_LAST_MODIFIED_DATE);
     }
 
     @Test
@@ -238,7 +250,7 @@ class ShipmentResourceIT {
             .andExpect(jsonPath("$.[*].samples").value(hasItem(DEFAULT_SAMPLES.toString())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)))
             .andExpect(jsonPath("$.[*].dateCreated").value(hasItem(DEFAULT_DATE_CREATED)))
-            .andExpect(jsonPath("$.[*].dateModified").value(hasItem(DEFAULT_DATE_MODIFIED.toString())))
+            .andExpect(jsonPath("$.[*].dateModified").value(hasItem(DEFAULT_DATE_MODIFIED)))
             .andExpect(jsonPath("$.[*].riderId").value(hasItem(DEFAULT_RIDER_ID)))
             .andExpect(jsonPath("$.[*].riderName").value(hasItem(DEFAULT_RIDER_NAME)))
             .andExpect(jsonPath("$.[*].destination").value(hasItem(DEFAULT_DESTINATION)))
@@ -250,7 +262,9 @@ class ShipmentResourceIT {
             .andExpect(jsonPath("$.[*].isModifiedByLaboratory").value(hasItem(DEFAULT_IS_MODIFIED_BY_LABORATORY.booleanValue())))
             .andExpect(jsonPath("$.[*].isModifiedByCourrier").value(hasItem(DEFAULT_IS_MODIFIED_BY_COURRIER.booleanValue())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
-            .andExpect(jsonPath("$.[*].modifiedBy").value(hasItem(DEFAULT_MODIFIED_BY.toString())));
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
+            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())));
     }
 
     @Test
@@ -272,7 +286,7 @@ class ShipmentResourceIT {
             .andExpect(jsonPath("$.samples").value(DEFAULT_SAMPLES.toString()))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS))
             .andExpect(jsonPath("$.dateCreated").value(DEFAULT_DATE_CREATED))
-            .andExpect(jsonPath("$.dateModified").value(DEFAULT_DATE_MODIFIED.toString()))
+            .andExpect(jsonPath("$.dateModified").value(DEFAULT_DATE_MODIFIED))
             .andExpect(jsonPath("$.riderId").value(DEFAULT_RIDER_ID))
             .andExpect(jsonPath("$.riderName").value(DEFAULT_RIDER_NAME))
             .andExpect(jsonPath("$.destination").value(DEFAULT_DESTINATION))
@@ -284,7 +298,9 @@ class ShipmentResourceIT {
             .andExpect(jsonPath("$.isModifiedByLaboratory").value(DEFAULT_IS_MODIFIED_BY_LABORATORY.booleanValue()))
             .andExpect(jsonPath("$.isModifiedByCourrier").value(DEFAULT_IS_MODIFIED_BY_COURRIER.booleanValue()))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
-            .andExpect(jsonPath("$.modifiedBy").value(DEFAULT_MODIFIED_BY.toString()));
+            .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY))
+            .andExpect(jsonPath("$.lastModifiedDate").value(DEFAULT_LAST_MODIFIED_DATE.toString()));
     }
 
     @Test
@@ -326,7 +342,9 @@ class ShipmentResourceIT {
             .isModifiedByLaboratory(UPDATED_IS_MODIFIED_BY_LABORATORY)
             .isModifiedByCourrier(UPDATED_IS_MODIFIED_BY_COURRIER)
             .createdBy(UPDATED_CREATED_BY)
-            .modifiedBy(UPDATED_MODIFIED_BY);
+            .createdDate(UPDATED_CREATED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE);
 
         restShipmentMockMvc
             .perform(
@@ -358,7 +376,9 @@ class ShipmentResourceIT {
         assertThat(testShipment.getIsModifiedByLaboratory()).isEqualTo(UPDATED_IS_MODIFIED_BY_LABORATORY);
         assertThat(testShipment.getIsModifiedByCourrier()).isEqualTo(UPDATED_IS_MODIFIED_BY_COURRIER);
         assertThat(testShipment.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
-        assertThat(testShipment.getModifiedBy()).isEqualTo(UPDATED_MODIFIED_BY);
+        assertThat(testShipment.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
+        assertThat(testShipment.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
+        assertThat(testShipment.getLastModifiedDate()).isEqualTo(UPDATED_LAST_MODIFIED_DATE);
     }
 
     @Test
@@ -442,7 +462,8 @@ class ShipmentResourceIT {
             .isModifiedByLaboratory(UPDATED_IS_MODIFIED_BY_LABORATORY)
             .isModifiedByCourrier(UPDATED_IS_MODIFIED_BY_COURRIER)
             .createdBy(UPDATED_CREATED_BY)
-            .modifiedBy(UPDATED_MODIFIED_BY);
+            .createdDate(UPDATED_CREATED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restShipmentMockMvc
             .perform(
@@ -474,7 +495,9 @@ class ShipmentResourceIT {
         assertThat(testShipment.getIsModifiedByLaboratory()).isEqualTo(UPDATED_IS_MODIFIED_BY_LABORATORY);
         assertThat(testShipment.getIsModifiedByCourrier()).isEqualTo(UPDATED_IS_MODIFIED_BY_COURRIER);
         assertThat(testShipment.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
-        assertThat(testShipment.getModifiedBy()).isEqualTo(UPDATED_MODIFIED_BY);
+        assertThat(testShipment.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
+        assertThat(testShipment.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
+        assertThat(testShipment.getLastModifiedDate()).isEqualTo(DEFAULT_LAST_MODIFIED_DATE);
     }
 
     @Test
@@ -509,7 +532,9 @@ class ShipmentResourceIT {
             .isModifiedByLaboratory(UPDATED_IS_MODIFIED_BY_LABORATORY)
             .isModifiedByCourrier(UPDATED_IS_MODIFIED_BY_COURRIER)
             .createdBy(UPDATED_CREATED_BY)
-            .modifiedBy(UPDATED_MODIFIED_BY);
+            .createdDate(UPDATED_CREATED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE);
 
         restShipmentMockMvc
             .perform(
@@ -541,7 +566,9 @@ class ShipmentResourceIT {
         assertThat(testShipment.getIsModifiedByLaboratory()).isEqualTo(UPDATED_IS_MODIFIED_BY_LABORATORY);
         assertThat(testShipment.getIsModifiedByCourrier()).isEqualTo(UPDATED_IS_MODIFIED_BY_COURRIER);
         assertThat(testShipment.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
-        assertThat(testShipment.getModifiedBy()).isEqualTo(UPDATED_MODIFIED_BY);
+        assertThat(testShipment.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
+        assertThat(testShipment.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
+        assertThat(testShipment.getLastModifiedDate()).isEqualTo(UPDATED_LAST_MODIFIED_DATE);
     }
 
     @Test

@@ -28,9 +28,9 @@ describe('TestType Service', () => {
       name: 'AAAAAAA',
       prefix: 'AAAAAAA',
       createdBy: 'AAAAAAA',
-      createdDate: currentDate,
-      lastModifiedBy: 'AAAAAAA',
-      lastModifiedDate: currentDate,
+      modifiedBy: 'AAAAAAA',
+      dateCreated: currentDate,
+      dateModified: currentDate,
     };
   });
 
@@ -38,8 +38,8 @@ describe('TestType Service', () => {
     it('should find an element', () => {
       const returnedFromService = Object.assign(
         {
-          createdDate: currentDate.format(DATE_TIME_FORMAT),
-          lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
+          dateCreated: currentDate.format(DATE_TIME_FORMAT),
+          dateModified: currentDate.format(DATE_TIME_FORMAT),
         },
         elemDefault
       );
@@ -55,16 +55,16 @@ describe('TestType Service', () => {
       const returnedFromService = Object.assign(
         {
           id: 'ID',
-          createdDate: currentDate.format(DATE_TIME_FORMAT),
-          lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
+          dateCreated: currentDate.format(DATE_TIME_FORMAT),
+          dateModified: currentDate.format(DATE_TIME_FORMAT),
         },
         elemDefault
       );
 
       const expected = Object.assign(
         {
-          createdDate: currentDate,
-          lastModifiedDate: currentDate,
+          dateCreated: currentDate,
+          dateModified: currentDate,
         },
         returnedFromService
       );
@@ -83,17 +83,17 @@ describe('TestType Service', () => {
           name: 'BBBBBB',
           prefix: 'BBBBBB',
           createdBy: 'BBBBBB',
-          createdDate: currentDate.format(DATE_TIME_FORMAT),
-          lastModifiedBy: 'BBBBBB',
-          lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
+          modifiedBy: 'BBBBBB',
+          dateCreated: currentDate.format(DATE_TIME_FORMAT),
+          dateModified: currentDate.format(DATE_TIME_FORMAT),
         },
         elemDefault
       );
 
       const expected = Object.assign(
         {
-          createdDate: currentDate,
-          lastModifiedDate: currentDate,
+          dateCreated: currentDate,
+          dateModified: currentDate,
         },
         returnedFromService
       );
@@ -110,8 +110,8 @@ describe('TestType Service', () => {
         {
           name: 'BBBBBB',
           createdBy: 'BBBBBB',
-          createdDate: currentDate.format(DATE_TIME_FORMAT),
-          lastModifiedBy: 'BBBBBB',
+          modifiedBy: 'BBBBBB',
+          dateCreated: currentDate.format(DATE_TIME_FORMAT),
         },
         new TestType()
       );
@@ -120,8 +120,8 @@ describe('TestType Service', () => {
 
       const expected = Object.assign(
         {
-          createdDate: currentDate,
-          lastModifiedDate: currentDate,
+          dateCreated: currentDate,
+          dateModified: currentDate,
         },
         returnedFromService
       );
@@ -140,17 +140,17 @@ describe('TestType Service', () => {
           name: 'BBBBBB',
           prefix: 'BBBBBB',
           createdBy: 'BBBBBB',
-          createdDate: currentDate.format(DATE_TIME_FORMAT),
-          lastModifiedBy: 'BBBBBB',
-          lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
+          modifiedBy: 'BBBBBB',
+          dateCreated: currentDate.format(DATE_TIME_FORMAT),
+          dateModified: currentDate.format(DATE_TIME_FORMAT),
         },
         elemDefault
       );
 
       const expected = Object.assign(
         {
-          createdDate: currentDate,
-          lastModifiedDate: currentDate,
+          dateCreated: currentDate,
+          dateModified: currentDate,
         },
         returnedFromService
       );

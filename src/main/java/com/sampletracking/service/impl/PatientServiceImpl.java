@@ -75,8 +75,14 @@ public class PatientServiceImpl implements PatientService {
                 if (patient.getCreatedBy() != null) {
                     existingPatient.setCreatedBy(patient.getCreatedBy());
                 }
-                if (patient.getModifiedBy() != null) {
-                    existingPatient.setModifiedBy(patient.getModifiedBy());
+                if (patient.getCreatedDate() != null) {
+                    existingPatient.setCreatedDate(patient.getCreatedDate());
+                }
+                if (patient.getLastModifiedBy() != null) {
+                    existingPatient.setLastModifiedBy(patient.getLastModifiedBy());
+                }
+                if (patient.getLastModifiedDate() != null) {
+                    existingPatient.setLastModifiedDate(patient.getLastModifiedDate());
                 }
 
                 return existingPatient;

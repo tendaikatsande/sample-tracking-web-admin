@@ -23,9 +23,9 @@ export class TestTypeUpdateComponent implements OnInit {
     name: [],
     prefix: [],
     createdBy: [],
-    createdDate: [],
-    lastModifiedBy: [],
-    lastModifiedDate: [],
+    modifiedBy: [],
+    dateCreated: [],
+    dateModified: [],
   });
 
   constructor(protected testTypeService: TestTypeService, protected activatedRoute: ActivatedRoute, protected fb: FormBuilder) {}
@@ -34,8 +34,8 @@ export class TestTypeUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ testType }) => {
       if (testType.id === undefined) {
         const today = dayjs().startOf('day');
-        testType.createdDate = today;
-        testType.lastModifiedDate = today;
+        testType.dateCreated = today;
+        testType.dateModified = today;
       }
 
       this.updateForm(testType);
@@ -81,9 +81,9 @@ export class TestTypeUpdateComponent implements OnInit {
       name: testType.name,
       prefix: testType.prefix,
       createdBy: testType.createdBy,
-      createdDate: testType.createdDate ? testType.createdDate.format(DATE_TIME_FORMAT) : null,
-      lastModifiedBy: testType.lastModifiedBy,
-      lastModifiedDate: testType.lastModifiedDate ? testType.lastModifiedDate.format(DATE_TIME_FORMAT) : null,
+      modifiedBy: testType.modifiedBy,
+      dateCreated: testType.dateCreated ? testType.dateCreated.format(DATE_TIME_FORMAT) : null,
+      dateModified: testType.dateModified ? testType.dateModified.format(DATE_TIME_FORMAT) : null,
     });
   }
 
@@ -94,12 +94,12 @@ export class TestTypeUpdateComponent implements OnInit {
       name: this.editForm.get(['name'])!.value,
       prefix: this.editForm.get(['prefix'])!.value,
       createdBy: this.editForm.get(['createdBy'])!.value,
-      createdDate: this.editForm.get(['createdDate'])!.value
-        ? dayjs(this.editForm.get(['createdDate'])!.value, DATE_TIME_FORMAT)
+      modifiedBy: this.editForm.get(['modifiedBy'])!.value,
+      dateCreated: this.editForm.get(['dateCreated'])!.value
+        ? dayjs(this.editForm.get(['dateCreated'])!.value, DATE_TIME_FORMAT)
         : undefined,
-      lastModifiedBy: this.editForm.get(['lastModifiedBy'])!.value,
-      lastModifiedDate: this.editForm.get(['lastModifiedDate'])!.value
-        ? dayjs(this.editForm.get(['lastModifiedDate'])!.value, DATE_TIME_FORMAT)
+      dateModified: this.editForm.get(['dateModified'])!.value
+        ? dayjs(this.editForm.get(['dateModified'])!.value, DATE_TIME_FORMAT)
         : undefined,
     };
   }

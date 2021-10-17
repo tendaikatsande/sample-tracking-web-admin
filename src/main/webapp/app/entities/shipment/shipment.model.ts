@@ -8,7 +8,7 @@ export interface IShipment {
   samples?: string | null;
   status?: string | null;
   dateCreated?: string | null;
-  dateModified?: dayjs.Dayjs | null;
+  dateModified?: string | null;
   riderId?: string | null;
   riderName?: string | null;
   destination?: string | null;
@@ -20,7 +20,9 @@ export interface IShipment {
   isModifiedByLaboratory?: boolean | null;
   isModifiedByCourrier?: boolean | null;
   createdBy?: string | null;
-  modifiedBy?: dayjs.Dayjs | null;
+  createdDate?: dayjs.Dayjs | null;
+  lastModifiedBy?: string | null;
+  lastModifiedDate?: dayjs.Dayjs | null;
 }
 
 export class Shipment implements IShipment {
@@ -32,7 +34,7 @@ export class Shipment implements IShipment {
     public samples?: string | null,
     public status?: string | null,
     public dateCreated?: string | null,
-    public dateModified?: dayjs.Dayjs | null,
+    public dateModified?: string | null,
     public riderId?: string | null,
     public riderName?: string | null,
     public destination?: string | null,
@@ -44,7 +46,9 @@ export class Shipment implements IShipment {
     public isModifiedByLaboratory?: boolean | null,
     public isModifiedByCourrier?: boolean | null,
     public createdBy?: string | null,
-    public modifiedBy?: dayjs.Dayjs | null
+    public createdDate?: dayjs.Dayjs | null,
+    public lastModifiedBy?: string | null,
+    public lastModifiedDate?: dayjs.Dayjs | null
   ) {
     this.isModifiedByHub = this.isModifiedByHub ?? false;
     this.isModifiedByFacility = this.isModifiedByFacility ?? false;

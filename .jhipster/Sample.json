@@ -110,15 +110,15 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "modifiedBy",
+      "fieldName": "createdDate",
       "fieldType": "Instant"
     },
     {
-      "fieldName": "dateCreated",
+      "fieldName": "lastModifiedBy",
       "fieldType": "String"
     },
     {
-      "fieldName": "dateModified",
+      "fieldName": "lastModifiedDate",
       "fieldType": "Instant"
     }
   ],

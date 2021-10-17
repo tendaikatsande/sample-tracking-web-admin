@@ -98,14 +98,14 @@ public class Sample implements Serializable {
     @Column(name = "created_by")
     private String createdBy;
 
-    @Column(name = "modified_by")
-    private Instant modifiedBy;
+    @Column(name = "created_date")
+    private Instant createdDate;
 
-    @Column(name = "date_created")
-    private String dateCreated;
+    @Column(name = "last_modified_by")
+    private String lastModifiedBy;
 
-    @Column(name = "date_modified")
-    private Instant dateModified;
+    @Column(name = "last_modified_date")
+    private Instant lastModifiedDate;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -460,43 +460,43 @@ public class Sample implements Serializable {
         this.createdBy = createdBy;
     }
 
-    public Instant getModifiedBy() {
-        return this.modifiedBy;
+    public Instant getCreatedDate() {
+        return this.createdDate;
     }
 
-    public Sample modifiedBy(Instant modifiedBy) {
-        this.setModifiedBy(modifiedBy);
+    public Sample createdDate(Instant createdDate) {
+        this.setCreatedDate(createdDate);
         return this;
     }
 
-    public void setModifiedBy(Instant modifiedBy) {
-        this.modifiedBy = modifiedBy;
+    public void setCreatedDate(Instant createdDate) {
+        this.createdDate = createdDate;
     }
 
-    public String getDateCreated() {
-        return this.dateCreated;
+    public String getLastModifiedBy() {
+        return this.lastModifiedBy;
     }
 
-    public Sample dateCreated(String dateCreated) {
-        this.setDateCreated(dateCreated);
+    public Sample lastModifiedBy(String lastModifiedBy) {
+        this.setLastModifiedBy(lastModifiedBy);
         return this;
     }
 
-    public void setDateCreated(String dateCreated) {
-        this.dateCreated = dateCreated;
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
     }
 
-    public Instant getDateModified() {
-        return this.dateModified;
+    public Instant getLastModifiedDate() {
+        return this.lastModifiedDate;
     }
 
-    public Sample dateModified(Instant dateModified) {
-        this.setDateModified(dateModified);
+    public Sample lastModifiedDate(Instant lastModifiedDate) {
+        this.setLastModifiedDate(lastModifiedDate);
         return this;
     }
 
-    public void setDateModified(Instant dateModified) {
-        this.dateModified = dateModified;
+    public void setLastModifiedDate(Instant lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
@@ -549,9 +549,9 @@ public class Sample implements Serializable {
             ", isModifiedByLaboratory='" + getIsModifiedByLaboratory() + "'" +
             ", isModifiedByCourrier='" + getIsModifiedByCourrier() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
-            ", modifiedBy='" + getModifiedBy() + "'" +
-            ", dateCreated='" + getDateCreated() + "'" +
-            ", dateModified='" + getDateModified() + "'" +
+            ", createdDate='" + getCreatedDate() + "'" +
+            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
+            ", lastModifiedDate='" + getLastModifiedDate() + "'" +
             "}";
     }
 }

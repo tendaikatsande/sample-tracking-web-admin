@@ -32,7 +32,7 @@
     },
     {
       "fieldName": "dateModified",
-      "fieldType": "Instant"
+      "fieldType": "String"
     },
     {
       "fieldName": "riderId",
@@ -79,7 +79,15 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "modifiedBy",
+      "fieldName": "createdDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lastModifiedBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "lastModifiedDate",
       "fieldType": "Instant"
     }
   ],

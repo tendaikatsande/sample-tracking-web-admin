@@ -117,14 +117,14 @@ public class SampleServiceImpl implements SampleService {
                 if (sample.getCreatedBy() != null) {
                     existingSample.setCreatedBy(sample.getCreatedBy());
                 }
-                if (sample.getModifiedBy() != null) {
-                    existingSample.setModifiedBy(sample.getModifiedBy());
+                if (sample.getCreatedDate() != null) {
+                    existingSample.setCreatedDate(sample.getCreatedDate());
                 }
-                if (sample.getDateCreated() != null) {
-                    existingSample.setDateCreated(sample.getDateCreated());
+                if (sample.getLastModifiedBy() != null) {
+                    existingSample.setLastModifiedBy(sample.getLastModifiedBy());
                 }
-                if (sample.getDateModified() != null) {
-                    existingSample.setDateModified(sample.getDateModified());
+                if (sample.getLastModifiedDate() != null) {
+                    existingSample.setLastModifiedDate(sample.getLastModifiedDate());
                 }
 
                 return existingSample;

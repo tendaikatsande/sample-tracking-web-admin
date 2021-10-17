@@ -77,8 +77,8 @@ export class SampleService {
     return Object.assign({}, sample, {
       dateCollected: sample.dateCollected?.isValid() ? sample.dateCollected.toJSON() : undefined,
       dateSynced: sample.dateSynced?.isValid() ? sample.dateSynced.toJSON() : undefined,
-      modifiedBy: sample.modifiedBy?.isValid() ? sample.modifiedBy.toJSON() : undefined,
-      dateModified: sample.dateModified?.isValid() ? sample.dateModified.toJSON() : undefined,
+      createdDate: sample.createdDate?.isValid() ? sample.createdDate.toJSON() : undefined,
+      lastModifiedDate: sample.lastModifiedDate?.isValid() ? sample.lastModifiedDate.toJSON() : undefined,
     });
   }
 
@@ -86,8 +86,8 @@ export class SampleService {
     if (res.body) {
       res.body.dateCollected = res.body.dateCollected ? dayjs(res.body.dateCollected) : undefined;
       res.body.dateSynced = res.body.dateSynced ? dayjs(res.body.dateSynced) : undefined;
-      res.body.modifiedBy = res.body.modifiedBy ? dayjs(res.body.modifiedBy) : undefined;
-      res.body.dateModified = res.body.dateModified ? dayjs(res.body.dateModified) : undefined;
+      res.body.createdDate = res.body.createdDate ? dayjs(res.body.createdDate) : undefined;
+      res.body.lastModifiedDate = res.body.lastModifiedDate ? dayjs(res.body.lastModifiedDate) : undefined;
     }
     return res;
   }
@@ -97,8 +97,8 @@ export class SampleService {
       res.body.forEach((sample: ISample) => {
         sample.dateCollected = sample.dateCollected ? dayjs(sample.dateCollected) : undefined;
         sample.dateSynced = sample.dateSynced ? dayjs(sample.dateSynced) : undefined;
-        sample.modifiedBy = sample.modifiedBy ? dayjs(sample.modifiedBy) : undefined;
-        sample.dateModified = sample.dateModified ? dayjs(sample.dateModified) : undefined;
+        sample.createdDate = sample.createdDate ? dayjs(sample.createdDate) : undefined;
+        sample.lastModifiedDate = sample.lastModifiedDate ? dayjs(sample.lastModifiedDate) : undefined;
       });
     }
     return res;

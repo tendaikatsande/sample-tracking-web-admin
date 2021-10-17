@@ -21,9 +21,9 @@
       "name": "Name",
       "prefix": "Prefix",
       "createdBy": "Created By",
-      "createdDate": "Created Date",
-      "lastModifiedBy": "Last Modified By",
-      "lastModifiedDate": "Last Modified Date"
+      "modifiedBy": "Modified By",
+      "dateCreated": "Date Created",
+      "dateModified": "Date Modified"
     }
   }
 }

@@ -75,15 +75,15 @@ export class TestTypeService {
 
   protected convertDateFromClient(testType: ITestType): ITestType {
     return Object.assign({}, testType, {
-      createdDate: testType.createdDate?.isValid() ? testType.createdDate.toJSON() : undefined,
-      lastModifiedDate: testType.lastModifiedDate?.isValid() ? testType.lastModifiedDate.toJSON() : undefined,
+      dateCreated: testType.dateCreated?.isValid() ? testType.dateCreated.toJSON() : undefined,
+      dateModified: testType.dateModified?.isValid() ? testType.dateModified.toJSON() : undefined,
     });
   }
 
   protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
     if (res.body) {
-      res.body.createdDate = res.body.createdDate ? dayjs(res.body.createdDate) : undefined;
-      res.body.lastModifiedDate = res.body.lastModifiedDate ? dayjs(res.body.lastModifiedDate) : undefined;
+      res.body.dateCreated = res.body.dateCreated ? dayjs(res.body.dateCreated) : undefined;
+      res.body.dateModified = res.body.dateModified ? dayjs(res.body.dateModified) : undefined;
     }
     return res;
   }
@@ -91,8 +91,8 @@ export class TestTypeService {
   protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
     if (res.body) {
       res.body.forEach((testType: ITestType) => {
-        testType.createdDate = testType.createdDate ? dayjs(testType.createdDate) : undefined;
-        testType.lastModifiedDate = testType.lastModifiedDate ? dayjs(testType.lastModifiedDate) : undefined;
+        testType.dateCreated = testType.dateCreated ? dayjs(testType.dateCreated) : undefined;
+        testType.dateModified = testType.dateModified ? dayjs(testType.dateModified) : undefined;
       });
     }
     return res;

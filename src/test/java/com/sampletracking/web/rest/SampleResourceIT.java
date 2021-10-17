@@ -108,14 +108,14 @@ class SampleResourceIT {
     private static final String DEFAULT_CREATED_BY = "AAAAAAAAAA";
     private static final String UPDATED_CREATED_BY = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_MODIFIED_BY = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_MODIFIED_BY = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_CREATED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_CREATED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final String DEFAULT_DATE_CREATED = "AAAAAAAAAA";
-    private static final String UPDATED_DATE_CREATED = "BBBBBBBBBB";
+    private static final String DEFAULT_LAST_MODIFIED_BY = "AAAAAAAAAA";
+    private static final String UPDATED_LAST_MODIFIED_BY = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_DATE_MODIFIED = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_DATE_MODIFIED = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_LAST_MODIFIED_DATE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_LAST_MODIFIED_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final String ENTITY_API_URL = "/api/samples";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -165,9 +165,9 @@ class SampleResourceIT {
             .isModifiedByLaboratory(DEFAULT_IS_MODIFIED_BY_LABORATORY)
             .isModifiedByCourrier(DEFAULT_IS_MODIFIED_BY_COURRIER)
             .createdBy(DEFAULT_CREATED_BY)
-            .modifiedBy(DEFAULT_MODIFIED_BY)
-            .dateCreated(DEFAULT_DATE_CREATED)
-            .dateModified(DEFAULT_DATE_MODIFIED);
+            .createdDate(DEFAULT_CREATED_DATE)
+            .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
+            .lastModifiedDate(DEFAULT_LAST_MODIFIED_DATE);
         return sample;
     }
 
@@ -205,9 +205,9 @@ class SampleResourceIT {
             .isModifiedByLaboratory(UPDATED_IS_MODIFIED_BY_LABORATORY)
             .isModifiedByCourrier(UPDATED_IS_MODIFIED_BY_COURRIER)
             .createdBy(UPDATED_CREATED_BY)
-            .modifiedBy(UPDATED_MODIFIED_BY)
-            .dateCreated(UPDATED_DATE_CREATED)
-            .dateModified(UPDATED_DATE_MODIFIED);
+            .createdDate(UPDATED_CREATED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE);
         return sample;
     }
 
@@ -255,9 +255,9 @@ class SampleResourceIT {
         assertThat(testSample.getIsModifiedByLaboratory()).isEqualTo(DEFAULT_IS_MODIFIED_BY_LABORATORY);
         assertThat(testSample.getIsModifiedByCourrier()).isEqualTo(DEFAULT_IS_MODIFIED_BY_COURRIER);
         assertThat(testSample.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
-        assertThat(testSample.getModifiedBy()).isEqualTo(DEFAULT_MODIFIED_BY);
-        assertThat(testSample.getDateCreated()).isEqualTo(DEFAULT_DATE_CREATED);
-        assertThat(testSample.getDateModified()).isEqualTo(DEFAULT_DATE_MODIFIED);
+        assertThat(testSample.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
+        assertThat(testSample.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
+        assertThat(testSample.getLastModifiedDate()).isEqualTo(DEFAULT_LAST_MODIFIED_DATE);
     }
 
     @Test
@@ -317,9 +317,9 @@ class SampleResourceIT {
             .andExpect(jsonPath("$.[*].isModifiedByLaboratory").value(hasItem(DEFAULT_IS_MODIFIED_BY_LABORATORY.booleanValue())))
             .andExpect(jsonPath("$.[*].isModifiedByCourrier").value(hasItem(DEFAULT_IS_MODIFIED_BY_COURRIER.booleanValue())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
-            .andExpect(jsonPath("$.[*].modifiedBy").value(hasItem(DEFAULT_MODIFIED_BY.toString())))
-            .andExpect(jsonPath("$.[*].dateCreated").value(hasItem(DEFAULT_DATE_CREATED)))
-            .andExpect(jsonPath("$.[*].dateModified").value(hasItem(DEFAULT_DATE_MODIFIED.toString())));
+            .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
+            .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
+            .andExpect(jsonPath("$.[*].lastModifiedDate").value(hasItem(DEFAULT_LAST_MODIFIED_DATE.toString())));
     }
 
     @Test
@@ -361,9 +361,9 @@ class SampleResourceIT {
             .andExpect(jsonPath("$.isModifiedByLaboratory").value(DEFAULT_IS_MODIFIED_BY_LABORATORY.booleanValue()))
             .andExpect(jsonPath("$.isModifiedByCourrier").value(DEFAULT_IS_MODIFIED_BY_COURRIER.booleanValue()))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
-            .andExpect(jsonPath("$.modifiedBy").value(DEFAULT_MODIFIED_BY.toString()))
-            .andExpect(jsonPath("$.dateCreated").value(DEFAULT_DATE_CREATED))
-            .andExpect(jsonPath("$.dateModified").value(DEFAULT_DATE_MODIFIED.toString()));
+            .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
+            .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY))
+            .andExpect(jsonPath("$.lastModifiedDate").value(DEFAULT_LAST_MODIFIED_DATE.toString()));
     }
 
     @Test
@@ -413,9 +413,9 @@ class SampleResourceIT {
             .isModifiedByLaboratory(UPDATED_IS_MODIFIED_BY_LABORATORY)
             .isModifiedByCourrier(UPDATED_IS_MODIFIED_BY_COURRIER)
             .createdBy(UPDATED_CREATED_BY)
-            .modifiedBy(UPDATED_MODIFIED_BY)
-            .dateCreated(UPDATED_DATE_CREATED)
-            .dateModified(UPDATED_DATE_MODIFIED);
+            .createdDate(UPDATED_CREATED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE);
 
         restSampleMockMvc
             .perform(
@@ -455,9 +455,9 @@ class SampleResourceIT {
         assertThat(testSample.getIsModifiedByLaboratory()).isEqualTo(UPDATED_IS_MODIFIED_BY_LABORATORY);
         assertThat(testSample.getIsModifiedByCourrier()).isEqualTo(UPDATED_IS_MODIFIED_BY_COURRIER);
         assertThat(testSample.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
-        assertThat(testSample.getModifiedBy()).isEqualTo(UPDATED_MODIFIED_BY);
-        assertThat(testSample.getDateCreated()).isEqualTo(UPDATED_DATE_CREATED);
-        assertThat(testSample.getDateModified()).isEqualTo(UPDATED_DATE_MODIFIED);
+        assertThat(testSample.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
+        assertThat(testSample.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
+        assertThat(testSample.getLastModifiedDate()).isEqualTo(UPDATED_LAST_MODIFIED_DATE);
     }
 
     @Test
@@ -542,8 +542,8 @@ class SampleResourceIT {
             .isModifiedByLaboratory(UPDATED_IS_MODIFIED_BY_LABORATORY)
             .isModifiedByCourrier(UPDATED_IS_MODIFIED_BY_COURRIER)
             .createdBy(UPDATED_CREATED_BY)
-            .modifiedBy(UPDATED_MODIFIED_BY)
-            .dateCreated(UPDATED_DATE_CREATED);
+            .createdDate(UPDATED_CREATED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
 
         restSampleMockMvc
             .perform(
@@ -583,9 +583,9 @@ class SampleResourceIT {
         assertThat(testSample.getIsModifiedByLaboratory()).isEqualTo(UPDATED_IS_MODIFIED_BY_LABORATORY);
         assertThat(testSample.getIsModifiedByCourrier()).isEqualTo(UPDATED_IS_MODIFIED_BY_COURRIER);
         assertThat(testSample.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
-        assertThat(testSample.getModifiedBy()).isEqualTo(UPDATED_MODIFIED_BY);
-        assertThat(testSample.getDateCreated()).isEqualTo(UPDATED_DATE_CREATED);
-        assertThat(testSample.getDateModified()).isEqualTo(DEFAULT_DATE_MODIFIED);
+        assertThat(testSample.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
+        assertThat(testSample.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
+        assertThat(testSample.getLastModifiedDate()).isEqualTo(DEFAULT_LAST_MODIFIED_DATE);
     }
 
     @Test
@@ -628,9 +628,9 @@ class SampleResourceIT {
             .isModifiedByLaboratory(UPDATED_IS_MODIFIED_BY_LABORATORY)
             .isModifiedByCourrier(UPDATED_IS_MODIFIED_BY_COURRIER)
             .createdBy(UPDATED_CREATED_BY)
-            .modifiedBy(UPDATED_MODIFIED_BY)
-            .dateCreated(UPDATED_DATE_CREATED)
-            .dateModified(UPDATED_DATE_MODIFIED);
+            .createdDate(UPDATED_CREATED_DATE)
+            .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
+            .lastModifiedDate(UPDATED_LAST_MODIFIED_DATE);
 
         restSampleMockMvc
             .perform(
@@ -670,9 +670,9 @@ class SampleResourceIT {
         assertThat(testSample.getIsModifiedByLaboratory()).isEqualTo(UPDATED_IS_MODIFIED_BY_LABORATORY);
         assertThat(testSample.getIsModifiedByCourrier()).isEqualTo(UPDATED_IS_MODIFIED_BY_COURRIER);
         assertThat(testSample.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
-        assertThat(testSample.getModifiedBy()).isEqualTo(UPDATED_MODIFIED_BY);
-        assertThat(testSample.getDateCreated()).isEqualTo(UPDATED_DATE_CREATED);
-        assertThat(testSample.getDateModified()).isEqualTo(UPDATED_DATE_MODIFIED);
+        assertThat(testSample.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
+        assertThat(testSample.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
+        assertThat(testSample.getLastModifiedDate()).isEqualTo(UPDATED_LAST_MODIFIED_DATE);
     }
 
     @Test

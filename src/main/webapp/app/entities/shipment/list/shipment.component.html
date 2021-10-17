@@ -91,8 +91,14 @@
           <th scope="col" jhiSortBy="createdBy">
             <span jhiTranslate="sampleTrackingApp.shipment.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="modifiedBy">
-            <span jhiTranslate="sampleTrackingApp.shipment.modifiedBy">Modified By</span> <fa-icon icon="sort"></fa-icon>
+          <th scope="col" jhiSortBy="createdDate">
+            <span jhiTranslate="sampleTrackingApp.shipment.createdDate">Created Date</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="lastModifiedBy">
+            <span jhiTranslate="sampleTrackingApp.shipment.lastModifiedBy">Last Modified By</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="lastModifiedDate">
+            <span jhiTranslate="sampleTrackingApp.shipment.lastModifiedDate">Last Modified Date</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col"></th>
         </tr>
@@ -108,7 +114,7 @@
           <td>{{ shipment.samples }}</td>
           <td>{{ shipment.status }}</td>
           <td>{{ shipment.dateCreated }}</td>
-          <td>{{ shipment.dateModified | formatMediumDatetime }}</td>
+          <td>{{ shipment.dateModified }}</td>
           <td>{{ shipment.riderId }}</td>
           <td>{{ shipment.riderName }}</td>
           <td>{{ shipment.destination }}</td>
@@ -120,7 +126,9 @@
           <td>{{ shipment.isModifiedByLaboratory }}</td>
           <td>{{ shipment.isModifiedByCourrier }}</td>
           <td>{{ shipment.createdBy }}</td>
-          <td>{{ shipment.modifiedBy | formatMediumDatetime }}</td>
+          <td>{{ shipment.createdDate | formatMediumDatetime }}</td>
+          <td>{{ shipment.lastModifiedBy }}</td>
+          <td>{{ shipment.lastModifiedDate | formatMediumDatetime }}</td>
           <td class="text-right">
             <div class="btn-group">
               <button
