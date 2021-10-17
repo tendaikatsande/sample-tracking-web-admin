@@ -93,6 +93,18 @@ class SampleResourceIT {
     private static final String DEFAULT_TEMPERATURE_AT_LAB = "AAAAAAAAAA";
     private static final String UPDATED_TEMPERATURE_AT_LAB = "BBBBBBBBBB";
 
+    private static final Boolean DEFAULT_IS_MODIFIED_BY_HUB = false;
+    private static final Boolean UPDATED_IS_MODIFIED_BY_HUB = true;
+
+    private static final Boolean DEFAULT_IS_MODIFIED_BY_FACILITY = false;
+    private static final Boolean UPDATED_IS_MODIFIED_BY_FACILITY = true;
+
+    private static final Boolean DEFAULT_IS_MODIFIED_BY_LABORATORY = false;
+    private static final Boolean UPDATED_IS_MODIFIED_BY_LABORATORY = true;
+
+    private static final Boolean DEFAULT_IS_MODIFIED_BY_COURRIER = false;
+    private static final Boolean UPDATED_IS_MODIFIED_BY_COURRIER = true;
+
     private static final String DEFAULT_CREATED_BY = "AAAAAAAAAA";
     private static final String UPDATED_CREATED_BY = "BBBBBBBBBB";
 
@@ -148,6 +160,10 @@ class SampleResourceIT {
             .clientContact(DEFAULT_CLIENT_CONTACT)
             .temperatureAtHub(DEFAULT_TEMPERATURE_AT_HUB)
             .temperatureAtLab(DEFAULT_TEMPERATURE_AT_LAB)
+            .isModifiedByHub(DEFAULT_IS_MODIFIED_BY_HUB)
+            .isModifiedByFacility(DEFAULT_IS_MODIFIED_BY_FACILITY)
+            .isModifiedByLaboratory(DEFAULT_IS_MODIFIED_BY_LABORATORY)
+            .isModifiedByCourrier(DEFAULT_IS_MODIFIED_BY_COURRIER)
             .createdBy(DEFAULT_CREATED_BY)
             .modifiedBy(DEFAULT_MODIFIED_BY)
             .dateCreated(DEFAULT_DATE_CREATED)
@@ -184,6 +200,10 @@ class SampleResourceIT {
             .clientContact(UPDATED_CLIENT_CONTACT)
             .temperatureAtHub(UPDATED_TEMPERATURE_AT_HUB)
             .temperatureAtLab(UPDATED_TEMPERATURE_AT_LAB)
+            .isModifiedByHub(UPDATED_IS_MODIFIED_BY_HUB)
+            .isModifiedByFacility(UPDATED_IS_MODIFIED_BY_FACILITY)
+            .isModifiedByLaboratory(UPDATED_IS_MODIFIED_BY_LABORATORY)
+            .isModifiedByCourrier(UPDATED_IS_MODIFIED_BY_COURRIER)
             .createdBy(UPDATED_CREATED_BY)
             .modifiedBy(UPDATED_MODIFIED_BY)
             .dateCreated(UPDATED_DATE_CREATED)
@@ -230,6 +250,10 @@ class SampleResourceIT {
         assertThat(testSample.getClientContact()).isEqualTo(DEFAULT_CLIENT_CONTACT);
         assertThat(testSample.getTemperatureAtHub()).isEqualTo(DEFAULT_TEMPERATURE_AT_HUB);
         assertThat(testSample.getTemperatureAtLab()).isEqualTo(DEFAULT_TEMPERATURE_AT_LAB);
+        assertThat(testSample.getIsModifiedByHub()).isEqualTo(DEFAULT_IS_MODIFIED_BY_HUB);
+        assertThat(testSample.getIsModifiedByFacility()).isEqualTo(DEFAULT_IS_MODIFIED_BY_FACILITY);
+        assertThat(testSample.getIsModifiedByLaboratory()).isEqualTo(DEFAULT_IS_MODIFIED_BY_LABORATORY);
+        assertThat(testSample.getIsModifiedByCourrier()).isEqualTo(DEFAULT_IS_MODIFIED_BY_COURRIER);
         assertThat(testSample.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
         assertThat(testSample.getModifiedBy()).isEqualTo(DEFAULT_MODIFIED_BY);
         assertThat(testSample.getDateCreated()).isEqualTo(DEFAULT_DATE_CREATED);
@@ -288,6 +312,10 @@ class SampleResourceIT {
             .andExpect(jsonPath("$.[*].clientContact").value(hasItem(DEFAULT_CLIENT_CONTACT)))
             .andExpect(jsonPath("$.[*].temperatureAtHub").value(hasItem(DEFAULT_TEMPERATURE_AT_HUB)))
             .andExpect(jsonPath("$.[*].temperatureAtLab").value(hasItem(DEFAULT_TEMPERATURE_AT_LAB)))
+            .andExpect(jsonPath("$.[*].isModifiedByHub").value(hasItem(DEFAULT_IS_MODIFIED_BY_HUB.booleanValue())))
+            .andExpect(jsonPath("$.[*].isModifiedByFacility").value(hasItem(DEFAULT_IS_MODIFIED_BY_FACILITY.booleanValue())))
+            .andExpect(jsonPath("$.[*].isModifiedByLaboratory").value(hasItem(DEFAULT_IS_MODIFIED_BY_LABORATORY.booleanValue())))
+            .andExpect(jsonPath("$.[*].isModifiedByCourrier").value(hasItem(DEFAULT_IS_MODIFIED_BY_COURRIER.booleanValue())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
             .andExpect(jsonPath("$.[*].modifiedBy").value(hasItem(DEFAULT_MODIFIED_BY.toString())))
             .andExpect(jsonPath("$.[*].dateCreated").value(hasItem(DEFAULT_DATE_CREATED)))
@@ -328,6 +356,10 @@ class SampleResourceIT {
             .andExpect(jsonPath("$.clientContact").value(DEFAULT_CLIENT_CONTACT))
             .andExpect(jsonPath("$.temperatureAtHub").value(DEFAULT_TEMPERATURE_AT_HUB))
             .andExpect(jsonPath("$.temperatureAtLab").value(DEFAULT_TEMPERATURE_AT_LAB))
+            .andExpect(jsonPath("$.isModifiedByHub").value(DEFAULT_IS_MODIFIED_BY_HUB.booleanValue()))
+            .andExpect(jsonPath("$.isModifiedByFacility").value(DEFAULT_IS_MODIFIED_BY_FACILITY.booleanValue()))
+            .andExpect(jsonPath("$.isModifiedByLaboratory").value(DEFAULT_IS_MODIFIED_BY_LABORATORY.booleanValue()))
+            .andExpect(jsonPath("$.isModifiedByCourrier").value(DEFAULT_IS_MODIFIED_BY_COURRIER.booleanValue()))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
             .andExpect(jsonPath("$.modifiedBy").value(DEFAULT_MODIFIED_BY.toString()))
             .andExpect(jsonPath("$.dateCreated").value(DEFAULT_DATE_CREATED))
@@ -376,6 +408,10 @@ class SampleResourceIT {
             .clientContact(UPDATED_CLIENT_CONTACT)
             .temperatureAtHub(UPDATED_TEMPERATURE_AT_HUB)
             .temperatureAtLab(UPDATED_TEMPERATURE_AT_LAB)
+            .isModifiedByHub(UPDATED_IS_MODIFIED_BY_HUB)
+            .isModifiedByFacility(UPDATED_IS_MODIFIED_BY_FACILITY)
+            .isModifiedByLaboratory(UPDATED_IS_MODIFIED_BY_LABORATORY)
+            .isModifiedByCourrier(UPDATED_IS_MODIFIED_BY_COURRIER)
             .createdBy(UPDATED_CREATED_BY)
             .modifiedBy(UPDATED_MODIFIED_BY)
             .dateCreated(UPDATED_DATE_CREATED)
@@ -414,6 +450,10 @@ class SampleResourceIT {
         assertThat(testSample.getClientContact()).isEqualTo(UPDATED_CLIENT_CONTACT);
         assertThat(testSample.getTemperatureAtHub()).isEqualTo(UPDATED_TEMPERATURE_AT_HUB);
         assertThat(testSample.getTemperatureAtLab()).isEqualTo(UPDATED_TEMPERATURE_AT_LAB);
+        assertThat(testSample.getIsModifiedByHub()).isEqualTo(UPDATED_IS_MODIFIED_BY_HUB);
+        assertThat(testSample.getIsModifiedByFacility()).isEqualTo(UPDATED_IS_MODIFIED_BY_FACILITY);
+        assertThat(testSample.getIsModifiedByLaboratory()).isEqualTo(UPDATED_IS_MODIFIED_BY_LABORATORY);
+        assertThat(testSample.getIsModifiedByCourrier()).isEqualTo(UPDATED_IS_MODIFIED_BY_COURRIER);
         assertThat(testSample.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testSample.getModifiedBy()).isEqualTo(UPDATED_MODIFIED_BY);
         assertThat(testSample.getDateCreated()).isEqualTo(UPDATED_DATE_CREATED);
@@ -499,8 +539,11 @@ class SampleResourceIT {
             .location(UPDATED_LOCATION)
             .clientContact(UPDATED_CLIENT_CONTACT)
             .temperatureAtHub(UPDATED_TEMPERATURE_AT_HUB)
-            .dateCreated(UPDATED_DATE_CREATED)
-            .dateModified(UPDATED_DATE_MODIFIED);
+            .isModifiedByLaboratory(UPDATED_IS_MODIFIED_BY_LABORATORY)
+            .isModifiedByCourrier(UPDATED_IS_MODIFIED_BY_COURRIER)
+            .createdBy(UPDATED_CREATED_BY)
+            .modifiedBy(UPDATED_MODIFIED_BY)
+            .dateCreated(UPDATED_DATE_CREATED);
 
         restSampleMockMvc
             .perform(
@@ -535,10 +578,14 @@ class SampleResourceIT {
         assertThat(testSample.getClientContact()).isEqualTo(UPDATED_CLIENT_CONTACT);
         assertThat(testSample.getTemperatureAtHub()).isEqualTo(UPDATED_TEMPERATURE_AT_HUB);
         assertThat(testSample.getTemperatureAtLab()).isEqualTo(DEFAULT_TEMPERATURE_AT_LAB);
-        assertThat(testSample.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
-        assertThat(testSample.getModifiedBy()).isEqualTo(DEFAULT_MODIFIED_BY);
+        assertThat(testSample.getIsModifiedByHub()).isEqualTo(DEFAULT_IS_MODIFIED_BY_HUB);
+        assertThat(testSample.getIsModifiedByFacility()).isEqualTo(DEFAULT_IS_MODIFIED_BY_FACILITY);
+        assertThat(testSample.getIsModifiedByLaboratory()).isEqualTo(UPDATED_IS_MODIFIED_BY_LABORATORY);
+        assertThat(testSample.getIsModifiedByCourrier()).isEqualTo(UPDATED_IS_MODIFIED_BY_COURRIER);
+        assertThat(testSample.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
+        assertThat(testSample.getModifiedBy()).isEqualTo(UPDATED_MODIFIED_BY);
         assertThat(testSample.getDateCreated()).isEqualTo(UPDATED_DATE_CREATED);
-        assertThat(testSample.getDateModified()).isEqualTo(UPDATED_DATE_MODIFIED);
+        assertThat(testSample.getDateModified()).isEqualTo(DEFAULT_DATE_MODIFIED);
     }
 
     @Test
@@ -576,6 +623,10 @@ class SampleResourceIT {
             .clientContact(UPDATED_CLIENT_CONTACT)
             .temperatureAtHub(UPDATED_TEMPERATURE_AT_HUB)
             .temperatureAtLab(UPDATED_TEMPERATURE_AT_LAB)
+            .isModifiedByHub(UPDATED_IS_MODIFIED_BY_HUB)
+            .isModifiedByFacility(UPDATED_IS_MODIFIED_BY_FACILITY)
+            .isModifiedByLaboratory(UPDATED_IS_MODIFIED_BY_LABORATORY)
+            .isModifiedByCourrier(UPDATED_IS_MODIFIED_BY_COURRIER)
             .createdBy(UPDATED_CREATED_BY)
             .modifiedBy(UPDATED_MODIFIED_BY)
             .dateCreated(UPDATED_DATE_CREATED)
@@ -614,6 +665,10 @@ class SampleResourceIT {
         assertThat(testSample.getClientContact()).isEqualTo(UPDATED_CLIENT_CONTACT);
         assertThat(testSample.getTemperatureAtHub()).isEqualTo(UPDATED_TEMPERATURE_AT_HUB);
         assertThat(testSample.getTemperatureAtLab()).isEqualTo(UPDATED_TEMPERATURE_AT_LAB);
+        assertThat(testSample.getIsModifiedByHub()).isEqualTo(UPDATED_IS_MODIFIED_BY_HUB);
+        assertThat(testSample.getIsModifiedByFacility()).isEqualTo(UPDATED_IS_MODIFIED_BY_FACILITY);
+        assertThat(testSample.getIsModifiedByLaboratory()).isEqualTo(UPDATED_IS_MODIFIED_BY_LABORATORY);
+        assertThat(testSample.getIsModifiedByCourrier()).isEqualTo(UPDATED_IS_MODIFIED_BY_COURRIER);
         assertThat(testSample.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testSample.getModifiedBy()).isEqualTo(UPDATED_MODIFIED_BY);
         assertThat(testSample.getDateCreated()).isEqualTo(UPDATED_DATE_CREATED);

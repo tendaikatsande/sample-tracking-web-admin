@@ -70,6 +70,18 @@ class ShipmentResourceIT {
     private static final String DEFAULT_TEMPERATURE_DESTINATION = "AAAAAAAAAA";
     private static final String UPDATED_TEMPERATURE_DESTINATION = "BBBBBBBBBB";
 
+    private static final Boolean DEFAULT_IS_MODIFIED_BY_HUB = false;
+    private static final Boolean UPDATED_IS_MODIFIED_BY_HUB = true;
+
+    private static final Boolean DEFAULT_IS_MODIFIED_BY_FACILITY = false;
+    private static final Boolean UPDATED_IS_MODIFIED_BY_FACILITY = true;
+
+    private static final Boolean DEFAULT_IS_MODIFIED_BY_LABORATORY = false;
+    private static final Boolean UPDATED_IS_MODIFIED_BY_LABORATORY = true;
+
+    private static final Boolean DEFAULT_IS_MODIFIED_BY_COURRIER = false;
+    private static final Boolean UPDATED_IS_MODIFIED_BY_COURRIER = true;
+
     private static final String DEFAULT_CREATED_BY = "AAAAAAAAAA";
     private static final String UPDATED_CREATED_BY = "BBBBBBBBBB";
 
@@ -111,6 +123,10 @@ class ShipmentResourceIT {
             .clusterClientId(DEFAULT_CLUSTER_CLIENT_ID)
             .temperatureOrigin(DEFAULT_TEMPERATURE_ORIGIN)
             .temperatureDestination(DEFAULT_TEMPERATURE_DESTINATION)
+            .isModifiedByHub(DEFAULT_IS_MODIFIED_BY_HUB)
+            .isModifiedByFacility(DEFAULT_IS_MODIFIED_BY_FACILITY)
+            .isModifiedByLaboratory(DEFAULT_IS_MODIFIED_BY_LABORATORY)
+            .isModifiedByCourrier(DEFAULT_IS_MODIFIED_BY_COURRIER)
             .createdBy(DEFAULT_CREATED_BY)
             .modifiedBy(DEFAULT_MODIFIED_BY);
         return shipment;
@@ -137,6 +153,10 @@ class ShipmentResourceIT {
             .clusterClientId(UPDATED_CLUSTER_CLIENT_ID)
             .temperatureOrigin(UPDATED_TEMPERATURE_ORIGIN)
             .temperatureDestination(UPDATED_TEMPERATURE_DESTINATION)
+            .isModifiedByHub(UPDATED_IS_MODIFIED_BY_HUB)
+            .isModifiedByFacility(UPDATED_IS_MODIFIED_BY_FACILITY)
+            .isModifiedByLaboratory(UPDATED_IS_MODIFIED_BY_LABORATORY)
+            .isModifiedByCourrier(UPDATED_IS_MODIFIED_BY_COURRIER)
             .createdBy(UPDATED_CREATED_BY)
             .modifiedBy(UPDATED_MODIFIED_BY);
         return shipment;
@@ -173,6 +193,10 @@ class ShipmentResourceIT {
         assertThat(testShipment.getClusterClientId()).isEqualTo(DEFAULT_CLUSTER_CLIENT_ID);
         assertThat(testShipment.getTemperatureOrigin()).isEqualTo(DEFAULT_TEMPERATURE_ORIGIN);
         assertThat(testShipment.getTemperatureDestination()).isEqualTo(DEFAULT_TEMPERATURE_DESTINATION);
+        assertThat(testShipment.getIsModifiedByHub()).isEqualTo(DEFAULT_IS_MODIFIED_BY_HUB);
+        assertThat(testShipment.getIsModifiedByFacility()).isEqualTo(DEFAULT_IS_MODIFIED_BY_FACILITY);
+        assertThat(testShipment.getIsModifiedByLaboratory()).isEqualTo(DEFAULT_IS_MODIFIED_BY_LABORATORY);
+        assertThat(testShipment.getIsModifiedByCourrier()).isEqualTo(DEFAULT_IS_MODIFIED_BY_COURRIER);
         assertThat(testShipment.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
         assertThat(testShipment.getModifiedBy()).isEqualTo(DEFAULT_MODIFIED_BY);
     }
@@ -221,6 +245,10 @@ class ShipmentResourceIT {
             .andExpect(jsonPath("$.[*].clusterClientId").value(hasItem(DEFAULT_CLUSTER_CLIENT_ID)))
             .andExpect(jsonPath("$.[*].temperatureOrigin").value(hasItem(DEFAULT_TEMPERATURE_ORIGIN)))
             .andExpect(jsonPath("$.[*].temperatureDestination").value(hasItem(DEFAULT_TEMPERATURE_DESTINATION)))
+            .andExpect(jsonPath("$.[*].isModifiedByHub").value(hasItem(DEFAULT_IS_MODIFIED_BY_HUB.booleanValue())))
+            .andExpect(jsonPath("$.[*].isModifiedByFacility").value(hasItem(DEFAULT_IS_MODIFIED_BY_FACILITY.booleanValue())))
+            .andExpect(jsonPath("$.[*].isModifiedByLaboratory").value(hasItem(DEFAULT_IS_MODIFIED_BY_LABORATORY.booleanValue())))
+            .andExpect(jsonPath("$.[*].isModifiedByCourrier").value(hasItem(DEFAULT_IS_MODIFIED_BY_COURRIER.booleanValue())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
             .andExpect(jsonPath("$.[*].modifiedBy").value(hasItem(DEFAULT_MODIFIED_BY.toString())));
     }
@@ -251,6 +279,10 @@ class ShipmentResourceIT {
             .andExpect(jsonPath("$.clusterClientId").value(DEFAULT_CLUSTER_CLIENT_ID))
             .andExpect(jsonPath("$.temperatureOrigin").value(DEFAULT_TEMPERATURE_ORIGIN))
             .andExpect(jsonPath("$.temperatureDestination").value(DEFAULT_TEMPERATURE_DESTINATION))
+            .andExpect(jsonPath("$.isModifiedByHub").value(DEFAULT_IS_MODIFIED_BY_HUB.booleanValue()))
+            .andExpect(jsonPath("$.isModifiedByFacility").value(DEFAULT_IS_MODIFIED_BY_FACILITY.booleanValue()))
+            .andExpect(jsonPath("$.isModifiedByLaboratory").value(DEFAULT_IS_MODIFIED_BY_LABORATORY.booleanValue()))
+            .andExpect(jsonPath("$.isModifiedByCourrier").value(DEFAULT_IS_MODIFIED_BY_COURRIER.booleanValue()))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
             .andExpect(jsonPath("$.modifiedBy").value(DEFAULT_MODIFIED_BY.toString()));
     }
@@ -289,6 +321,10 @@ class ShipmentResourceIT {
             .clusterClientId(UPDATED_CLUSTER_CLIENT_ID)
             .temperatureOrigin(UPDATED_TEMPERATURE_ORIGIN)
             .temperatureDestination(UPDATED_TEMPERATURE_DESTINATION)
+            .isModifiedByHub(UPDATED_IS_MODIFIED_BY_HUB)
+            .isModifiedByFacility(UPDATED_IS_MODIFIED_BY_FACILITY)
+            .isModifiedByLaboratory(UPDATED_IS_MODIFIED_BY_LABORATORY)
+            .isModifiedByCourrier(UPDATED_IS_MODIFIED_BY_COURRIER)
             .createdBy(UPDATED_CREATED_BY)
             .modifiedBy(UPDATED_MODIFIED_BY);
 
@@ -317,6 +353,10 @@ class ShipmentResourceIT {
         assertThat(testShipment.getClusterClientId()).isEqualTo(UPDATED_CLUSTER_CLIENT_ID);
         assertThat(testShipment.getTemperatureOrigin()).isEqualTo(UPDATED_TEMPERATURE_ORIGIN);
         assertThat(testShipment.getTemperatureDestination()).isEqualTo(UPDATED_TEMPERATURE_DESTINATION);
+        assertThat(testShipment.getIsModifiedByHub()).isEqualTo(UPDATED_IS_MODIFIED_BY_HUB);
+        assertThat(testShipment.getIsModifiedByFacility()).isEqualTo(UPDATED_IS_MODIFIED_BY_FACILITY);
+        assertThat(testShipment.getIsModifiedByLaboratory()).isEqualTo(UPDATED_IS_MODIFIED_BY_LABORATORY);
+        assertThat(testShipment.getIsModifiedByCourrier()).isEqualTo(UPDATED_IS_MODIFIED_BY_COURRIER);
         assertThat(testShipment.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testShipment.getModifiedBy()).isEqualTo(UPDATED_MODIFIED_BY);
     }
@@ -397,6 +437,10 @@ class ShipmentResourceIT {
             .dateCreated(UPDATED_DATE_CREATED)
             .clusterClientId(UPDATED_CLUSTER_CLIENT_ID)
             .temperatureOrigin(UPDATED_TEMPERATURE_ORIGIN)
+            .isModifiedByHub(UPDATED_IS_MODIFIED_BY_HUB)
+            .isModifiedByFacility(UPDATED_IS_MODIFIED_BY_FACILITY)
+            .isModifiedByLaboratory(UPDATED_IS_MODIFIED_BY_LABORATORY)
+            .isModifiedByCourrier(UPDATED_IS_MODIFIED_BY_COURRIER)
             .createdBy(UPDATED_CREATED_BY)
             .modifiedBy(UPDATED_MODIFIED_BY);
 
@@ -425,6 +469,10 @@ class ShipmentResourceIT {
         assertThat(testShipment.getClusterClientId()).isEqualTo(UPDATED_CLUSTER_CLIENT_ID);
         assertThat(testShipment.getTemperatureOrigin()).isEqualTo(UPDATED_TEMPERATURE_ORIGIN);
         assertThat(testShipment.getTemperatureDestination()).isEqualTo(DEFAULT_TEMPERATURE_DESTINATION);
+        assertThat(testShipment.getIsModifiedByHub()).isEqualTo(UPDATED_IS_MODIFIED_BY_HUB);
+        assertThat(testShipment.getIsModifiedByFacility()).isEqualTo(UPDATED_IS_MODIFIED_BY_FACILITY);
+        assertThat(testShipment.getIsModifiedByLaboratory()).isEqualTo(UPDATED_IS_MODIFIED_BY_LABORATORY);
+        assertThat(testShipment.getIsModifiedByCourrier()).isEqualTo(UPDATED_IS_MODIFIED_BY_COURRIER);
         assertThat(testShipment.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testShipment.getModifiedBy()).isEqualTo(UPDATED_MODIFIED_BY);
     }
@@ -456,6 +504,10 @@ class ShipmentResourceIT {
             .clusterClientId(UPDATED_CLUSTER_CLIENT_ID)
             .temperatureOrigin(UPDATED_TEMPERATURE_ORIGIN)
             .temperatureDestination(UPDATED_TEMPERATURE_DESTINATION)
+            .isModifiedByHub(UPDATED_IS_MODIFIED_BY_HUB)
+            .isModifiedByFacility(UPDATED_IS_MODIFIED_BY_FACILITY)
+            .isModifiedByLaboratory(UPDATED_IS_MODIFIED_BY_LABORATORY)
+            .isModifiedByCourrier(UPDATED_IS_MODIFIED_BY_COURRIER)
             .createdBy(UPDATED_CREATED_BY)
             .modifiedBy(UPDATED_MODIFIED_BY);
 
@@ -484,6 +536,10 @@ class ShipmentResourceIT {
         assertThat(testShipment.getClusterClientId()).isEqualTo(UPDATED_CLUSTER_CLIENT_ID);
         assertThat(testShipment.getTemperatureOrigin()).isEqualTo(UPDATED_TEMPERATURE_ORIGIN);
         assertThat(testShipment.getTemperatureDestination()).isEqualTo(UPDATED_TEMPERATURE_DESTINATION);
+        assertThat(testShipment.getIsModifiedByHub()).isEqualTo(UPDATED_IS_MODIFIED_BY_HUB);
+        assertThat(testShipment.getIsModifiedByFacility()).isEqualTo(UPDATED_IS_MODIFIED_BY_FACILITY);
+        assertThat(testShipment.getIsModifiedByLaboratory()).isEqualTo(UPDATED_IS_MODIFIED_BY_LABORATORY);
+        assertThat(testShipment.getIsModifiedByCourrier()).isEqualTo(UPDATED_IS_MODIFIED_BY_COURRIER);
         assertThat(testShipment.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testShipment.getModifiedBy()).isEqualTo(UPDATED_MODIFIED_BY);
     }

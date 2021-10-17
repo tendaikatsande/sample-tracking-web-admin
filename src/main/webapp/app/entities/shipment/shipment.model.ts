@@ -15,6 +15,10 @@ export interface IShipment {
   clusterClientId?: string | null;
   temperatureOrigin?: string | null;
   temperatureDestination?: string | null;
+  isModifiedByHub?: boolean | null;
+  isModifiedByFacility?: boolean | null;
+  isModifiedByLaboratory?: boolean | null;
+  isModifiedByCourrier?: boolean | null;
   createdBy?: string | null;
   modifiedBy?: dayjs.Dayjs | null;
 }
@@ -35,9 +39,18 @@ export class Shipment implements IShipment {
     public clusterClientId?: string | null,
     public temperatureOrigin?: string | null,
     public temperatureDestination?: string | null,
+    public isModifiedByHub?: boolean | null,
+    public isModifiedByFacility?: boolean | null,
+    public isModifiedByLaboratory?: boolean | null,
+    public isModifiedByCourrier?: boolean | null,
     public createdBy?: string | null,
     public modifiedBy?: dayjs.Dayjs | null
-  ) {}
+  ) {
+    this.isModifiedByHub = this.isModifiedByHub ?? false;
+    this.isModifiedByFacility = this.isModifiedByFacility ?? false;
+    this.isModifiedByLaboratory = this.isModifiedByLaboratory ?? false;
+    this.isModifiedByCourrier = this.isModifiedByCourrier ?? false;
+  }
 }
 
 export function getShipmentIdentifier(shipment: IShipment): string | undefined {

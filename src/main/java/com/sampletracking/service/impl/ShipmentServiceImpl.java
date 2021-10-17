@@ -78,6 +78,18 @@ public class ShipmentServiceImpl implements ShipmentService {
                 if (shipment.getTemperatureDestination() != null) {
                     existingShipment.setTemperatureDestination(shipment.getTemperatureDestination());
                 }
+                if (shipment.getIsModifiedByHub() != null) {
+                    existingShipment.setIsModifiedByHub(shipment.getIsModifiedByHub());
+                }
+                if (shipment.getIsModifiedByFacility() != null) {
+                    existingShipment.setIsModifiedByFacility(shipment.getIsModifiedByFacility());
+                }
+                if (shipment.getIsModifiedByLaboratory() != null) {
+                    existingShipment.setIsModifiedByLaboratory(shipment.getIsModifiedByLaboratory());
+                }
+                if (shipment.getIsModifiedByCourrier() != null) {
+                    existingShipment.setIsModifiedByCourrier(shipment.getIsModifiedByCourrier());
+                }
                 if (shipment.getCreatedBy() != null) {
                     existingShipment.setCreatedBy(shipment.getCreatedBy());
                 }

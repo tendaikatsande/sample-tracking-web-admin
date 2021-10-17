@@ -62,6 +62,18 @@ public class Shipment implements Serializable {
     @Column(name = "temperature_destination")
     private String temperatureDestination;
 
+    @Column(name = "is_modified_by_hub")
+    private Boolean isModifiedByHub;
+
+    @Column(name = "is_modified_by_facility")
+    private Boolean isModifiedByFacility;
+
+    @Column(name = "is_modified_by_laboratory")
+    private Boolean isModifiedByLaboratory;
+
+    @Column(name = "is_modified_by_courrier")
+    private Boolean isModifiedByCourrier;
+
     @Column(name = "created_by")
     private String createdBy;
 
@@ -252,6 +264,58 @@ public class Shipment implements Serializable {
         this.temperatureDestination = temperatureDestination;
     }
 
+    public Boolean getIsModifiedByHub() {
+        return this.isModifiedByHub;
+    }
+
+    public Shipment isModifiedByHub(Boolean isModifiedByHub) {
+        this.setIsModifiedByHub(isModifiedByHub);
+        return this;
+    }
+
+    public void setIsModifiedByHub(Boolean isModifiedByHub) {
+        this.isModifiedByHub = isModifiedByHub;
+    }
+
+    public Boolean getIsModifiedByFacility() {
+        return this.isModifiedByFacility;
+    }
+
+    public Shipment isModifiedByFacility(Boolean isModifiedByFacility) {
+        this.setIsModifiedByFacility(isModifiedByFacility);
+        return this;
+    }
+
+    public void setIsModifiedByFacility(Boolean isModifiedByFacility) {
+        this.isModifiedByFacility = isModifiedByFacility;
+    }
+
+    public Boolean getIsModifiedByLaboratory() {
+        return this.isModifiedByLaboratory;
+    }
+
+    public Shipment isModifiedByLaboratory(Boolean isModifiedByLaboratory) {
+        this.setIsModifiedByLaboratory(isModifiedByLaboratory);
+        return this;
+    }
+
+    public void setIsModifiedByLaboratory(Boolean isModifiedByLaboratory) {
+        this.isModifiedByLaboratory = isModifiedByLaboratory;
+    }
+
+    public Boolean getIsModifiedByCourrier() {
+        return this.isModifiedByCourrier;
+    }
+
+    public Shipment isModifiedByCourrier(Boolean isModifiedByCourrier) {
+        this.setIsModifiedByCourrier(isModifiedByCourrier);
+        return this;
+    }
+
+    public void setIsModifiedByCourrier(Boolean isModifiedByCourrier) {
+        this.isModifiedByCourrier = isModifiedByCourrier;
+    }
+
     public String getCreatedBy() {
         return this.createdBy;
     }
@@ -315,6 +379,10 @@ public class Shipment implements Serializable {
             ", clusterClientId='" + getClusterClientId() + "'" +
             ", temperatureOrigin='" + getTemperatureOrigin() + "'" +
             ", temperatureDestination='" + getTemperatureDestination() + "'" +
+            ", isModifiedByHub='" + getIsModifiedByHub() + "'" +
+            ", isModifiedByFacility='" + getIsModifiedByFacility() + "'" +
+            ", isModifiedByLaboratory='" + getIsModifiedByLaboratory() + "'" +
+            ", isModifiedByCourrier='" + getIsModifiedByCourrier() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
             ", modifiedBy='" + getModifiedBy() + "'" +
             "}";
