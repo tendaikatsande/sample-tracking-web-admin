@@ -40,7 +40,7 @@
         </dd>
         <dt><span jhiTranslate="sampleTrackingApp.shipment.dateModified">Date Modified</span></dt>
         <dd>
-          <span>{{ shipment.dateModified | formatMediumDatetime }}</span>
+          <span>{{ shipment.dateModified }}</span>
         </dd>
         <dt><span jhiTranslate="sampleTrackingApp.shipment.riderId">Rider Id</span></dt>
         <dd>
@@ -86,9 +86,17 @@
         <dd>
           <span>{{ shipment.createdBy }}</span>
         </dd>
-        <dt><span jhiTranslate="sampleTrackingApp.shipment.modifiedBy">Modified By</span></dt>
+        <dt><span jhiTranslate="sampleTrackingApp.shipment.createdDate">Created Date</span></dt>
         <dd>
-          <span>{{ shipment.modifiedBy | formatMediumDatetime }}</span>
+          <span>{{ shipment.createdDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.shipment.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+          <span>{{ shipment.lastModifiedBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.shipment.lastModifiedDate">Last Modified Date</span></dt>
+        <dd>
+          <span>{{ shipment.lastModifiedDate | formatMediumDatetime }}</span>
         </dd>
       </dl>
 

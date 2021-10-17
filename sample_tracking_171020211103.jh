@@ -30,9 +30,9 @@ entity Sample {
   
   
   createdBy String
-  modifiedBy Instant
-  dateCreated String
-  dateModified Instant
+    createdDate Instant
+    lastModifiedBy String
+    lastModifiedDate Instant
 }
 
 entity Shipment{
@@ -56,10 +56,10 @@ entity Shipment{
    isModifiedByLaboratory Boolean
    isModifiedByCourrier Boolean
    
-  createdBy String
-  modifiedBy Instant
-  dateCreated String
-  dateModified Instant
+ createdBy String
+    createdDate Instant
+    lastModifiedBy String
+    lastModifiedDate Instant
 }
 
 entity Patient{
@@ -75,10 +75,10 @@ entity Patient{
   dateCreated String
   dateModified String
   phoneNumber String
-  createdBy String
-  modifiedBy Instant
-  dateCreated String
-  dateModified Instant
+ createdBy String
+    createdDate Instant
+    lastModifiedBy String
+    lastModifiedDate Instant
 }
 
 entity Laboratory{
@@ -123,10 +123,10 @@ entity TestType{
    id  String
    name  String
    prefix  String
-   createdBy  String
-   createdDate  Instant
-   lastModifiedBy  String
-   lastModifiedDate  Instant
+  createdBy String
+  modifiedBy String
+  dateCreated Instant
+  dateModified Instant
 }
 
 enum Language {

@@ -32,7 +32,7 @@
             <column name="date_created" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="date_modified" type="${datetimeType}">
+            <column name="date_modified" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="rider_id" type="varchar(255)">
@@ -68,13 +68,19 @@
             <column name="created_by" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="modified_by" type="${datetimeType}">
+            <column name="created_date" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="last_modified_by" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="last_modified_date" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
-        <dropDefaultValue tableName="shipment" columnName="date_modified" columnDataType="${datetimeType}"/>
-        <dropDefaultValue tableName="shipment" columnName="modified_by" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="shipment" columnName="created_date" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="shipment" columnName="last_modified_date" columnDataType="${datetimeType}"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
@@ -100,7 +106,7 @@
             <column name="samples" type="clob"/>
             <column name="status" type="string"/>
             <column name="date_created" type="string"/>
-            <column name="date_modified" type="date"/>
+            <column name="date_modified" type="string"/>
             <column name="rider_id" type="string"/>
             <column name="rider_name" type="string"/>
             <column name="destination" type="string"/>
@@ -112,7 +118,9 @@
             <column name="is_modified_by_laboratory" type="boolean"/>
             <column name="is_modified_by_courrier" type="boolean"/>
             <column name="created_by" type="string"/>
-            <column name="modified_by" type="date"/>
+            <column name="created_date" type="date"/>
+            <column name="last_modified_by" type="string"/>
+            <column name="last_modified_date" type="date"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

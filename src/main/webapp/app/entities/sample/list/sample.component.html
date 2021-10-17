@@ -114,14 +114,14 @@
           <th scope="col" jhiSortBy="createdBy">
             <span jhiTranslate="sampleTrackingApp.sample.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="modifiedBy">
-            <span jhiTranslate="sampleTrackingApp.sample.modifiedBy">Modified By</span> <fa-icon icon="sort"></fa-icon>
+          <th scope="col" jhiSortBy="createdDate">
+            <span jhiTranslate="sampleTrackingApp.sample.createdDate">Created Date</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="dateCreated">
-            <span jhiTranslate="sampleTrackingApp.sample.dateCreated">Date Created</span> <fa-icon icon="sort"></fa-icon>
+          <th scope="col" jhiSortBy="lastModifiedBy">
+            <span jhiTranslate="sampleTrackingApp.sample.lastModifiedBy">Last Modified By</span> <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="dateModified">
-            <span jhiTranslate="sampleTrackingApp.sample.dateModified">Date Modified</span> <fa-icon icon="sort"></fa-icon>
+          <th scope="col" jhiSortBy="lastModifiedDate">
+            <span jhiTranslate="sampleTrackingApp.sample.lastModifiedDate">Last Modified Date</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col"></th>
         </tr>
@@ -157,9 +157,9 @@
           <td>{{ sample.isModifiedByLaboratory }}</td>
           <td>{{ sample.isModifiedByCourrier }}</td>
           <td>{{ sample.createdBy }}</td>
-          <td>{{ sample.modifiedBy | formatMediumDatetime }}</td>
-          <td>{{ sample.dateCreated }}</td>
-          <td>{{ sample.dateModified | formatMediumDatetime }}</td>
+          <td>{{ sample.createdDate | formatMediumDatetime }}</td>
+          <td>{{ sample.lastModifiedBy }}</td>
+          <td>{{ sample.lastModifiedDate | formatMediumDatetime }}</td>
           <td class="text-right">
             <div class="btn-group">
               <button type="submit" [routerLink]="['/sample', sample.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">

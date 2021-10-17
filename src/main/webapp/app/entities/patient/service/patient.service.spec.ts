@@ -34,10 +34,12 @@ describe('Patient Service', () => {
       clientPatientId: 'AAAAAAA',
       cohortNumber: 'AAAAAAA',
       dateCreated: 'AAAAAAA',
-      dateModified: currentDate,
+      dateModified: 'AAAAAAA',
       phoneNumber: 'AAAAAAA',
       createdBy: 'AAAAAAA',
-      modifiedBy: currentDate,
+      createdDate: currentDate,
+      lastModifiedBy: 'AAAAAAA',
+      lastModifiedDate: currentDate,
     };
   });
 
@@ -45,8 +47,8 @@ describe('Patient Service', () => {
     it('should find an element', () => {
       const returnedFromService = Object.assign(
         {
-          dateModified: currentDate.format(DATE_TIME_FORMAT),
-          modifiedBy: currentDate.format(DATE_TIME_FORMAT),
+          createdDate: currentDate.format(DATE_TIME_FORMAT),
+          lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
         },
         elemDefault
       );
@@ -62,16 +64,16 @@ describe('Patient Service', () => {
       const returnedFromService = Object.assign(
         {
           id: 'ID',
-          dateModified: currentDate.format(DATE_TIME_FORMAT),
-          modifiedBy: currentDate.format(DATE_TIME_FORMAT),
+          createdDate: currentDate.format(DATE_TIME_FORMAT),
+          lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
         },
         elemDefault
       );
 
       const expected = Object.assign(
         {
-          dateModified: currentDate,
-          modifiedBy: currentDate,
+          createdDate: currentDate,
+          lastModifiedDate: currentDate,
         },
         returnedFromService
       );
@@ -96,18 +98,20 @@ describe('Patient Service', () => {
           clientPatientId: 'BBBBBB',
           cohortNumber: 'BBBBBB',
           dateCreated: 'BBBBBB',
-          dateModified: currentDate.format(DATE_TIME_FORMAT),
+          dateModified: 'BBBBBB',
           phoneNumber: 'BBBBBB',
           createdBy: 'BBBBBB',
-          modifiedBy: currentDate.format(DATE_TIME_FORMAT),
+          createdDate: currentDate.format(DATE_TIME_FORMAT),
+          lastModifiedBy: 'BBBBBB',
+          lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
         },
         elemDefault
       );
 
       const expected = Object.assign(
         {
-          dateModified: currentDate,
-          modifiedBy: currentDate,
+          createdDate: currentDate,
+          lastModifiedDate: currentDate,
         },
         returnedFromService
       );
@@ -126,7 +130,8 @@ describe('Patient Service', () => {
           lastName: 'BBBBBB',
           clientPatientId: 'BBBBBB',
           dateCreated: 'BBBBBB',
-          modifiedBy: currentDate.format(DATE_TIME_FORMAT),
+          createdDate: currentDate.format(DATE_TIME_FORMAT),
+          lastModifiedBy: 'BBBBBB',
         },
         new Patient()
       );
@@ -135,8 +140,8 @@ describe('Patient Service', () => {
 
       const expected = Object.assign(
         {
-          dateModified: currentDate,
-          modifiedBy: currentDate,
+          createdDate: currentDate,
+          lastModifiedDate: currentDate,
         },
         returnedFromService
       );
@@ -161,18 +166,20 @@ describe('Patient Service', () => {
           clientPatientId: 'BBBBBB',
           cohortNumber: 'BBBBBB',
           dateCreated: 'BBBBBB',
-          dateModified: currentDate.format(DATE_TIME_FORMAT),
+          dateModified: 'BBBBBB',
           phoneNumber: 'BBBBBB',
           createdBy: 'BBBBBB',
-          modifiedBy: currentDate.format(DATE_TIME_FORMAT),
+          createdDate: currentDate.format(DATE_TIME_FORMAT),
+          lastModifiedBy: 'BBBBBB',
+          lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
         },
         elemDefault
       );
 
       const expected = Object.assign(
         {
-          dateModified: currentDate,
-          modifiedBy: currentDate,
+          createdDate: currentDate,
+          lastModifiedDate: currentDate,
         },
         returnedFromService
       );
@@ -222,7 +229,7 @@ describe('Patient Service', () => {
       });
 
       it('should add only unique Patient to an array', () => {
-        const patientArray: IPatient[] = [{ id: 'ABC' }, { id: 'CBA' }, { id: 'a2566441-72e0-425e-98ae-fb4934637ad7' }];
+        const patientArray: IPatient[] = [{ id: 'ABC' }, { id: 'CBA' }, { id: '56644172-e025-4e58-aefb-4934637ad74d' }];
         const patientCollection: IPatient[] = [{ id: 'ABC' }];
         expectedResult = service.addPatientToCollectionIfMissing(patientCollection, ...patientArray);
         expect(expectedResult).toHaveLength(3);

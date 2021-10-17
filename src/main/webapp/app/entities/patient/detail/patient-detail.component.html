@@ -52,7 +52,7 @@
         </dd>
         <dt><span jhiTranslate="sampleTrackingApp.patient.dateModified">Date Modified</span></dt>
         <dd>
-          <span>{{ patient.dateModified | formatMediumDatetime }}</span>
+          <span>{{ patient.dateModified }}</span>
         </dd>
         <dt><span jhiTranslate="sampleTrackingApp.patient.phoneNumber">Phone Number</span></dt>
         <dd>
@@ -62,9 +62,17 @@
         <dd>
           <span>{{ patient.createdBy }}</span>
         </dd>
-        <dt><span jhiTranslate="sampleTrackingApp.patient.modifiedBy">Modified By</span></dt>
+        <dt><span jhiTranslate="sampleTrackingApp.patient.createdDate">Created Date</span></dt>
         <dd>
-          <span>{{ patient.modifiedBy | formatMediumDatetime }}</span>
+          <span>{{ patient.createdDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.patient.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+          <span>{{ patient.lastModifiedBy }}</span>
+        </dd>
+        <dt><span jhiTranslate="sampleTrackingApp.patient.lastModifiedDate">Last Modified Date</span></dt>
+        <dd>
+          <span>{{ patient.lastModifiedDate | formatMediumDatetime }}</span>
         </dd>
       </dl>
 

@@ -93,8 +93,14 @@ public class ShipmentServiceImpl implements ShipmentService {
                 if (shipment.getCreatedBy() != null) {
                     existingShipment.setCreatedBy(shipment.getCreatedBy());
                 }
-                if (shipment.getModifiedBy() != null) {
-                    existingShipment.setModifiedBy(shipment.getModifiedBy());
+                if (shipment.getCreatedDate() != null) {
+                    existingShipment.setCreatedDate(shipment.getCreatedDate());
+                }
+                if (shipment.getLastModifiedBy() != null) {
+                    existingShipment.setLastModifiedBy(shipment.getLastModifiedBy());
+                }
+                if (shipment.getLastModifiedDate() != null) {
+                    existingShipment.setLastModifiedDate(shipment.getLastModifiedDate());
                 }
 
                 return existingShipment;

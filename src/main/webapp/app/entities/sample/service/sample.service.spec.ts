@@ -51,9 +51,9 @@ describe('Sample Service', () => {
       isModifiedByLaboratory: false,
       isModifiedByCourrier: false,
       createdBy: 'AAAAAAA',
-      modifiedBy: currentDate,
-      dateCreated: 'AAAAAAA',
-      dateModified: currentDate,
+      createdDate: currentDate,
+      lastModifiedBy: 'AAAAAAA',
+      lastModifiedDate: currentDate,
     };
   });
 
@@ -63,8 +63,8 @@ describe('Sample Service', () => {
         {
           dateCollected: currentDate.format(DATE_TIME_FORMAT),
           dateSynced: currentDate.format(DATE_TIME_FORMAT),
-          modifiedBy: currentDate.format(DATE_TIME_FORMAT),
-          dateModified: currentDate.format(DATE_TIME_FORMAT),
+          createdDate: currentDate.format(DATE_TIME_FORMAT),
+          lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
         },
         elemDefault
       );
@@ -82,8 +82,8 @@ describe('Sample Service', () => {
           id: 'ID',
           dateCollected: currentDate.format(DATE_TIME_FORMAT),
           dateSynced: currentDate.format(DATE_TIME_FORMAT),
-          modifiedBy: currentDate.format(DATE_TIME_FORMAT),
-          dateModified: currentDate.format(DATE_TIME_FORMAT),
+          createdDate: currentDate.format(DATE_TIME_FORMAT),
+          lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
         },
         elemDefault
       );
@@ -92,8 +92,8 @@ describe('Sample Service', () => {
         {
           dateCollected: currentDate,
           dateSynced: currentDate,
-          modifiedBy: currentDate,
-          dateModified: currentDate,
+          createdDate: currentDate,
+          lastModifiedDate: currentDate,
         },
         returnedFromService
       );
@@ -135,9 +135,9 @@ describe('Sample Service', () => {
           isModifiedByLaboratory: true,
           isModifiedByCourrier: true,
           createdBy: 'BBBBBB',
-          modifiedBy: currentDate.format(DATE_TIME_FORMAT),
-          dateCreated: 'BBBBBB',
-          dateModified: currentDate.format(DATE_TIME_FORMAT),
+          createdDate: currentDate.format(DATE_TIME_FORMAT),
+          lastModifiedBy: 'BBBBBB',
+          lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
         },
         elemDefault
       );
@@ -146,8 +146,8 @@ describe('Sample Service', () => {
         {
           dateCollected: currentDate,
           dateSynced: currentDate,
-          modifiedBy: currentDate,
-          dateModified: currentDate,
+          createdDate: currentDate,
+          lastModifiedDate: currentDate,
         },
         returnedFromService
       );
@@ -177,8 +177,8 @@ describe('Sample Service', () => {
           isModifiedByFacility: true,
           isModifiedByLaboratory: true,
           createdBy: 'BBBBBB',
-          dateCreated: 'BBBBBB',
-          dateModified: currentDate.format(DATE_TIME_FORMAT),
+          lastModifiedBy: 'BBBBBB',
+          lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
         },
         new Sample()
       );
@@ -189,8 +189,8 @@ describe('Sample Service', () => {
         {
           dateCollected: currentDate,
           dateSynced: currentDate,
-          modifiedBy: currentDate,
-          dateModified: currentDate,
+          createdDate: currentDate,
+          lastModifiedDate: currentDate,
         },
         returnedFromService
       );
@@ -232,9 +232,9 @@ describe('Sample Service', () => {
           isModifiedByLaboratory: true,
           isModifiedByCourrier: true,
           createdBy: 'BBBBBB',
-          modifiedBy: currentDate.format(DATE_TIME_FORMAT),
-          dateCreated: 'BBBBBB',
-          dateModified: currentDate.format(DATE_TIME_FORMAT),
+          createdDate: currentDate.format(DATE_TIME_FORMAT),
+          lastModifiedBy: 'BBBBBB',
+          lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
         },
         elemDefault
       );
@@ -243,8 +243,8 @@ describe('Sample Service', () => {
         {
           dateCollected: currentDate,
           dateSynced: currentDate,
-          modifiedBy: currentDate,
-          dateModified: currentDate,
+          createdDate: currentDate,
+          lastModifiedDate: currentDate,
         },
         returnedFromService
       );

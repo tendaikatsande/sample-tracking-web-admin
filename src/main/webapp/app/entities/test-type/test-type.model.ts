@@ -5,9 +5,9 @@ export interface ITestType {
   name?: string | null;
   prefix?: string | null;
   createdBy?: string | null;
-  createdDate?: dayjs.Dayjs | null;
-  lastModifiedBy?: string | null;
-  lastModifiedDate?: dayjs.Dayjs | null;
+  modifiedBy?: string | null;
+  dateCreated?: dayjs.Dayjs | null;
+  dateModified?: dayjs.Dayjs | null;
 }
 
 export class TestType implements ITestType {
@@ -16,9 +16,9 @@ export class TestType implements ITestType {
     public name?: string | null,
     public prefix?: string | null,
     public createdBy?: string | null,
-    public createdDate?: dayjs.Dayjs | null,
-    public lastModifiedBy?: string | null,
-    public lastModifiedDate?: dayjs.Dayjs | null
+    public modifiedBy?: string | null,
+    public dateCreated?: dayjs.Dayjs | null,
+    public dateModified?: dayjs.Dayjs | null
   ) {}
 }
 

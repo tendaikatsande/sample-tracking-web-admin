@@ -41,7 +41,7 @@
             <column name="date_created" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="date_modified" type="${datetimeType}">
+            <column name="date_modified" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="phone_number" type="varchar(255)">
@@ -50,13 +50,19 @@
             <column name="created_by" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="modified_by" type="${datetimeType}">
+            <column name="created_date" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="last_modified_by" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="last_modified_date" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
-        <dropDefaultValue tableName="patient" columnName="date_modified" columnDataType="${datetimeType}"/>
-        <dropDefaultValue tableName="patient" columnName="modified_by" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="patient" columnName="created_date" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="patient" columnName="last_modified_date" columnDataType="${datetimeType}"/>
     </changeSet>
 
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
@@ -85,10 +91,12 @@
             <column name="client_patient_id" type="string"/>
             <column name="cohort_number" type="string"/>
             <column name="date_created" type="string"/>
-            <column name="date_modified" type="date"/>
+            <column name="date_modified" type="string"/>
             <column name="phone_number" type="string"/>
             <column name="created_by" type="string"/>
-            <column name="modified_by" type="date"/>
+            <column name="created_date" type="date"/>
+            <column name="last_modified_by" type="string"/>
+            <column name="last_modified_date" type="date"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

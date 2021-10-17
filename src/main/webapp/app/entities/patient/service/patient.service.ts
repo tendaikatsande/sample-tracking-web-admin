@@ -75,15 +75,15 @@ export class PatientService {
 
   protected convertDateFromClient(patient: IPatient): IPatient {
     return Object.assign({}, patient, {
-      dateModified: patient.dateModified?.isValid() ? patient.dateModified.toJSON() : undefined,
-      modifiedBy: patient.modifiedBy?.isValid() ? patient.modifiedBy.toJSON() : undefined,
+      createdDate: patient.createdDate?.isValid() ? patient.createdDate.toJSON() : undefined,
+      lastModifiedDate: patient.lastModifiedDate?.isValid() ? patient.lastModifiedDate.toJSON() : undefined,
     });
   }
 
   protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
     if (res.body) {
-      res.body.dateModified = res.body.dateModified ? dayjs(res.body.dateModified) : undefined;
-      res.body.modifiedBy = res.body.modifiedBy ? dayjs(res.body.modifiedBy) : undefined;
+      res.body.createdDate = res.body.createdDate ? dayjs(res.body.createdDate) : undefined;
+      res.body.lastModifiedDate = res.body.lastModifiedDate ? dayjs(res.body.lastModifiedDate) : undefined;
     }
     return res;
   }
@@ -91,8 +91,8 @@ export class PatientService {
   protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
     if (res.body) {
       res.body.forEach((patient: IPatient) => {
-        patient.dateModified = patient.dateModified ? dayjs(patient.dateModified) : undefined;
-        patient.modifiedBy = patient.modifiedBy ? dayjs(patient.modifiedBy) : undefined;
+        patient.createdDate = patient.createdDate ? dayjs(patient.createdDate) : undefined;
+        patient.lastModifiedDate = patient.lastModifiedDate ? dayjs(patient.lastModifiedDate) : undefined;
       });
     }
     return res;

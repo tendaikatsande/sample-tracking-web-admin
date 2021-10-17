@@ -28,9 +28,9 @@ export interface ISample {
   isModifiedByLaboratory?: boolean | null;
   isModifiedByCourrier?: boolean | null;
   createdBy?: string | null;
-  modifiedBy?: dayjs.Dayjs | null;
-  dateCreated?: string | null;
-  dateModified?: dayjs.Dayjs | null;
+  createdDate?: dayjs.Dayjs | null;
+  lastModifiedBy?: string | null;
+  lastModifiedDate?: dayjs.Dayjs | null;
 }
 
 export class Sample implements ISample {
@@ -62,9 +62,9 @@ export class Sample implements ISample {
     public isModifiedByLaboratory?: boolean | null,
     public isModifiedByCourrier?: boolean | null,
     public createdBy?: string | null,
-    public modifiedBy?: dayjs.Dayjs | null,
-    public dateCreated?: string | null,
-    public dateModified?: dayjs.Dayjs | null
+    public createdDate?: dayjs.Dayjs | null,
+    public lastModifiedBy?: string | null,
+    public lastModifiedDate?: dayjs.Dayjs | null
   ) {
     this.synced = this.synced ?? false;
     this.isModifiedByHub = this.isModifiedByHub ?? false;
