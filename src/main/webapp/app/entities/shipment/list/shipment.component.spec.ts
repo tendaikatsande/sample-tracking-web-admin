@@ -50,7 +50,7 @@ describe('Component Tests', () => {
       jest.spyOn(service, 'query').mockReturnValue(
         of(
           new HttpResponse({
-            body: [{ id: 'ABC' }],
+            body: [{ id: 123 }],
             headers,
           })
         )
@@ -63,7 +63,7 @@ describe('Component Tests', () => {
 
       // THEN
       expect(service.query).toHaveBeenCalled();
-      expect(comp.shipments?.[0]).toEqual(expect.objectContaining({ id: 'ABC' }));
+      expect(comp.shipments?.[0]).toEqual(expect.objectContaining({ id: 123 }));
     });
 
     it('should load a page', () => {
@@ -72,7 +72,7 @@ describe('Component Tests', () => {
 
       // THEN
       expect(service.query).toHaveBeenCalled();
-      expect(comp.shipments?.[0]).toEqual(expect.objectContaining({ id: 'ABC' }));
+      expect(comp.shipments?.[0]).toEqual(expect.objectContaining({ id: 123 }));
     });
 
     it('should calculate the sort attribute for an id', () => {

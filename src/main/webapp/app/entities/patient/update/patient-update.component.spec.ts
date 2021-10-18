@@ -37,7 +37,7 @@ describe('Component Tests', () => {
 
     describe('ngOnInit', () => {
       it('Should update editForm', () => {
-        const patient: IPatient = { id: 'CBA' };
+        const patient: IPatient = { id: 456 };
 
         activatedRoute.data = of({ patient });
         comp.ngOnInit();
@@ -50,7 +50,7 @@ describe('Component Tests', () => {
       it('Should call update service on save for existing entity', () => {
         // GIVEN
         const saveSubject = new Subject<HttpResponse<Patient>>();
-        const patient = { id: 'ABC' };
+        const patient = { id: 123 };
         jest.spyOn(patientService, 'update').mockReturnValue(saveSubject);
         jest.spyOn(comp, 'previousState');
         activatedRoute.data = of({ patient });
@@ -92,7 +92,7 @@ describe('Component Tests', () => {
       it('Should set isSaving to false on error', () => {
         // GIVEN
         const saveSubject = new Subject<HttpResponse<Patient>>();
-        const patient = { id: 'ABC' };
+        const patient = { id: 123 };
         jest.spyOn(patientService, 'update').mockReturnValue(saveSubject);
         jest.spyOn(comp, 'previousState');
         activatedRoute.data = of({ patient });

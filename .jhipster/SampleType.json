@@ -2,10 +2,6 @@
   "name": "SampleType",
   "fields": [
     {
-      "fieldName": "id",
-      "fieldType": "String"
-    },
-    {
       "fieldName": "name",
       "fieldType": "String"
     },
