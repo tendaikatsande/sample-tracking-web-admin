@@ -24,7 +24,7 @@ describe('Laboratory Service', () => {
     currentDate = dayjs();
 
     elemDefault = {
-      id: 'AAAAAAA',
+      id: 0,
       name: 'AAAAAAA',
       type: 'AAAAAAA',
       code: 'AAAAAAA',
@@ -45,7 +45,7 @@ describe('Laboratory Service', () => {
         elemDefault
       );
 
-      service.find('ABC').subscribe(resp => (expectedResult = resp.body));
+      service.find(123).subscribe(resp => (expectedResult = resp.body));
 
       const req = httpMock.expectOne({ method: 'GET' });
       req.flush(returnedFromService);
@@ -55,7 +55,7 @@ describe('Laboratory Service', () => {
     it('should create a Laboratory', () => {
       const returnedFromService = Object.assign(
         {
-          id: 'ID',
+          id: 0,
           createdDate: currentDate.format(DATE_TIME_FORMAT),
           lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
         },
@@ -80,7 +80,7 @@ describe('Laboratory Service', () => {
     it('should update a Laboratory', () => {
       const returnedFromService = Object.assign(
         {
-          id: 'BBBBBB',
+          id: 1,
           name: 'BBBBBB',
           type: 'BBBBBB',
           code: 'BBBBBB',
@@ -139,7 +139,7 @@ describe('Laboratory Service', () => {
     it('should return a list of Laboratory', () => {
       const returnedFromService = Object.assign(
         {
-          id: 'BBBBBB',
+          id: 1,
           name: 'BBBBBB',
           type: 'BBBBBB',
           code: 'BBBBBB',
@@ -168,7 +168,7 @@ describe('Laboratory Service', () => {
     });
 
     it('should delete a Laboratory', () => {
-      service.delete('ABC').subscribe(resp => (expectedResult = resp.ok));
+      service.delete(123).subscribe(resp => (expectedResult = resp.ok));
 
       const req = httpMock.expectOne({ method: 'DELETE' });
       req.flush({ status: 200 });
@@ -177,42 +177,42 @@ describe('Laboratory Service', () => {
 
     describe('addLaboratoryToCollectionIfMissing', () => {
       it('should add a Laboratory to an empty array', () => {
-        const laboratory: ILaboratory = { id: 'ABC' };
+        const laboratory: ILaboratory = { id: 123 };
         expectedResult = service.addLaboratoryToCollectionIfMissing([], laboratory);
         expect(expectedResult).toHaveLength(1);
         expect(expectedResult).toContain(laboratory);
       });
 
       it('should not add a Laboratory to an array that contains it', () => {
-        const laboratory: ILaboratory = { id: 'ABC' };
+        const laboratory: ILaboratory = { id: 123 };
         const laboratoryCollection: ILaboratory[] = [
           {
             ...laboratory,
           },
-          { id: 'CBA' },
+          { id: 456 },
         ];
         expectedResult = service.addLaboratoryToCollectionIfMissing(laboratoryCollection, laboratory);
         expect(expectedResult).toHaveLength(2);
       });
 
       it("should add a Laboratory to an array that doesn't contain it", () => {
-        const laboratory: ILaboratory = { id: 'ABC' };
-        const laboratoryCollection: ILaboratory[] = [{ id: 'CBA' }];
+        const laboratory: ILaboratory = { id: 123 };
+        const laboratoryCollection: ILaboratory[] = [{ id: 456 }];
         expectedResult = service.addLaboratoryToCollectionIfMissing(laboratoryCollection, laboratory);
         expect(expectedResult).toHaveLength(2);
         expect(expectedResult).toContain(laboratory);
       });
 
       it('should add only unique Laboratory to an array', () => {
-        const laboratoryArray: ILaboratory[] = [{ id: 'ABC' }, { id: 'CBA' }, { id: '073e4aae-57ed-43a6-a70c-5df9f23540bb' }];
-        const laboratoryCollection: ILaboratory[] = [{ id: 'ABC' }];
+        const laboratoryArray: ILaboratory[] = [{ id: 123 }, { id: 456 }, { id: 2482 }];
+        const laboratoryCollection: ILaboratory[] = [{ id: 123 }];
         expectedResult = service.addLaboratoryToCollectionIfMissing(laboratoryCollection, ...laboratoryArray);
         expect(expectedResult).toHaveLength(3);
       });
 
       it('should accept varargs', () => {
-        const laboratory: ILaboratory = { id: 'ABC' };
-        const laboratory2: ILaboratory = { id: 'CBA' };
+        const laboratory: ILaboratory = { id: 123 };
+        const laboratory2: ILaboratory = { id: 456 };
         expectedResult = service.addLaboratoryToCollectionIfMissing([], laboratory, laboratory2);
         expect(expectedResult).toHaveLength(2);
         expect(expectedResult).toContain(laboratory);
@@ -220,14 +220,14 @@ describe('Laboratory Service', () => {
       });
 
       it('should accept null and undefined values', () => {
-        const laboratory: ILaboratory = { id: 'ABC' };
+        const laboratory: ILaboratory = { id: 123 };
         expectedResult = service.addLaboratoryToCollectionIfMissing([], null, laboratory, undefined);
         expect(expectedResult).toHaveLength(1);
         expect(expectedResult).toContain(laboratory);
       });
 
       it('should return initial array if no Laboratory is added', () => {
-        const laboratoryCollection: ILaboratory[] = [{ id: 'ABC' }];
+        const laboratoryCollection: ILaboratory[] = [{ id: 123 }];
         expectedResult = service.addLaboratoryToCollectionIfMissing(laboratoryCollection, undefined, null);
         expect(expectedResult).toEqual(laboratoryCollection);
       });

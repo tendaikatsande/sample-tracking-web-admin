@@ -16,7 +16,7 @@ export class LaboratoryDeleteDialogComponent {
     this.activeModal.dismiss();
   }
 
-  confirmDelete(id: string): void {
+  confirmDelete(id: number): void {
     this.laboratoryService.delete(id).subscribe(() => {
       this.activeModal.close('deleted');
     });

@@ -17,8 +17,10 @@ public class Sample implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
     @Column(name = "id")
-    private String id;
+    private Long id;
 
     @Column(name = "app_id")
     private String appId;
@@ -109,16 +111,16 @@ public class Sample implements Serializable {
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public String getId() {
+    public Long getId() {
         return this.id;
     }
 
-    public Sample id(String id) {
+    public Sample id(Long id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -16,7 +16,7 @@ export class ShipmentDeleteDialogComponent {
     this.activeModal.dismiss();
   }
 
-  confirmDelete(id: string): void {
+  confirmDelete(id: number): void {
     this.shipmentService.delete(id).subscribe(() => {
       this.activeModal.close('deleted');
     });

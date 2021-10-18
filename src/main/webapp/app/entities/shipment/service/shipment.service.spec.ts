@@ -24,7 +24,7 @@ describe('Shipment Service', () => {
     currentDate = dayjs();
 
     elemDefault = {
-      id: 'AAAAAAA',
+      id: 0,
       appId: 'AAAAAAA',
       description: 'AAAAAAA',
       clientId: 'AAAAAAA',
@@ -59,7 +59,7 @@ describe('Shipment Service', () => {
         elemDefault
       );
 
-      service.find('ABC').subscribe(resp => (expectedResult = resp.body));
+      service.find(123).subscribe(resp => (expectedResult = resp.body));
 
       const req = httpMock.expectOne({ method: 'GET' });
       req.flush(returnedFromService);
@@ -69,7 +69,7 @@ describe('Shipment Service', () => {
     it('should create a Shipment', () => {
       const returnedFromService = Object.assign(
         {
-          id: 'ID',
+          id: 0,
           createdDate: currentDate.format(DATE_TIME_FORMAT),
           lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
         },
@@ -94,7 +94,7 @@ describe('Shipment Service', () => {
     it('should update a Shipment', () => {
       const returnedFromService = Object.assign(
         {
-          id: 'BBBBBB',
+          id: 1,
           appId: 'BBBBBB',
           description: 'BBBBBB',
           clientId: 'BBBBBB',
@@ -176,7 +176,7 @@ describe('Shipment Service', () => {
     it('should return a list of Shipment', () => {
       const returnedFromService = Object.assign(
         {
-          id: 'BBBBBB',
+          id: 1,
           appId: 'BBBBBB',
           description: 'BBBBBB',
           clientId: 'BBBBBB',
@@ -219,7 +219,7 @@ describe('Shipment Service', () => {
     });
 
     it('should delete a Shipment', () => {
-      service.delete('ABC').subscribe(resp => (expectedResult = resp.ok));
+      service.delete(123).subscribe(resp => (expectedResult = resp.ok));
 
       const req = httpMock.expectOne({ method: 'DELETE' });
       req.flush({ status: 200 });
@@ -228,42 +228,42 @@ describe('Shipment Service', () => {
 
     describe('addShipmentToCollectionIfMissing', () => {
       it('should add a Shipment to an empty array', () => {
-        const shipment: IShipment = { id: 'ABC' };
+        const shipment: IShipment = { id: 123 };
         expectedResult = service.addShipmentToCollectionIfMissing([], shipment);
         expect(expectedResult).toHaveLength(1);
         expect(expectedResult).toContain(shipment);
       });
 
       it('should not add a Shipment to an array that contains it', () => {
-        const shipment: IShipment = { id: 'ABC' };
+        const shipment: IShipment = { id: 123 };
         const shipmentCollection: IShipment[] = [
           {
             ...shipment,
           },
-          { id: 'CBA' },
+          { id: 456 },
         ];
         expectedResult = service.addShipmentToCollectionIfMissing(shipmentCollection, shipment);
         expect(expectedResult).toHaveLength(2);
       });
 
       it("should add a Shipment to an array that doesn't contain it", () => {
-        const shipment: IShipment = { id: 'ABC' };
-        const shipmentCollection: IShipment[] = [{ id: 'CBA' }];
+        const shipment: IShipment = { id: 123 };
+        const shipmentCollection: IShipment[] = [{ id: 456 }];
         expectedResult = service.addShipmentToCollectionIfMissing(shipmentCollection, shipment);
         expect(expectedResult).toHaveLength(2);
         expect(expectedResult).toContain(shipment);
       });
 
       it('should add only unique Shipment to an array', () => {
-        const shipmentArray: IShipment[] = [{ id: 'ABC' }, { id: 'CBA' }, { id: '522474f0-52a4-4c39-b65f-e34e4c07587b' }];
-        const shipmentCollection: IShipment[] = [{ id: 'ABC' }];
+        const shipmentArray: IShipment[] = [{ id: 123 }, { id: 456 }, { id: 31482 }];
+        const shipmentCollection: IShipment[] = [{ id: 123 }];
         expectedResult = service.addShipmentToCollectionIfMissing(shipmentCollection, ...shipmentArray);
         expect(expectedResult).toHaveLength(3);
       });
 
       it('should accept varargs', () => {
-        const shipment: IShipment = { id: 'ABC' };
-        const shipment2: IShipment = { id: 'CBA' };
+        const shipment: IShipment = { id: 123 };
+        const shipment2: IShipment = { id: 456 };
         expectedResult = service.addShipmentToCollectionIfMissing([], shipment, shipment2);
         expect(expectedResult).toHaveLength(2);
         expect(expectedResult).toContain(shipment);
@@ -271,14 +271,14 @@ describe('Shipment Service', () => {
       });
 
       it('should accept null and undefined values', () => {
-        const shipment: IShipment = { id: 'ABC' };
+        const shipment: IShipment = { id: 123 };
         expectedResult = service.addShipmentToCollectionIfMissing([], null, shipment, undefined);
         expect(expectedResult).toHaveLength(1);
         expect(expectedResult).toContain(shipment);
       });
 
       it('should return initial array if no Shipment is added', () => {
-        const shipmentCollection: IShipment[] = [{ id: 'ABC' }];
+        const shipmentCollection: IShipment[] = [{ id: 123 }];
         expectedResult = service.addShipmentToCollectionIfMissing(shipmentCollection, undefined, null);
         expect(expectedResult).toEqual(shipmentCollection);
       });

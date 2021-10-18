@@ -62,7 +62,7 @@ public class ShipmentResource {
         Shipment result = shipmentService.save(shipment);
         return ResponseEntity
             .created(new URI("/api/shipments/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
 
@@ -78,7 +78,7 @@ public class ShipmentResource {
      */
     @PutMapping("/shipments/{id}")
     public ResponseEntity<Shipment> updateShipment(
-        @PathVariable(value = "id", required = false) final String id,
+        @PathVariable(value = "id", required = false) final Long id,
         @RequestBody Shipment shipment
     ) throws URISyntaxException {
         log.debug("REST request to update Shipment : {}, {}", id, shipment);
@@ -96,7 +96,7 @@ public class ShipmentResource {
         Shipment result = shipmentService.save(shipment);
         return ResponseEntity
             .ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, shipment.getId()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, shipment.getId().toString()))
             .body(result);
     }
 
@@ -113,7 +113,7 @@ public class ShipmentResource {
      */
     @PatchMapping(value = "/shipments/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Shipment> partialUpdateShipment(
-        @PathVariable(value = "id", required = false) final String id,
+        @PathVariable(value = "id", required = false) final Long id,
         @RequestBody Shipment shipment
     ) throws URISyntaxException {
         log.debug("REST request to partial update Shipment partially : {}, {}", id, shipment);
@@ -132,7 +132,7 @@ public class ShipmentResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, shipment.getId())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, shipment.getId().toString())
         );
     }
 
@@ -157,7 +157,7 @@ public class ShipmentResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the shipment, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/shipments/{id}")
-    public ResponseEntity<Shipment> getShipment(@PathVariable String id) {
+    public ResponseEntity<Shipment> getShipment(@PathVariable Long id) {
         log.debug("REST request to get Shipment : {}", id);
         Optional<Shipment> shipment = shipmentService.findOne(id);
         return ResponseUtil.wrapOrNotFound(shipment);
@@ -170,9 +170,12 @@ public class ShipmentResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/shipments/{id}")
-    public ResponseEntity<Void> deleteShipment(@PathVariable String id) {
+    public ResponseEntity<Void> deleteShipment(@PathVariable Long id) {
         log.debug("REST request to delete Shipment : {}", id);
         shipmentService.delete(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
+        return ResponseEntity
+            .noContent()
+            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+            .build();
     }
 }
