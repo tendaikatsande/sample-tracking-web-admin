@@ -11,7 +11,8 @@ import com.sampletracking.repository.LaboratoryRepository;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.UUID;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicLong;
 import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -53,6 +54,9 @@ class LaboratoryResourceIT {
 
     private static final String ENTITY_API_URL = "/api/laboratories";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
+
+    private static Random random = new Random();
+    private static AtomicLong count = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private LaboratoryRepository laboratoryRepository;
@@ -132,7 +136,7 @@ class LaboratoryResourceIT {
     @Transactional
     void createLaboratoryWithExistingId() throws Exception {
         // Create the Laboratory with an existing ID
-        laboratory.setId("existing_id");
+        laboratory.setId(1L);
 
         int databaseSizeBeforeCreate = laboratoryRepository.findAll().size();
 
@@ -150,7 +154,6 @@ class LaboratoryResourceIT {
     @Transactional
     void getAllLaboratories() throws Exception {
         // Initialize the database
-        laboratory.setId(UUID.randomUUID().toString());
         laboratoryRepository.saveAndFlush(laboratory);
 
         // Get all the laboratoryList
@@ -158,7 +161,7 @@ class LaboratoryResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(laboratory.getId())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(laboratory.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE)))
             .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE)))
@@ -172,7 +175,6 @@ class LaboratoryResourceIT {
     @Transactional
     void getLaboratory() throws Exception {
         // Initialize the database
-        laboratory.setId(UUID.randomUUID().toString());
         laboratoryRepository.saveAndFlush(laboratory);
 
         // Get the laboratory
@@ -180,7 +182,7 @@ class LaboratoryResourceIT {
             .perform(get(ENTITY_API_URL_ID, laboratory.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(laboratory.getId()))
+            .andExpect(jsonPath("$.id").value(laboratory.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.type").value(DEFAULT_TYPE))
             .andExpect(jsonPath("$.code").value(DEFAULT_CODE))
@@ -201,7 +203,6 @@ class LaboratoryResourceIT {
     @Transactional
     void putNewLaboratory() throws Exception {
         // Initialize the database
-        laboratory.setId(UUID.randomUUID().toString());
         laboratoryRepository.saveAndFlush(laboratory);
 
         int databaseSizeBeforeUpdate = laboratoryRepository.findAll().size();
@@ -244,7 +245,7 @@ class LaboratoryResourceIT {
     @Transactional
     void putNonExistingLaboratory() throws Exception {
         int databaseSizeBeforeUpdate = laboratoryRepository.findAll().size();
-        laboratory.setId(UUID.randomUUID().toString());
+        laboratory.setId(count.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restLaboratoryMockMvc
@@ -264,12 +265,12 @@ class LaboratoryResourceIT {
     @Transactional
     void putWithIdMismatchLaboratory() throws Exception {
         int databaseSizeBeforeUpdate = laboratoryRepository.findAll().size();
-        laboratory.setId(UUID.randomUUID().toString());
+        laboratory.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restLaboratoryMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
+                put(ENTITY_API_URL_ID, count.incrementAndGet())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(laboratory))
             )
@@ -284,7 +285,7 @@ class LaboratoryResourceIT {
     @Transactional
     void putWithMissingIdPathParamLaboratory() throws Exception {
         int databaseSizeBeforeUpdate = laboratoryRepository.findAll().size();
-        laboratory.setId(UUID.randomUUID().toString());
+        laboratory.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restLaboratoryMockMvc
@@ -300,7 +301,6 @@ class LaboratoryResourceIT {
     @Transactional
     void partialUpdateLaboratoryWithPatch() throws Exception {
         // Initialize the database
-        laboratory.setId(UUID.randomUUID().toString());
         laboratoryRepository.saveAndFlush(laboratory);
 
         int databaseSizeBeforeUpdate = laboratoryRepository.findAll().size();
@@ -336,7 +336,6 @@ class LaboratoryResourceIT {
     @Transactional
     void fullUpdateLaboratoryWithPatch() throws Exception {
         // Initialize the database
-        laboratory.setId(UUID.randomUUID().toString());
         laboratoryRepository.saveAndFlush(laboratory);
 
         int databaseSizeBeforeUpdate = laboratoryRepository.findAll().size();
@@ -379,7 +378,7 @@ class LaboratoryResourceIT {
     @Transactional
     void patchNonExistingLaboratory() throws Exception {
         int databaseSizeBeforeUpdate = laboratoryRepository.findAll().size();
-        laboratory.setId(UUID.randomUUID().toString());
+        laboratory.setId(count.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restLaboratoryMockMvc
@@ -399,12 +398,12 @@ class LaboratoryResourceIT {
     @Transactional
     void patchWithIdMismatchLaboratory() throws Exception {
         int databaseSizeBeforeUpdate = laboratoryRepository.findAll().size();
-        laboratory.setId(UUID.randomUUID().toString());
+        laboratory.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restLaboratoryMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
+                patch(ENTITY_API_URL_ID, count.incrementAndGet())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(laboratory))
             )
@@ -419,7 +418,7 @@ class LaboratoryResourceIT {
     @Transactional
     void patchWithMissingIdPathParamLaboratory() throws Exception {
         int databaseSizeBeforeUpdate = laboratoryRepository.findAll().size();
-        laboratory.setId(UUID.randomUUID().toString());
+        laboratory.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restLaboratoryMockMvc
@@ -437,7 +436,6 @@ class LaboratoryResourceIT {
     @Transactional
     void deleteLaboratory() throws Exception {
         // Initialize the database
-        laboratory.setId(UUID.randomUUID().toString());
         laboratoryRepository.saveAndFlush(laboratory);
 
         int databaseSizeBeforeDelete = laboratoryRepository.findAll().size();

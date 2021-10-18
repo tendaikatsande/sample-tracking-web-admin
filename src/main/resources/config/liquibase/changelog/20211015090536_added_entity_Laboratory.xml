@@ -11,7 +11,7 @@
     -->
     <changeSet id="20211015090536-1" author="jhipster">
         <createTable tableName="laboratory">
-            <column name="id" type="varchar(255)">
+            <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(255)">
@@ -57,7 +57,7 @@
                   separator=";"
                   tableName="laboratory"
                   usePreparedStatements="true">
-            <column name="id" type="string"/>
+            <column name="id" type="numeric"/>
             <column name="name" type="string"/>
             <column name="type" type="string"/>
             <column name="code" type="string"/>

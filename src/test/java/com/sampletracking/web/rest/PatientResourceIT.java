@@ -11,7 +11,8 @@ import com.sampletracking.repository.PatientRepository;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.UUID;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicLong;
 import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -77,6 +78,9 @@ class PatientResourceIT {
 
     private static final String ENTITY_API_URL = "/api/patients";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
+
+    private static Random random = new Random();
+    private static AtomicLong count = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private PatientRepository patientRepository;
@@ -180,7 +184,7 @@ class PatientResourceIT {
     @Transactional
     void createPatientWithExistingId() throws Exception {
         // Create the Patient with an existing ID
-        patient.setId("existing_id");
+        patient.setId(1L);
 
         int databaseSizeBeforeCreate = patientRepository.findAll().size();
 
@@ -198,7 +202,6 @@ class PatientResourceIT {
     @Transactional
     void getAllPatients() throws Exception {
         // Initialize the database
-        patient.setId(UUID.randomUUID().toString());
         patientRepository.saveAndFlush(patient);
 
         // Get all the patientList
@@ -206,7 +209,7 @@ class PatientResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(patient.getId())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(patient.getId().intValue())))
             .andExpect(jsonPath("$.[*].appId").value(hasItem(DEFAULT_APP_ID)))
             .andExpect(jsonPath("$.[*].firstName").value(hasItem(DEFAULT_FIRST_NAME)))
             .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LAST_NAME)))
@@ -228,7 +231,6 @@ class PatientResourceIT {
     @Transactional
     void getPatient() throws Exception {
         // Initialize the database
-        patient.setId(UUID.randomUUID().toString());
         patientRepository.saveAndFlush(patient);
 
         // Get the patient
@@ -236,7 +238,7 @@ class PatientResourceIT {
             .perform(get(ENTITY_API_URL_ID, patient.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(patient.getId()))
+            .andExpect(jsonPath("$.id").value(patient.getId().intValue()))
             .andExpect(jsonPath("$.appId").value(DEFAULT_APP_ID))
             .andExpect(jsonPath("$.firstName").value(DEFAULT_FIRST_NAME))
             .andExpect(jsonPath("$.lastName").value(DEFAULT_LAST_NAME))
@@ -265,7 +267,6 @@ class PatientResourceIT {
     @Transactional
     void putNewPatient() throws Exception {
         // Initialize the database
-        patient.setId(UUID.randomUUID().toString());
         patientRepository.saveAndFlush(patient);
 
         int databaseSizeBeforeUpdate = patientRepository.findAll().size();
@@ -324,7 +325,7 @@ class PatientResourceIT {
     @Transactional
     void putNonExistingPatient() throws Exception {
         int databaseSizeBeforeUpdate = patientRepository.findAll().size();
-        patient.setId(UUID.randomUUID().toString());
+        patient.setId(count.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restPatientMockMvc
@@ -344,12 +345,12 @@ class PatientResourceIT {
     @Transactional
     void putWithIdMismatchPatient() throws Exception {
         int databaseSizeBeforeUpdate = patientRepository.findAll().size();
-        patient.setId(UUID.randomUUID().toString());
+        patient.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPatientMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
+                put(ENTITY_API_URL_ID, count.incrementAndGet())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(patient))
             )
@@ -364,7 +365,7 @@ class PatientResourceIT {
     @Transactional
     void putWithMissingIdPathParamPatient() throws Exception {
         int databaseSizeBeforeUpdate = patientRepository.findAll().size();
-        patient.setId(UUID.randomUUID().toString());
+        patient.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPatientMockMvc
@@ -380,7 +381,6 @@ class PatientResourceIT {
     @Transactional
     void partialUpdatePatientWithPatch() throws Exception {
         // Initialize the database
-        patient.setId(UUID.randomUUID().toString());
         patientRepository.saveAndFlush(patient);
 
         int databaseSizeBeforeUpdate = patientRepository.findAll().size();
@@ -431,7 +431,6 @@ class PatientResourceIT {
     @Transactional
     void fullUpdatePatientWithPatch() throws Exception {
         // Initialize the database
-        patient.setId(UUID.randomUUID().toString());
         patientRepository.saveAndFlush(patient);
 
         int databaseSizeBeforeUpdate = patientRepository.findAll().size();
@@ -490,7 +489,7 @@ class PatientResourceIT {
     @Transactional
     void patchNonExistingPatient() throws Exception {
         int databaseSizeBeforeUpdate = patientRepository.findAll().size();
-        patient.setId(UUID.randomUUID().toString());
+        patient.setId(count.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restPatientMockMvc
@@ -510,12 +509,12 @@ class PatientResourceIT {
     @Transactional
     void patchWithIdMismatchPatient() throws Exception {
         int databaseSizeBeforeUpdate = patientRepository.findAll().size();
-        patient.setId(UUID.randomUUID().toString());
+        patient.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPatientMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
+                patch(ENTITY_API_URL_ID, count.incrementAndGet())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(patient))
             )
@@ -530,7 +529,7 @@ class PatientResourceIT {
     @Transactional
     void patchWithMissingIdPathParamPatient() throws Exception {
         int databaseSizeBeforeUpdate = patientRepository.findAll().size();
-        patient.setId(UUID.randomUUID().toString());
+        patient.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restPatientMockMvc
@@ -546,7 +545,6 @@ class PatientResourceIT {
     @Transactional
     void deletePatient() throws Exception {
         // Initialize the database
-        patient.setId(UUID.randomUUID().toString());
         patientRepository.saveAndFlush(patient);
 
         int databaseSizeBeforeDelete = patientRepository.findAll().size();

@@ -28,18 +28,18 @@ export class LaboratoryService {
   update(laboratory: ILaboratory): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(laboratory);
     return this.http
-      .put<ILaboratory>(`${this.resourceUrl}/${getLaboratoryIdentifier(laboratory) as string}`, copy, { observe: 'response' })
+      .put<ILaboratory>(`${this.resourceUrl}/${getLaboratoryIdentifier(laboratory) as number}`, copy, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
   partialUpdate(laboratory: ILaboratory): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(laboratory);
     return this.http
-      .patch<ILaboratory>(`${this.resourceUrl}/${getLaboratoryIdentifier(laboratory) as string}`, copy, { observe: 'response' })
+      .patch<ILaboratory>(`${this.resourceUrl}/${getLaboratoryIdentifier(laboratory) as number}`, copy, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
-  find(id: string): Observable<EntityResponseType> {
+  find(id: number): Observable<EntityResponseType> {
     return this.http
       .get<ILaboratory>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
@@ -52,7 +52,7 @@ export class LaboratoryService {
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 
-  delete(id: string): Observable<HttpResponse<{}>> {
+  delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 

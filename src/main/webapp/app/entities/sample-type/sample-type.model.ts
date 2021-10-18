@@ -1,7 +1,7 @@
 import * as dayjs from 'dayjs';
 
 export interface ISampleType {
-  id?: string;
+  id?: number;
   name?: string | null;
   prefix?: string | null;
   createdBy?: string | null;
@@ -12,7 +12,7 @@ export interface ISampleType {
 
 export class SampleType implements ISampleType {
   constructor(
-    public id?: string,
+    public id?: number,
     public name?: string | null,
     public prefix?: string | null,
     public createdBy?: string | null,
@@ -22,6 +22,6 @@ export class SampleType implements ISampleType {
   ) {}
 }
 
-export function getSampleTypeIdentifier(sampleType: ISampleType): string | undefined {
+export function getSampleTypeIdentifier(sampleType: ISampleType): number | undefined {
   return sampleType.id;
 }

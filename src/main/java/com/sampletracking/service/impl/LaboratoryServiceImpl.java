@@ -75,13 +75,13 @@ public class LaboratoryServiceImpl implements LaboratoryService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<Laboratory> findOne(String id) {
+    public Optional<Laboratory> findOne(Long id) {
         log.debug("Request to get Laboratory : {}", id);
         return laboratoryRepository.findById(id);
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Long id) {
         log.debug("Request to delete Laboratory : {}", id);
         laboratoryRepository.deleteById(id);
     }
