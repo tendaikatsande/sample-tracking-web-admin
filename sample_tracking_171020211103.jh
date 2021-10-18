@@ -1,6 +1,6 @@
 
 entity Sample {
-  id  String
+
   appId String
   clientSampleId   String
   clientPatientId  String
@@ -36,7 +36,7 @@ entity Sample {
 }
 
 entity Shipment{
-  id  String
+
   appId String
   description  String
   clientId  String
@@ -63,7 +63,7 @@ entity Shipment{
 }
 
 entity Patient{
-  id String
+
   appId String
   firstName String
   lastName String
@@ -82,7 +82,7 @@ entity Patient{
 }
 
 entity Laboratory{
-    id String
+  
     name String
     type String
     code String
@@ -110,7 +110,7 @@ entity Client{
 
 
 entity SampleType{
-   id  String
+
    name  String
    prefix  String
    createdBy  String
@@ -120,7 +120,7 @@ entity SampleType{
 }
 
 entity TestType{
-   id  String
+
    name  String
    prefix  String
   createdBy String
