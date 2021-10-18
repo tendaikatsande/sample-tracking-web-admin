@@ -39,12 +39,12 @@ public interface LaboratoryService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<Laboratory> findOne(String id);
+    Optional<Laboratory> findOne(Long id);
 
     /**
      * Delete the "id" laboratory.
      *
      * @param id the id of the entity.
      */
-    void delete(String id);
+    void delete(Long id);
 }

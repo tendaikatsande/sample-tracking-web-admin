@@ -17,7 +17,7 @@
       "detail": {
         "title": "Shipment"
       },
-      "id": "Id",
+      "id": "ID",
       "appId": "App Id",
       "description": "Description",
       "clientId": "Client Id",

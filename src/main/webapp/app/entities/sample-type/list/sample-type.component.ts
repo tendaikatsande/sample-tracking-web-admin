@@ -57,7 +57,7 @@ export class SampleTypeComponent implements OnInit {
     this.handleNavigation();
   }
 
-  trackId(index: number, item: ISampleType): string {
+  trackId(index: number, item: ISampleType): number {
     return item.id!;
   }
 

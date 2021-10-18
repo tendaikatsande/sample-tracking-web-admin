@@ -117,13 +117,13 @@ public class ShipmentServiceImpl implements ShipmentService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<Shipment> findOne(String id) {
+    public Optional<Shipment> findOne(Long id) {
         log.debug("Request to get Shipment : {}", id);
         return shipmentRepository.findById(id);
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Long id) {
         log.debug("Request to delete Shipment : {}", id);
         shipmentRepository.deleteById(id);
     }

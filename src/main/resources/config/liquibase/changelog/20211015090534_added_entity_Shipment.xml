@@ -11,7 +11,7 @@
     -->
     <changeSet id="20211015090534-1" author="jhipster">
         <createTable tableName="shipment">
-            <column name="id" type="varchar(255)">
+            <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="app_id" type="varchar(255)">
@@ -99,7 +99,7 @@
                   separator=";"
                   tableName="shipment"
                   usePreparedStatements="true">
-            <column name="id" type="string"/>
+            <column name="id" type="numeric"/>
             <column name="app_id" type="string"/>
             <column name="description" type="string"/>
             <column name="client_id" type="string"/>

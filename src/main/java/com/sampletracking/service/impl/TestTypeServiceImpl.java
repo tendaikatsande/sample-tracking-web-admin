@@ -72,13 +72,13 @@ public class TestTypeServiceImpl implements TestTypeService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<TestType> findOne(String id) {
+    public Optional<TestType> findOne(Long id) {
         log.debug("Request to get TestType : {}", id);
         return testTypeRepository.findById(id);
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Long id) {
         log.debug("Request to delete TestType : {}", id);
         testTypeRepository.deleteById(id);
     }

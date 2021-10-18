@@ -1,7 +1,7 @@
 import * as dayjs from 'dayjs';
 
 export interface IShipment {
-  id?: string;
+  id?: number;
   appId?: string | null;
   description?: string | null;
   clientId?: string | null;
@@ -27,7 +27,7 @@ export interface IShipment {
 
 export class Shipment implements IShipment {
   constructor(
-    public id?: string,
+    public id?: number,
     public appId?: string | null,
     public description?: string | null,
     public clientId?: string | null,
@@ -57,6 +57,6 @@ export class Shipment implements IShipment {
   }
 }
 
-export function getShipmentIdentifier(shipment: IShipment): string | undefined {
+export function getShipmentIdentifier(shipment: IShipment): number | undefined {
   return shipment.id;
 }

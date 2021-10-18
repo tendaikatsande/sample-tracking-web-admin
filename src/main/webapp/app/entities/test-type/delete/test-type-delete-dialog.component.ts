@@ -16,7 +16,7 @@ export class TestTypeDeleteDialogComponent {
     this.activeModal.dismiss();
   }
 
-  confirmDelete(id: string): void {
+  confirmDelete(id: number): void {
     this.testTypeService.delete(id).subscribe(() => {
       this.activeModal.close('deleted');
     });

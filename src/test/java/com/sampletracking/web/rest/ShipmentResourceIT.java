@@ -11,7 +11,8 @@ import com.sampletracking.repository.ShipmentRepository;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.UUID;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicLong;
 import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -96,6 +97,9 @@ class ShipmentResourceIT {
 
     private static final String ENTITY_API_URL = "/api/shipments";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
+
+    private static Random random = new Random();
+    private static AtomicLong count = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ShipmentRepository shipmentRepository;
@@ -217,7 +221,7 @@ class ShipmentResourceIT {
     @Transactional
     void createShipmentWithExistingId() throws Exception {
         // Create the Shipment with an existing ID
-        shipment.setId("existing_id");
+        shipment.setId(1L);
 
         int databaseSizeBeforeCreate = shipmentRepository.findAll().size();
 
@@ -235,7 +239,6 @@ class ShipmentResourceIT {
     @Transactional
     void getAllShipments() throws Exception {
         // Initialize the database
-        shipment.setId(UUID.randomUUID().toString());
         shipmentRepository.saveAndFlush(shipment);
 
         // Get all the shipmentList
@@ -243,7 +246,7 @@ class ShipmentResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(shipment.getId())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(shipment.getId().intValue())))
             .andExpect(jsonPath("$.[*].appId").value(hasItem(DEFAULT_APP_ID)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].clientId").value(hasItem(DEFAULT_CLIENT_ID)))
@@ -271,7 +274,6 @@ class ShipmentResourceIT {
     @Transactional
     void getShipment() throws Exception {
         // Initialize the database
-        shipment.setId(UUID.randomUUID().toString());
         shipmentRepository.saveAndFlush(shipment);
 
         // Get the shipment
@@ -279,7 +281,7 @@ class ShipmentResourceIT {
             .perform(get(ENTITY_API_URL_ID, shipment.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(shipment.getId()))
+            .andExpect(jsonPath("$.id").value(shipment.getId().intValue()))
             .andExpect(jsonPath("$.appId").value(DEFAULT_APP_ID))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
             .andExpect(jsonPath("$.clientId").value(DEFAULT_CLIENT_ID))
@@ -314,7 +316,6 @@ class ShipmentResourceIT {
     @Transactional
     void putNewShipment() throws Exception {
         // Initialize the database
-        shipment.setId(UUID.randomUUID().toString());
         shipmentRepository.saveAndFlush(shipment);
 
         int databaseSizeBeforeUpdate = shipmentRepository.findAll().size();
@@ -385,7 +386,7 @@ class ShipmentResourceIT {
     @Transactional
     void putNonExistingShipment() throws Exception {
         int databaseSizeBeforeUpdate = shipmentRepository.findAll().size();
-        shipment.setId(UUID.randomUUID().toString());
+        shipment.setId(count.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restShipmentMockMvc
@@ -405,12 +406,12 @@ class ShipmentResourceIT {
     @Transactional
     void putWithIdMismatchShipment() throws Exception {
         int databaseSizeBeforeUpdate = shipmentRepository.findAll().size();
-        shipment.setId(UUID.randomUUID().toString());
+        shipment.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restShipmentMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
+                put(ENTITY_API_URL_ID, count.incrementAndGet())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(shipment))
             )
@@ -425,7 +426,7 @@ class ShipmentResourceIT {
     @Transactional
     void putWithMissingIdPathParamShipment() throws Exception {
         int databaseSizeBeforeUpdate = shipmentRepository.findAll().size();
-        shipment.setId(UUID.randomUUID().toString());
+        shipment.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restShipmentMockMvc
@@ -441,7 +442,6 @@ class ShipmentResourceIT {
     @Transactional
     void partialUpdateShipmentWithPatch() throws Exception {
         // Initialize the database
-        shipment.setId(UUID.randomUUID().toString());
         shipmentRepository.saveAndFlush(shipment);
 
         int databaseSizeBeforeUpdate = shipmentRepository.findAll().size();
@@ -504,7 +504,6 @@ class ShipmentResourceIT {
     @Transactional
     void fullUpdateShipmentWithPatch() throws Exception {
         // Initialize the database
-        shipment.setId(UUID.randomUUID().toString());
         shipmentRepository.saveAndFlush(shipment);
 
         int databaseSizeBeforeUpdate = shipmentRepository.findAll().size();
@@ -575,7 +574,7 @@ class ShipmentResourceIT {
     @Transactional
     void patchNonExistingShipment() throws Exception {
         int databaseSizeBeforeUpdate = shipmentRepository.findAll().size();
-        shipment.setId(UUID.randomUUID().toString());
+        shipment.setId(count.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restShipmentMockMvc
@@ -595,12 +594,12 @@ class ShipmentResourceIT {
     @Transactional
     void patchWithIdMismatchShipment() throws Exception {
         int databaseSizeBeforeUpdate = shipmentRepository.findAll().size();
-        shipment.setId(UUID.randomUUID().toString());
+        shipment.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restShipmentMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
+                patch(ENTITY_API_URL_ID, count.incrementAndGet())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(shipment))
             )
@@ -615,7 +614,7 @@ class ShipmentResourceIT {
     @Transactional
     void patchWithMissingIdPathParamShipment() throws Exception {
         int databaseSizeBeforeUpdate = shipmentRepository.findAll().size();
-        shipment.setId(UUID.randomUUID().toString());
+        shipment.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restShipmentMockMvc
@@ -631,7 +630,6 @@ class ShipmentResourceIT {
     @Transactional
     void deleteShipment() throws Exception {
         // Initialize the database
-        shipment.setId(UUID.randomUUID().toString());
         shipmentRepository.saveAndFlush(shipment);
 
         int databaseSizeBeforeDelete = shipmentRepository.findAll().size();

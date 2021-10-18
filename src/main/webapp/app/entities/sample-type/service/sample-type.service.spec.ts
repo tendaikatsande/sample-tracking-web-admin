@@ -24,7 +24,7 @@ describe('SampleType Service', () => {
     currentDate = dayjs();
 
     elemDefault = {
-      id: 'AAAAAAA',
+      id: 0,
       name: 'AAAAAAA',
       prefix: 'AAAAAAA',
       createdBy: 'AAAAAAA',
@@ -44,7 +44,7 @@ describe('SampleType Service', () => {
         elemDefault
       );
 
-      service.find('ABC').subscribe(resp => (expectedResult = resp.body));
+      service.find(123).subscribe(resp => (expectedResult = resp.body));
 
       const req = httpMock.expectOne({ method: 'GET' });
       req.flush(returnedFromService);
@@ -54,7 +54,7 @@ describe('SampleType Service', () => {
     it('should create a SampleType', () => {
       const returnedFromService = Object.assign(
         {
-          id: 'ID',
+          id: 0,
           createdDate: currentDate.format(DATE_TIME_FORMAT),
           lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
         },
@@ -79,7 +79,7 @@ describe('SampleType Service', () => {
     it('should update a SampleType', () => {
       const returnedFromService = Object.assign(
         {
-          id: 'BBBBBB',
+          id: 1,
           name: 'BBBBBB',
           prefix: 'BBBBBB',
           createdBy: 'BBBBBB',
@@ -135,7 +135,7 @@ describe('SampleType Service', () => {
     it('should return a list of SampleType', () => {
       const returnedFromService = Object.assign(
         {
-          id: 'BBBBBB',
+          id: 1,
           name: 'BBBBBB',
           prefix: 'BBBBBB',
           createdBy: 'BBBBBB',
@@ -163,7 +163,7 @@ describe('SampleType Service', () => {
     });
 
     it('should delete a SampleType', () => {
-      service.delete('ABC').subscribe(resp => (expectedResult = resp.ok));
+      service.delete(123).subscribe(resp => (expectedResult = resp.ok));
 
       const req = httpMock.expectOne({ method: 'DELETE' });
       req.flush({ status: 200 });
@@ -172,42 +172,42 @@ describe('SampleType Service', () => {
 
     describe('addSampleTypeToCollectionIfMissing', () => {
       it('should add a SampleType to an empty array', () => {
-        const sampleType: ISampleType = { id: 'ABC' };
+        const sampleType: ISampleType = { id: 123 };
         expectedResult = service.addSampleTypeToCollectionIfMissing([], sampleType);
         expect(expectedResult).toHaveLength(1);
         expect(expectedResult).toContain(sampleType);
       });
 
       it('should not add a SampleType to an array that contains it', () => {
-        const sampleType: ISampleType = { id: 'ABC' };
+        const sampleType: ISampleType = { id: 123 };
         const sampleTypeCollection: ISampleType[] = [
           {
             ...sampleType,
           },
-          { id: 'CBA' },
+          { id: 456 },
         ];
         expectedResult = service.addSampleTypeToCollectionIfMissing(sampleTypeCollection, sampleType);
         expect(expectedResult).toHaveLength(2);
       });
 
       it("should add a SampleType to an array that doesn't contain it", () => {
-        const sampleType: ISampleType = { id: 'ABC' };
-        const sampleTypeCollection: ISampleType[] = [{ id: 'CBA' }];
+        const sampleType: ISampleType = { id: 123 };
+        const sampleTypeCollection: ISampleType[] = [{ id: 456 }];
         expectedResult = service.addSampleTypeToCollectionIfMissing(sampleTypeCollection, sampleType);
         expect(expectedResult).toHaveLength(2);
         expect(expectedResult).toContain(sampleType);
       });
 
       it('should add only unique SampleType to an array', () => {
-        const sampleTypeArray: ISampleType[] = [{ id: 'ABC' }, { id: 'CBA' }, { id: '380dcec2-3a45-4258-a816-ae924dad549f' }];
-        const sampleTypeCollection: ISampleType[] = [{ id: 'ABC' }];
+        const sampleTypeArray: ISampleType[] = [{ id: 123 }, { id: 456 }, { id: 19777 }];
+        const sampleTypeCollection: ISampleType[] = [{ id: 123 }];
         expectedResult = service.addSampleTypeToCollectionIfMissing(sampleTypeCollection, ...sampleTypeArray);
         expect(expectedResult).toHaveLength(3);
       });
 
       it('should accept varargs', () => {
-        const sampleType: ISampleType = { id: 'ABC' };
-        const sampleType2: ISampleType = { id: 'CBA' };
+        const sampleType: ISampleType = { id: 123 };
+        const sampleType2: ISampleType = { id: 456 };
         expectedResult = service.addSampleTypeToCollectionIfMissing([], sampleType, sampleType2);
         expect(expectedResult).toHaveLength(2);
         expect(expectedResult).toContain(sampleType);
@@ -215,14 +215,14 @@ describe('SampleType Service', () => {
       });
 
       it('should accept null and undefined values', () => {
-        const sampleType: ISampleType = { id: 'ABC' };
+        const sampleType: ISampleType = { id: 123 };
         expectedResult = service.addSampleTypeToCollectionIfMissing([], null, sampleType, undefined);
         expect(expectedResult).toHaveLength(1);
         expect(expectedResult).toContain(sampleType);
       });
 
       it('should return initial array if no SampleType is added', () => {
-        const sampleTypeCollection: ISampleType[] = [{ id: 'ABC' }];
+        const sampleTypeCollection: ISampleType[] = [{ id: 123 }];
         expectedResult = service.addSampleTypeToCollectionIfMissing(sampleTypeCollection, undefined, null);
         expect(expectedResult).toEqual(sampleTypeCollection);
       });

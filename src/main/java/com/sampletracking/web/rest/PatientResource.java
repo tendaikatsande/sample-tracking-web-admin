@@ -62,7 +62,7 @@ public class PatientResource {
         Patient result = patientService.save(patient);
         return ResponseEntity
             .created(new URI("/api/patients/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
 
@@ -77,10 +77,8 @@ public class PatientResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/patients/{id}")
-    public ResponseEntity<Patient> updatePatient(
-        @PathVariable(value = "id", required = false) final String id,
-        @RequestBody Patient patient
-    ) throws URISyntaxException {
+    public ResponseEntity<Patient> updatePatient(@PathVariable(value = "id", required = false) final Long id, @RequestBody Patient patient)
+        throws URISyntaxException {
         log.debug("REST request to update Patient : {}, {}", id, patient);
         if (patient.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
@@ -96,7 +94,7 @@ public class PatientResource {
         Patient result = patientService.save(patient);
         return ResponseEntity
             .ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, patient.getId()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, patient.getId().toString()))
             .body(result);
     }
 
@@ -113,7 +111,7 @@ public class PatientResource {
      */
     @PatchMapping(value = "/patients/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Patient> partialUpdatePatient(
-        @PathVariable(value = "id", required = false) final String id,
+        @PathVariable(value = "id", required = false) final Long id,
         @RequestBody Patient patient
     ) throws URISyntaxException {
         log.debug("REST request to partial update Patient partially : {}, {}", id, patient);
@@ -130,7 +128,10 @@ public class PatientResource {
 
         Optional<Patient> result = patientService.partialUpdate(patient);
 
-        return ResponseUtil.wrapOrNotFound(result, HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, patient.getId()));
+        return ResponseUtil.wrapOrNotFound(
+            result,
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, patient.getId().toString())
+        );
     }
 
     /**
@@ -154,7 +155,7 @@ public class PatientResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the patient, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/patients/{id}")
-    public ResponseEntity<Patient> getPatient(@PathVariable String id) {
+    public ResponseEntity<Patient> getPatient(@PathVariable Long id) {
         log.debug("REST request to get Patient : {}", id);
         Optional<Patient> patient = patientService.findOne(id);
         return ResponseUtil.wrapOrNotFound(patient);
@@ -167,9 +168,12 @@ public class PatientResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/patients/{id}")
-    public ResponseEntity<Void> deletePatient(@PathVariable String id) {
+    public ResponseEntity<Void> deletePatient(@PathVariable Long id) {
         log.debug("REST request to delete Patient : {}", id);
         patientService.delete(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
+        return ResponseEntity
+            .noContent()
+            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+            .build();
     }
 }
