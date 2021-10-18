@@ -39,12 +39,12 @@ public interface TestTypeService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<TestType> findOne(String id);
+    Optional<TestType> findOne(Long id);
 
     /**
      * Delete the "id" testType.
      *
      * @param id the id of the entity.
      */
-    void delete(String id);
+    void delete(Long id);
 }

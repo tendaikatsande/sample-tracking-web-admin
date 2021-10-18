@@ -141,13 +141,13 @@ public class SampleServiceImpl implements SampleService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<Sample> findOne(String id) {
+    public Optional<Sample> findOne(Long id) {
         log.debug("Request to get Sample : {}", id);
         return sampleRepository.findById(id);
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(Long id) {
         log.debug("Request to delete Sample : {}", id);
         sampleRepository.deleteById(id);
     }

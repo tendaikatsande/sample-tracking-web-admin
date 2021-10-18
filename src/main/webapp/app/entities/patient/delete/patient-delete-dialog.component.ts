@@ -16,7 +16,7 @@ export class PatientDeleteDialogComponent {
     this.activeModal.dismiss();
   }
 
-  confirmDelete(id: string): void {
+  confirmDelete(id: number): void {
     this.patientService.delete(id).subscribe(() => {
       this.activeModal.close('deleted');
     });

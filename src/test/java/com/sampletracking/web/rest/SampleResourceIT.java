@@ -11,7 +11,8 @@ import com.sampletracking.repository.SampleRepository;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.UUID;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicLong;
 import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -119,6 +120,9 @@ class SampleResourceIT {
 
     private static final String ENTITY_API_URL = "/api/samples";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
+
+    private static Random random = new Random();
+    private static AtomicLong count = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private SampleRepository sampleRepository;
@@ -264,7 +268,7 @@ class SampleResourceIT {
     @Transactional
     void createSampleWithExistingId() throws Exception {
         // Create the Sample with an existing ID
-        sample.setId("existing_id");
+        sample.setId(1L);
 
         int databaseSizeBeforeCreate = sampleRepository.findAll().size();
 
@@ -282,7 +286,6 @@ class SampleResourceIT {
     @Transactional
     void getAllSamples() throws Exception {
         // Initialize the database
-        sample.setId(UUID.randomUUID().toString());
         sampleRepository.saveAndFlush(sample);
 
         // Get all the sampleList
@@ -290,7 +293,7 @@ class SampleResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(sample.getId())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(sample.getId().intValue())))
             .andExpect(jsonPath("$.[*].appId").value(hasItem(DEFAULT_APP_ID)))
             .andExpect(jsonPath("$.[*].clientSampleId").value(hasItem(DEFAULT_CLIENT_SAMPLE_ID)))
             .andExpect(jsonPath("$.[*].clientPatientId").value(hasItem(DEFAULT_CLIENT_PATIENT_ID)))
@@ -326,7 +329,6 @@ class SampleResourceIT {
     @Transactional
     void getSample() throws Exception {
         // Initialize the database
-        sample.setId(UUID.randomUUID().toString());
         sampleRepository.saveAndFlush(sample);
 
         // Get the sample
@@ -334,7 +336,7 @@ class SampleResourceIT {
             .perform(get(ENTITY_API_URL_ID, sample.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(sample.getId()))
+            .andExpect(jsonPath("$.id").value(sample.getId().intValue()))
             .andExpect(jsonPath("$.appId").value(DEFAULT_APP_ID))
             .andExpect(jsonPath("$.clientSampleId").value(DEFAULT_CLIENT_SAMPLE_ID))
             .andExpect(jsonPath("$.clientPatientId").value(DEFAULT_CLIENT_PATIENT_ID))
@@ -377,7 +379,6 @@ class SampleResourceIT {
     @Transactional
     void putNewSample() throws Exception {
         // Initialize the database
-        sample.setId(UUID.randomUUID().toString());
         sampleRepository.saveAndFlush(sample);
 
         int databaseSizeBeforeUpdate = sampleRepository.findAll().size();
@@ -464,7 +465,7 @@ class SampleResourceIT {
     @Transactional
     void putNonExistingSample() throws Exception {
         int databaseSizeBeforeUpdate = sampleRepository.findAll().size();
-        sample.setId(UUID.randomUUID().toString());
+        sample.setId(count.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restSampleMockMvc
@@ -484,12 +485,12 @@ class SampleResourceIT {
     @Transactional
     void putWithIdMismatchSample() throws Exception {
         int databaseSizeBeforeUpdate = sampleRepository.findAll().size();
-        sample.setId(UUID.randomUUID().toString());
+        sample.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restSampleMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
+                put(ENTITY_API_URL_ID, count.incrementAndGet())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(sample))
             )
@@ -504,7 +505,7 @@ class SampleResourceIT {
     @Transactional
     void putWithMissingIdPathParamSample() throws Exception {
         int databaseSizeBeforeUpdate = sampleRepository.findAll().size();
-        sample.setId(UUID.randomUUID().toString());
+        sample.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restSampleMockMvc
@@ -520,7 +521,6 @@ class SampleResourceIT {
     @Transactional
     void partialUpdateSampleWithPatch() throws Exception {
         // Initialize the database
-        sample.setId(UUID.randomUUID().toString());
         sampleRepository.saveAndFlush(sample);
 
         int databaseSizeBeforeUpdate = sampleRepository.findAll().size();
@@ -592,7 +592,6 @@ class SampleResourceIT {
     @Transactional
     void fullUpdateSampleWithPatch() throws Exception {
         // Initialize the database
-        sample.setId(UUID.randomUUID().toString());
         sampleRepository.saveAndFlush(sample);
 
         int databaseSizeBeforeUpdate = sampleRepository.findAll().size();
@@ -679,7 +678,7 @@ class SampleResourceIT {
     @Transactional
     void patchNonExistingSample() throws Exception {
         int databaseSizeBeforeUpdate = sampleRepository.findAll().size();
-        sample.setId(UUID.randomUUID().toString());
+        sample.setId(count.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restSampleMockMvc
@@ -699,12 +698,12 @@ class SampleResourceIT {
     @Transactional
     void patchWithIdMismatchSample() throws Exception {
         int databaseSizeBeforeUpdate = sampleRepository.findAll().size();
-        sample.setId(UUID.randomUUID().toString());
+        sample.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restSampleMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
+                patch(ENTITY_API_URL_ID, count.incrementAndGet())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(sample))
             )
@@ -719,7 +718,7 @@ class SampleResourceIT {
     @Transactional
     void patchWithMissingIdPathParamSample() throws Exception {
         int databaseSizeBeforeUpdate = sampleRepository.findAll().size();
-        sample.setId(UUID.randomUUID().toString());
+        sample.setId(count.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restSampleMockMvc
@@ -735,7 +734,6 @@ class SampleResourceIT {
     @Transactional
     void deleteSample() throws Exception {
         // Initialize the database
-        sample.setId(UUID.randomUUID().toString());
         sampleRepository.saveAndFlush(sample);
 
         int databaseSizeBeforeDelete = sampleRepository.findAll().size();
