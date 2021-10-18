@@ -87,8 +87,8 @@ public class ShipmentServiceImpl implements ShipmentService {
                 if (shipment.getIsModifiedByLaboratory() != null) {
                     existingShipment.setIsModifiedByLaboratory(shipment.getIsModifiedByLaboratory());
                 }
-                if (shipment.getIsModifiedByCourrier() != null) {
-                    existingShipment.setIsModifiedByCourrier(shipment.getIsModifiedByCourrier());
+                if (shipment.getIsModifiedByCourier() != null) {
+                    existingShipment.setIsModifiedByCourier(shipment.getIsModifiedByCourier());
                 }
                 if (shipment.getCreatedBy() != null) {
                     existingShipment.setCreatedBy(shipment.getCreatedBy());
@@ -117,13 +117,13 @@ public class ShipmentServiceImpl implements ShipmentService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<Shipment> findOne(Long id) {
+    public Optional<Shipment> findOne(String id) {
         log.debug("Request to get Shipment : {}", id);
         return shipmentRepository.findById(id);
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(String id) {
         log.debug("Request to delete Shipment : {}", id);
         shipmentRepository.deleteById(id);
     }

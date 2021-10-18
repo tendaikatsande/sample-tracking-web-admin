@@ -39,7 +39,7 @@ export class ShipmentUpdateComponent implements OnInit {
     isModifiedByHub: [],
     isModifiedByFacility: [],
     isModifiedByLaboratory: [],
-    isModifiedByCourrier: [],
+    isModifiedByCourier: [],
     createdBy: [],
     createdDate: [],
     lastModifiedBy: [],
@@ -133,7 +133,7 @@ export class ShipmentUpdateComponent implements OnInit {
       isModifiedByHub: shipment.isModifiedByHub,
       isModifiedByFacility: shipment.isModifiedByFacility,
       isModifiedByLaboratory: shipment.isModifiedByLaboratory,
-      isModifiedByCourrier: shipment.isModifiedByCourrier,
+      isModifiedByCourier: shipment.isModifiedByCourier,
       createdBy: shipment.createdBy,
       createdDate: shipment.createdDate ? shipment.createdDate.format(DATE_TIME_FORMAT) : null,
       lastModifiedBy: shipment.lastModifiedBy,
@@ -161,7 +161,7 @@ export class ShipmentUpdateComponent implements OnInit {
       isModifiedByHub: this.editForm.get(['isModifiedByHub'])!.value,
       isModifiedByFacility: this.editForm.get(['isModifiedByFacility'])!.value,
       isModifiedByLaboratory: this.editForm.get(['isModifiedByLaboratory'])!.value,
-      isModifiedByCourrier: this.editForm.get(['isModifiedByCourrier'])!.value,
+      isModifiedByCourier: this.editForm.get(['isModifiedByCourier'])!.value,
       createdBy: this.editForm.get(['createdBy'])!.value,
       createdDate: this.editForm.get(['createdDate'])!.value
         ? dayjs(this.editForm.get(['createdDate'])!.value, DATE_TIME_FORMAT)

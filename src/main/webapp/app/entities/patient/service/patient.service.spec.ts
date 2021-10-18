@@ -24,7 +24,7 @@ describe('Patient Service', () => {
     currentDate = dayjs();
 
     elemDefault = {
-      id: 0,
+      id: 'AAAAAAA',
       appId: 'AAAAAAA',
       firstName: 'AAAAAAA',
       lastName: 'AAAAAAA',
@@ -53,7 +53,7 @@ describe('Patient Service', () => {
         elemDefault
       );
 
-      service.find(123).subscribe(resp => (expectedResult = resp.body));
+      service.find('ABC').subscribe(resp => (expectedResult = resp.body));
 
       const req = httpMock.expectOne({ method: 'GET' });
       req.flush(returnedFromService);
@@ -63,7 +63,7 @@ describe('Patient Service', () => {
     it('should create a Patient', () => {
       const returnedFromService = Object.assign(
         {
-          id: 0,
+          id: 'ID',
           createdDate: currentDate.format(DATE_TIME_FORMAT),
           lastModifiedDate: currentDate.format(DATE_TIME_FORMAT),
         },
@@ -88,7 +88,7 @@ describe('Patient Service', () => {
     it('should update a Patient', () => {
       const returnedFromService = Object.assign(
         {
-          id: 1,
+          id: 'BBBBBB',
           appId: 'BBBBBB',
           firstName: 'BBBBBB',
           lastName: 'BBBBBB',
@@ -156,7 +156,7 @@ describe('Patient Service', () => {
     it('should return a list of Patient', () => {
       const returnedFromService = Object.assign(
         {
-          id: 1,
+          id: 'BBBBBB',
           appId: 'BBBBBB',
           firstName: 'BBBBBB',
           lastName: 'BBBBBB',
@@ -193,7 +193,7 @@ describe('Patient Service', () => {
     });
 
     it('should delete a Patient', () => {
-      service.delete(123).subscribe(resp => (expectedResult = resp.ok));
+      service.delete('ABC').subscribe(resp => (expectedResult = resp.ok));
 
       const req = httpMock.expectOne({ method: 'DELETE' });
       req.flush({ status: 200 });
@@ -202,42 +202,42 @@ describe('Patient Service', () => {
 
     describe('addPatientToCollectionIfMissing', () => {
       it('should add a Patient to an empty array', () => {
-        const patient: IPatient = { id: 123 };
+        const patient: IPatient = { id: 'ABC' };
         expectedResult = service.addPatientToCollectionIfMissing([], patient);
         expect(expectedResult).toHaveLength(1);
         expect(expectedResult).toContain(patient);
       });
 
       it('should not add a Patient to an array that contains it', () => {
-        const patient: IPatient = { id: 123 };
+        const patient: IPatient = { id: 'ABC' };
         const patientCollection: IPatient[] = [
           {
             ...patient,
           },
-          { id: 456 },
+          { id: 'CBA' },
         ];
         expectedResult = service.addPatientToCollectionIfMissing(patientCollection, patient);
         expect(expectedResult).toHaveLength(2);
       });
 
       it("should add a Patient to an array that doesn't contain it", () => {
-        const patient: IPatient = { id: 123 };
-        const patientCollection: IPatient[] = [{ id: 456 }];
+        const patient: IPatient = { id: 'ABC' };
+        const patientCollection: IPatient[] = [{ id: 'CBA' }];
         expectedResult = service.addPatientToCollectionIfMissing(patientCollection, patient);
         expect(expectedResult).toHaveLength(2);
         expect(expectedResult).toContain(patient);
       });
 
       it('should add only unique Patient to an array', () => {
-        const patientArray: IPatient[] = [{ id: 123 }, { id: 456 }, { id: 35976 }];
-        const patientCollection: IPatient[] = [{ id: 123 }];
+        const patientArray: IPatient[] = [{ id: 'ABC' }, { id: 'CBA' }, { id: '56644172-e025-4e58-aefb-4934637ad74d' }];
+        const patientCollection: IPatient[] = [{ id: 'ABC' }];
         expectedResult = service.addPatientToCollectionIfMissing(patientCollection, ...patientArray);
         expect(expectedResult).toHaveLength(3);
       });
 
       it('should accept varargs', () => {
-        const patient: IPatient = { id: 123 };
-        const patient2: IPatient = { id: 456 };
+        const patient: IPatient = { id: 'ABC' };
+        const patient2: IPatient = { id: 'CBA' };
         expectedResult = service.addPatientToCollectionIfMissing([], patient, patient2);
         expect(expectedResult).toHaveLength(2);
         expect(expectedResult).toContain(patient);
@@ -245,14 +245,14 @@ describe('Patient Service', () => {
       });
 
       it('should accept null and undefined values', () => {
-        const patient: IPatient = { id: 123 };
+        const patient: IPatient = { id: 'ABC' };
         expectedResult = service.addPatientToCollectionIfMissing([], null, patient, undefined);
         expect(expectedResult).toHaveLength(1);
         expect(expectedResult).toContain(patient);
       });
 
       it('should return initial array if no Patient is added', () => {
-        const patientCollection: IPatient[] = [{ id: 123 }];
+        const patientCollection: IPatient[] = [{ id: 'ABC' }];
         expectedResult = service.addPatientToCollectionIfMissing(patientCollection, undefined, null);
         expect(expectedResult).toEqual(patientCollection);
       });

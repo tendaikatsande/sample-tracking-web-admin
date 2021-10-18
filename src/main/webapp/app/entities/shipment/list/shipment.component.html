@@ -32,7 +32,7 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
-          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="sampleTrackingApp.shipment.id">Id</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="appId">
             <span jhiTranslate="sampleTrackingApp.shipment.appId">App Id</span> <fa-icon icon="sort"></fa-icon>
           </th>
@@ -84,8 +84,8 @@
             <span jhiTranslate="sampleTrackingApp.shipment.isModifiedByLaboratory">Is Modified By Laboratory</span>
             <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="isModifiedByCourrier">
-            <span jhiTranslate="sampleTrackingApp.shipment.isModifiedByCourrier">Is Modified By Courrier</span>
+          <th scope="col" jhiSortBy="isModifiedByCourier">
+            <span jhiTranslate="sampleTrackingApp.shipment.isModifiedByCourier">Is Modified By Courier</span>
             <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" jhiSortBy="createdBy">
@@ -124,7 +124,7 @@
           <td>{{ shipment.isModifiedByHub }}</td>
           <td>{{ shipment.isModifiedByFacility }}</td>
           <td>{{ shipment.isModifiedByLaboratory }}</td>
-          <td>{{ shipment.isModifiedByCourrier }}</td>
+          <td>{{ shipment.isModifiedByCourier }}</td>
           <td>{{ shipment.createdBy }}</td>
           <td>{{ shipment.createdDate | formatMediumDatetime }}</td>
           <td>{{ shipment.lastModifiedBy }}</td>

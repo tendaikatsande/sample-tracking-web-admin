@@ -62,7 +62,7 @@ public class SampleTypeResource {
         SampleType result = sampleTypeService.save(sampleType);
         return ResponseEntity
             .created(new URI("/api/sample-types/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId()))
             .body(result);
     }
 
@@ -78,7 +78,7 @@ public class SampleTypeResource {
      */
     @PutMapping("/sample-types/{id}")
     public ResponseEntity<SampleType> updateSampleType(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody SampleType sampleType
     ) throws URISyntaxException {
         log.debug("REST request to update SampleType : {}, {}", id, sampleType);
@@ -96,7 +96,7 @@ public class SampleTypeResource {
         SampleType result = sampleTypeService.save(sampleType);
         return ResponseEntity
             .ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, sampleType.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, sampleType.getId()))
             .body(result);
     }
 
@@ -113,7 +113,7 @@ public class SampleTypeResource {
      */
     @PatchMapping(value = "/sample-types/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<SampleType> partialUpdateSampleType(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody SampleType sampleType
     ) throws URISyntaxException {
         log.debug("REST request to partial update SampleType partially : {}, {}", id, sampleType);
@@ -132,7 +132,7 @@ public class SampleTypeResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, sampleType.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, sampleType.getId())
         );
     }
 
@@ -157,7 +157,7 @@ public class SampleTypeResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the sampleType, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/sample-types/{id}")
-    public ResponseEntity<SampleType> getSampleType(@PathVariable Long id) {
+    public ResponseEntity<SampleType> getSampleType(@PathVariable String id) {
         log.debug("REST request to get SampleType : {}", id);
         Optional<SampleType> sampleType = sampleTypeService.findOne(id);
         return ResponseUtil.wrapOrNotFound(sampleType);
@@ -170,12 +170,9 @@ public class SampleTypeResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/sample-types/{id}")
-    public ResponseEntity<Void> deleteSampleType(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteSampleType(@PathVariable String id) {
         log.debug("REST request to delete SampleType : {}", id);
         sampleTypeService.delete(id);
-        return ResponseEntity
-            .noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

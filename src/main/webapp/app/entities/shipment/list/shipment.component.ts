@@ -59,7 +59,7 @@ export class ShipmentComponent implements OnInit {
     this.handleNavigation();
   }
 
-  trackId(index: number, item: IShipment): number {
+  trackId(index: number, item: IShipment): string {
     return item.id!;
   }
 

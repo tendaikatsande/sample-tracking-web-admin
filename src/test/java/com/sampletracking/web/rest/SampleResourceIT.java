@@ -11,8 +11,7 @@ import com.sampletracking.repository.SampleRepository;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -103,8 +102,8 @@ class SampleResourceIT {
     private static final Boolean DEFAULT_IS_MODIFIED_BY_LABORATORY = false;
     private static final Boolean UPDATED_IS_MODIFIED_BY_LABORATORY = true;
 
-    private static final Boolean DEFAULT_IS_MODIFIED_BY_COURRIER = false;
-    private static final Boolean UPDATED_IS_MODIFIED_BY_COURRIER = true;
+    private static final Boolean DEFAULT_IS_MODIFIED_BY_COURIER = false;
+    private static final Boolean UPDATED_IS_MODIFIED_BY_COURIER = true;
 
     private static final String DEFAULT_CREATED_BY = "AAAAAAAAAA";
     private static final String UPDATED_CREATED_BY = "BBBBBBBBBB";
@@ -120,9 +119,6 @@ class SampleResourceIT {
 
     private static final String ENTITY_API_URL = "/api/samples";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
-
-    private static Random random = new Random();
-    private static AtomicLong count = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private SampleRepository sampleRepository;
@@ -167,7 +163,7 @@ class SampleResourceIT {
             .isModifiedByHub(DEFAULT_IS_MODIFIED_BY_HUB)
             .isModifiedByFacility(DEFAULT_IS_MODIFIED_BY_FACILITY)
             .isModifiedByLaboratory(DEFAULT_IS_MODIFIED_BY_LABORATORY)
-            .isModifiedByCourrier(DEFAULT_IS_MODIFIED_BY_COURRIER)
+            .isModifiedByCourier(DEFAULT_IS_MODIFIED_BY_COURIER)
             .createdBy(DEFAULT_CREATED_BY)
             .createdDate(DEFAULT_CREATED_DATE)
             .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
@@ -207,7 +203,7 @@ class SampleResourceIT {
             .isModifiedByHub(UPDATED_IS_MODIFIED_BY_HUB)
             .isModifiedByFacility(UPDATED_IS_MODIFIED_BY_FACILITY)
             .isModifiedByLaboratory(UPDATED_IS_MODIFIED_BY_LABORATORY)
-            .isModifiedByCourrier(UPDATED_IS_MODIFIED_BY_COURRIER)
+            .isModifiedByCourier(UPDATED_IS_MODIFIED_BY_COURIER)
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE)
             .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
@@ -257,7 +253,7 @@ class SampleResourceIT {
         assertThat(testSample.getIsModifiedByHub()).isEqualTo(DEFAULT_IS_MODIFIED_BY_HUB);
         assertThat(testSample.getIsModifiedByFacility()).isEqualTo(DEFAULT_IS_MODIFIED_BY_FACILITY);
         assertThat(testSample.getIsModifiedByLaboratory()).isEqualTo(DEFAULT_IS_MODIFIED_BY_LABORATORY);
-        assertThat(testSample.getIsModifiedByCourrier()).isEqualTo(DEFAULT_IS_MODIFIED_BY_COURRIER);
+        assertThat(testSample.getIsModifiedByCourier()).isEqualTo(DEFAULT_IS_MODIFIED_BY_COURIER);
         assertThat(testSample.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
         assertThat(testSample.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
         assertThat(testSample.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
@@ -268,7 +264,7 @@ class SampleResourceIT {
     @Transactional
     void createSampleWithExistingId() throws Exception {
         // Create the Sample with an existing ID
-        sample.setId(1L);
+        sample.setId("existing_id");
 
         int databaseSizeBeforeCreate = sampleRepository.findAll().size();
 
@@ -286,6 +282,7 @@ class SampleResourceIT {
     @Transactional
     void getAllSamples() throws Exception {
         // Initialize the database
+        sample.setId(UUID.randomUUID().toString());
         sampleRepository.saveAndFlush(sample);
 
         // Get all the sampleList
@@ -293,7 +290,7 @@ class SampleResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(sample.getId().intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(sample.getId())))
             .andExpect(jsonPath("$.[*].appId").value(hasItem(DEFAULT_APP_ID)))
             .andExpect(jsonPath("$.[*].clientSampleId").value(hasItem(DEFAULT_CLIENT_SAMPLE_ID)))
             .andExpect(jsonPath("$.[*].clientPatientId").value(hasItem(DEFAULT_CLIENT_PATIENT_ID)))
@@ -318,7 +315,7 @@ class SampleResourceIT {
             .andExpect(jsonPath("$.[*].isModifiedByHub").value(hasItem(DEFAULT_IS_MODIFIED_BY_HUB.booleanValue())))
             .andExpect(jsonPath("$.[*].isModifiedByFacility").value(hasItem(DEFAULT_IS_MODIFIED_BY_FACILITY.booleanValue())))
             .andExpect(jsonPath("$.[*].isModifiedByLaboratory").value(hasItem(DEFAULT_IS_MODIFIED_BY_LABORATORY.booleanValue())))
-            .andExpect(jsonPath("$.[*].isModifiedByCourrier").value(hasItem(DEFAULT_IS_MODIFIED_BY_COURRIER.booleanValue())))
+            .andExpect(jsonPath("$.[*].isModifiedByCourier").value(hasItem(DEFAULT_IS_MODIFIED_BY_COURIER.booleanValue())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
             .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
@@ -329,6 +326,7 @@ class SampleResourceIT {
     @Transactional
     void getSample() throws Exception {
         // Initialize the database
+        sample.setId(UUID.randomUUID().toString());
         sampleRepository.saveAndFlush(sample);
 
         // Get the sample
@@ -336,7 +334,7 @@ class SampleResourceIT {
             .perform(get(ENTITY_API_URL_ID, sample.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(sample.getId().intValue()))
+            .andExpect(jsonPath("$.id").value(sample.getId()))
             .andExpect(jsonPath("$.appId").value(DEFAULT_APP_ID))
             .andExpect(jsonPath("$.clientSampleId").value(DEFAULT_CLIENT_SAMPLE_ID))
             .andExpect(jsonPath("$.clientPatientId").value(DEFAULT_CLIENT_PATIENT_ID))
@@ -361,7 +359,7 @@ class SampleResourceIT {
             .andExpect(jsonPath("$.isModifiedByHub").value(DEFAULT_IS_MODIFIED_BY_HUB.booleanValue()))
             .andExpect(jsonPath("$.isModifiedByFacility").value(DEFAULT_IS_MODIFIED_BY_FACILITY.booleanValue()))
             .andExpect(jsonPath("$.isModifiedByLaboratory").value(DEFAULT_IS_MODIFIED_BY_LABORATORY.booleanValue()))
-            .andExpect(jsonPath("$.isModifiedByCourrier").value(DEFAULT_IS_MODIFIED_BY_COURRIER.booleanValue()))
+            .andExpect(jsonPath("$.isModifiedByCourier").value(DEFAULT_IS_MODIFIED_BY_COURIER.booleanValue()))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
             .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
             .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY))
@@ -379,6 +377,7 @@ class SampleResourceIT {
     @Transactional
     void putNewSample() throws Exception {
         // Initialize the database
+        sample.setId(UUID.randomUUID().toString());
         sampleRepository.saveAndFlush(sample);
 
         int databaseSizeBeforeUpdate = sampleRepository.findAll().size();
@@ -412,7 +411,7 @@ class SampleResourceIT {
             .isModifiedByHub(UPDATED_IS_MODIFIED_BY_HUB)
             .isModifiedByFacility(UPDATED_IS_MODIFIED_BY_FACILITY)
             .isModifiedByLaboratory(UPDATED_IS_MODIFIED_BY_LABORATORY)
-            .isModifiedByCourrier(UPDATED_IS_MODIFIED_BY_COURRIER)
+            .isModifiedByCourier(UPDATED_IS_MODIFIED_BY_COURIER)
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE)
             .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
@@ -454,7 +453,7 @@ class SampleResourceIT {
         assertThat(testSample.getIsModifiedByHub()).isEqualTo(UPDATED_IS_MODIFIED_BY_HUB);
         assertThat(testSample.getIsModifiedByFacility()).isEqualTo(UPDATED_IS_MODIFIED_BY_FACILITY);
         assertThat(testSample.getIsModifiedByLaboratory()).isEqualTo(UPDATED_IS_MODIFIED_BY_LABORATORY);
-        assertThat(testSample.getIsModifiedByCourrier()).isEqualTo(UPDATED_IS_MODIFIED_BY_COURRIER);
+        assertThat(testSample.getIsModifiedByCourier()).isEqualTo(UPDATED_IS_MODIFIED_BY_COURIER);
         assertThat(testSample.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testSample.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testSample.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
@@ -465,7 +464,7 @@ class SampleResourceIT {
     @Transactional
     void putNonExistingSample() throws Exception {
         int databaseSizeBeforeUpdate = sampleRepository.findAll().size();
-        sample.setId(count.incrementAndGet());
+        sample.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restSampleMockMvc
@@ -485,12 +484,12 @@ class SampleResourceIT {
     @Transactional
     void putWithIdMismatchSample() throws Exception {
         int databaseSizeBeforeUpdate = sampleRepository.findAll().size();
-        sample.setId(count.incrementAndGet());
+        sample.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restSampleMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, count.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(sample))
             )
@@ -505,7 +504,7 @@ class SampleResourceIT {
     @Transactional
     void putWithMissingIdPathParamSample() throws Exception {
         int databaseSizeBeforeUpdate = sampleRepository.findAll().size();
-        sample.setId(count.incrementAndGet());
+        sample.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restSampleMockMvc
@@ -521,6 +520,7 @@ class SampleResourceIT {
     @Transactional
     void partialUpdateSampleWithPatch() throws Exception {
         // Initialize the database
+        sample.setId(UUID.randomUUID().toString());
         sampleRepository.saveAndFlush(sample);
 
         int databaseSizeBeforeUpdate = sampleRepository.findAll().size();
@@ -540,7 +540,7 @@ class SampleResourceIT {
             .clientContact(UPDATED_CLIENT_CONTACT)
             .temperatureAtHub(UPDATED_TEMPERATURE_AT_HUB)
             .isModifiedByLaboratory(UPDATED_IS_MODIFIED_BY_LABORATORY)
-            .isModifiedByCourrier(UPDATED_IS_MODIFIED_BY_COURRIER)
+            .isModifiedByCourier(UPDATED_IS_MODIFIED_BY_COURIER)
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE)
             .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
@@ -581,7 +581,7 @@ class SampleResourceIT {
         assertThat(testSample.getIsModifiedByHub()).isEqualTo(DEFAULT_IS_MODIFIED_BY_HUB);
         assertThat(testSample.getIsModifiedByFacility()).isEqualTo(DEFAULT_IS_MODIFIED_BY_FACILITY);
         assertThat(testSample.getIsModifiedByLaboratory()).isEqualTo(UPDATED_IS_MODIFIED_BY_LABORATORY);
-        assertThat(testSample.getIsModifiedByCourrier()).isEqualTo(UPDATED_IS_MODIFIED_BY_COURRIER);
+        assertThat(testSample.getIsModifiedByCourier()).isEqualTo(UPDATED_IS_MODIFIED_BY_COURIER);
         assertThat(testSample.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testSample.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testSample.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
@@ -592,6 +592,7 @@ class SampleResourceIT {
     @Transactional
     void fullUpdateSampleWithPatch() throws Exception {
         // Initialize the database
+        sample.setId(UUID.randomUUID().toString());
         sampleRepository.saveAndFlush(sample);
 
         int databaseSizeBeforeUpdate = sampleRepository.findAll().size();
@@ -625,7 +626,7 @@ class SampleResourceIT {
             .isModifiedByHub(UPDATED_IS_MODIFIED_BY_HUB)
             .isModifiedByFacility(UPDATED_IS_MODIFIED_BY_FACILITY)
             .isModifiedByLaboratory(UPDATED_IS_MODIFIED_BY_LABORATORY)
-            .isModifiedByCourrier(UPDATED_IS_MODIFIED_BY_COURRIER)
+            .isModifiedByCourier(UPDATED_IS_MODIFIED_BY_COURIER)
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE)
             .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
@@ -667,7 +668,7 @@ class SampleResourceIT {
         assertThat(testSample.getIsModifiedByHub()).isEqualTo(UPDATED_IS_MODIFIED_BY_HUB);
         assertThat(testSample.getIsModifiedByFacility()).isEqualTo(UPDATED_IS_MODIFIED_BY_FACILITY);
         assertThat(testSample.getIsModifiedByLaboratory()).isEqualTo(UPDATED_IS_MODIFIED_BY_LABORATORY);
-        assertThat(testSample.getIsModifiedByCourrier()).isEqualTo(UPDATED_IS_MODIFIED_BY_COURRIER);
+        assertThat(testSample.getIsModifiedByCourier()).isEqualTo(UPDATED_IS_MODIFIED_BY_COURIER);
         assertThat(testSample.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testSample.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testSample.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
@@ -678,7 +679,7 @@ class SampleResourceIT {
     @Transactional
     void patchNonExistingSample() throws Exception {
         int databaseSizeBeforeUpdate = sampleRepository.findAll().size();
-        sample.setId(count.incrementAndGet());
+        sample.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restSampleMockMvc
@@ -698,12 +699,12 @@ class SampleResourceIT {
     @Transactional
     void patchWithIdMismatchSample() throws Exception {
         int databaseSizeBeforeUpdate = sampleRepository.findAll().size();
-        sample.setId(count.incrementAndGet());
+        sample.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restSampleMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, count.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(sample))
             )
@@ -718,7 +719,7 @@ class SampleResourceIT {
     @Transactional
     void patchWithMissingIdPathParamSample() throws Exception {
         int databaseSizeBeforeUpdate = sampleRepository.findAll().size();
-        sample.setId(count.incrementAndGet());
+        sample.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restSampleMockMvc
@@ -734,6 +735,7 @@ class SampleResourceIT {
     @Transactional
     void deleteSample() throws Exception {
         // Initialize the database
+        sample.setId(UUID.randomUUID().toString());
         sampleRepository.saveAndFlush(sample);
 
         int databaseSizeBeforeDelete = sampleRepository.findAll().size();

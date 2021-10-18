@@ -11,8 +11,7 @@ import com.sampletracking.repository.SampleTypeRepository;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -51,9 +50,6 @@ class SampleTypeResourceIT {
 
     private static final String ENTITY_API_URL = "/api/sample-types";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
-
-    private static Random random = new Random();
-    private static AtomicLong count = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private SampleTypeRepository sampleTypeRepository;
@@ -130,7 +126,7 @@ class SampleTypeResourceIT {
     @Transactional
     void createSampleTypeWithExistingId() throws Exception {
         // Create the SampleType with an existing ID
-        sampleType.setId(1L);
+        sampleType.setId("existing_id");
 
         int databaseSizeBeforeCreate = sampleTypeRepository.findAll().size();
 
@@ -148,6 +144,7 @@ class SampleTypeResourceIT {
     @Transactional
     void getAllSampleTypes() throws Exception {
         // Initialize the database
+        sampleType.setId(UUID.randomUUID().toString());
         sampleTypeRepository.saveAndFlush(sampleType);
 
         // Get all the sampleTypeList
@@ -155,7 +152,7 @@ class SampleTypeResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(sampleType.getId().intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(sampleType.getId())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].prefix").value(hasItem(DEFAULT_PREFIX)))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
@@ -168,6 +165,7 @@ class SampleTypeResourceIT {
     @Transactional
     void getSampleType() throws Exception {
         // Initialize the database
+        sampleType.setId(UUID.randomUUID().toString());
         sampleTypeRepository.saveAndFlush(sampleType);
 
         // Get the sampleType
@@ -175,7 +173,7 @@ class SampleTypeResourceIT {
             .perform(get(ENTITY_API_URL_ID, sampleType.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(sampleType.getId().intValue()))
+            .andExpect(jsonPath("$.id").value(sampleType.getId()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.prefix").value(DEFAULT_PREFIX))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
@@ -195,6 +193,7 @@ class SampleTypeResourceIT {
     @Transactional
     void putNewSampleType() throws Exception {
         // Initialize the database
+        sampleType.setId(UUID.randomUUID().toString());
         sampleTypeRepository.saveAndFlush(sampleType);
 
         int databaseSizeBeforeUpdate = sampleTypeRepository.findAll().size();
@@ -235,7 +234,7 @@ class SampleTypeResourceIT {
     @Transactional
     void putNonExistingSampleType() throws Exception {
         int databaseSizeBeforeUpdate = sampleTypeRepository.findAll().size();
-        sampleType.setId(count.incrementAndGet());
+        sampleType.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restSampleTypeMockMvc
@@ -255,12 +254,12 @@ class SampleTypeResourceIT {
     @Transactional
     void putWithIdMismatchSampleType() throws Exception {
         int databaseSizeBeforeUpdate = sampleTypeRepository.findAll().size();
-        sampleType.setId(count.incrementAndGet());
+        sampleType.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restSampleTypeMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, count.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(sampleType))
             )
@@ -275,7 +274,7 @@ class SampleTypeResourceIT {
     @Transactional
     void putWithMissingIdPathParamSampleType() throws Exception {
         int databaseSizeBeforeUpdate = sampleTypeRepository.findAll().size();
-        sampleType.setId(count.incrementAndGet());
+        sampleType.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restSampleTypeMockMvc
@@ -291,6 +290,7 @@ class SampleTypeResourceIT {
     @Transactional
     void partialUpdateSampleTypeWithPatch() throws Exception {
         // Initialize the database
+        sampleType.setId(UUID.randomUUID().toString());
         sampleTypeRepository.saveAndFlush(sampleType);
 
         int databaseSizeBeforeUpdate = sampleTypeRepository.findAll().size();
@@ -328,6 +328,7 @@ class SampleTypeResourceIT {
     @Transactional
     void fullUpdateSampleTypeWithPatch() throws Exception {
         // Initialize the database
+        sampleType.setId(UUID.randomUUID().toString());
         sampleTypeRepository.saveAndFlush(sampleType);
 
         int databaseSizeBeforeUpdate = sampleTypeRepository.findAll().size();
@@ -368,7 +369,7 @@ class SampleTypeResourceIT {
     @Transactional
     void patchNonExistingSampleType() throws Exception {
         int databaseSizeBeforeUpdate = sampleTypeRepository.findAll().size();
-        sampleType.setId(count.incrementAndGet());
+        sampleType.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restSampleTypeMockMvc
@@ -388,12 +389,12 @@ class SampleTypeResourceIT {
     @Transactional
     void patchWithIdMismatchSampleType() throws Exception {
         int databaseSizeBeforeUpdate = sampleTypeRepository.findAll().size();
-        sampleType.setId(count.incrementAndGet());
+        sampleType.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restSampleTypeMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, count.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(sampleType))
             )
@@ -408,7 +409,7 @@ class SampleTypeResourceIT {
     @Transactional
     void patchWithMissingIdPathParamSampleType() throws Exception {
         int databaseSizeBeforeUpdate = sampleTypeRepository.findAll().size();
-        sampleType.setId(count.incrementAndGet());
+        sampleType.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restSampleTypeMockMvc
@@ -426,6 +427,7 @@ class SampleTypeResourceIT {
     @Transactional
     void deleteSampleType() throws Exception {
         // Initialize the database
+        sampleType.setId(UUID.randomUUID().toString());
         sampleTypeRepository.saveAndFlush(sampleType);
 
         int databaseSizeBeforeDelete = sampleTypeRepository.findAll().size();

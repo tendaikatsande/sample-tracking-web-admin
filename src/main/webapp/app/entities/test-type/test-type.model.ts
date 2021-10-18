@@ -1,7 +1,7 @@
 import * as dayjs from 'dayjs';
 
 export interface ITestType {
-  id?: number;
+  id?: string;
   name?: string | null;
   prefix?: string | null;
   createdBy?: string | null;
@@ -12,7 +12,7 @@ export interface ITestType {
 
 export class TestType implements ITestType {
   constructor(
-    public id?: number,
+    public id?: string,
     public name?: string | null,
     public prefix?: string | null,
     public createdBy?: string | null,
@@ -22,6 +22,6 @@ export class TestType implements ITestType {
   ) {}
 }
 
-export function getTestTypeIdentifier(testType: ITestType): number | undefined {
+export function getTestTypeIdentifier(testType: ITestType): string | undefined {
   return testType.id;
 }

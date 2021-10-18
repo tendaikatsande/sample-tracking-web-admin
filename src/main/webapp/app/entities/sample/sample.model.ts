@@ -1,7 +1,7 @@
 import * as dayjs from 'dayjs';
 
 export interface ISample {
-  id?: number;
+  id?: string;
   appId?: string | null;
   clientSampleId?: string | null;
   clientPatientId?: string | null;
@@ -26,7 +26,7 @@ export interface ISample {
   isModifiedByHub?: boolean | null;
   isModifiedByFacility?: boolean | null;
   isModifiedByLaboratory?: boolean | null;
-  isModifiedByCourrier?: boolean | null;
+  isModifiedByCourier?: boolean | null;
   createdBy?: string | null;
   createdDate?: dayjs.Dayjs | null;
   lastModifiedBy?: string | null;
@@ -35,7 +35,7 @@ export interface ISample {
 
 export class Sample implements ISample {
   constructor(
-    public id?: number,
+    public id?: string,
     public appId?: string | null,
     public clientSampleId?: string | null,
     public clientPatientId?: string | null,
@@ -60,7 +60,7 @@ export class Sample implements ISample {
     public isModifiedByHub?: boolean | null,
     public isModifiedByFacility?: boolean | null,
     public isModifiedByLaboratory?: boolean | null,
-    public isModifiedByCourrier?: boolean | null,
+    public isModifiedByCourier?: boolean | null,
     public createdBy?: string | null,
     public createdDate?: dayjs.Dayjs | null,
     public lastModifiedBy?: string | null,
@@ -70,10 +70,10 @@ export class Sample implements ISample {
     this.isModifiedByHub = this.isModifiedByHub ?? false;
     this.isModifiedByFacility = this.isModifiedByFacility ?? false;
     this.isModifiedByLaboratory = this.isModifiedByLaboratory ?? false;
-    this.isModifiedByCourrier = this.isModifiedByCourrier ?? false;
+    this.isModifiedByCourier = this.isModifiedByCourier ?? false;
   }
 }
 
-export function getSampleIdentifier(sample: ISample): number | undefined {
+export function getSampleIdentifier(sample: ISample): string | undefined {
   return sample.id;
 }

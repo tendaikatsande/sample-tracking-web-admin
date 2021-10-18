@@ -15,7 +15,7 @@ describe('Component Tests', () => {
         providers: [
           {
             provide: ActivatedRoute,
-            useValue: { data: of({ laboratory: { id: 123 } }) },
+            useValue: { data: of({ laboratory: { id: 'ABC' } }) },
           },
         ],
       })
@@ -31,7 +31,7 @@ describe('Component Tests', () => {
         comp.ngOnInit();
 
         // THEN
-        expect(comp.laboratory).toEqual(expect.objectContaining({ id: 123 }));
+        expect(comp.laboratory).toEqual(expect.objectContaining({ id: 'ABC' }));
       });
     });
   });

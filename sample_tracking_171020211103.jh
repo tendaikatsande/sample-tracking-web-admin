@@ -26,7 +26,7 @@ entity Sample {
     isModifiedByHub Boolean
    isModifiedByFacility Boolean
    isModifiedByLaboratory Boolean
-   isModifiedByCourrier Boolean
+   isModifiedByCourier Boolean
   
   
   createdBy String
@@ -54,7 +54,7 @@ entity Shipment{
      isModifiedByHub Boolean
    isModifiedByFacility Boolean
    isModifiedByLaboratory Boolean
-   isModifiedByCourrier Boolean
+   isModifiedByCourier Boolean
    
  createdBy String
     createdDate Instant

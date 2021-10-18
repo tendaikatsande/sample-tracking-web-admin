@@ -62,7 +62,7 @@ public class TestTypeResource {
         TestType result = testTypeService.save(testType);
         return ResponseEntity
             .created(new URI("/api/test-types/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId()))
             .body(result);
     }
 
@@ -78,7 +78,7 @@ public class TestTypeResource {
      */
     @PutMapping("/test-types/{id}")
     public ResponseEntity<TestType> updateTestType(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody TestType testType
     ) throws URISyntaxException {
         log.debug("REST request to update TestType : {}, {}", id, testType);
@@ -96,7 +96,7 @@ public class TestTypeResource {
         TestType result = testTypeService.save(testType);
         return ResponseEntity
             .ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, testType.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, testType.getId()))
             .body(result);
     }
 
@@ -113,7 +113,7 @@ public class TestTypeResource {
      */
     @PatchMapping(value = "/test-types/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<TestType> partialUpdateTestType(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody TestType testType
     ) throws URISyntaxException {
         log.debug("REST request to partial update TestType partially : {}, {}", id, testType);
@@ -132,7 +132,7 @@ public class TestTypeResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, testType.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, testType.getId())
         );
     }
 
@@ -157,7 +157,7 @@ public class TestTypeResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the testType, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/test-types/{id}")
-    public ResponseEntity<TestType> getTestType(@PathVariable Long id) {
+    public ResponseEntity<TestType> getTestType(@PathVariable String id) {
         log.debug("REST request to get TestType : {}", id);
         Optional<TestType> testType = testTypeService.findOne(id);
         return ResponseUtil.wrapOrNotFound(testType);
@@ -170,12 +170,9 @@ public class TestTypeResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/test-types/{id}")
-    public ResponseEntity<Void> deleteTestType(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteTestType(@PathVariable String id) {
         log.debug("REST request to delete TestType : {}", id);
         testTypeService.delete(id);
-        return ResponseEntity
-            .noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

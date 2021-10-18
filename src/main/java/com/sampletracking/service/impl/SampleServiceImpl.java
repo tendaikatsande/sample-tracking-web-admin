@@ -111,8 +111,8 @@ public class SampleServiceImpl implements SampleService {
                 if (sample.getIsModifiedByLaboratory() != null) {
                     existingSample.setIsModifiedByLaboratory(sample.getIsModifiedByLaboratory());
                 }
-                if (sample.getIsModifiedByCourrier() != null) {
-                    existingSample.setIsModifiedByCourrier(sample.getIsModifiedByCourrier());
+                if (sample.getIsModifiedByCourier() != null) {
+                    existingSample.setIsModifiedByCourier(sample.getIsModifiedByCourier());
                 }
                 if (sample.getCreatedBy() != null) {
                     existingSample.setCreatedBy(sample.getCreatedBy());
@@ -141,13 +141,13 @@ public class SampleServiceImpl implements SampleService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<Sample> findOne(Long id) {
+    public Optional<Sample> findOne(String id) {
         log.debug("Request to get Sample : {}", id);
         return sampleRepository.findById(id);
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(String id) {
         log.debug("Request to delete Sample : {}", id);
         sampleRepository.deleteById(id);
     }

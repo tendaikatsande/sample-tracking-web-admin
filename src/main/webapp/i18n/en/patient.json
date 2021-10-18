@@ -17,7 +17,7 @@
       "detail": {
         "title": "Patient"
       },
-      "id": "ID",
+      "id": "Id",
       "appId": "App Id",
       "firstName": "First Name",
       "lastName": "Last Name",

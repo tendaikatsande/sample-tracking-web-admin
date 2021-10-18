@@ -1,7 +1,7 @@
 import * as dayjs from 'dayjs';
 
 export interface ILaboratory {
-  id?: number;
+  id?: string;
   name?: string | null;
   type?: string | null;
   code?: string | null;
@@ -13,7 +13,7 @@ export interface ILaboratory {
 
 export class Laboratory implements ILaboratory {
   constructor(
-    public id?: number,
+    public id?: string,
     public name?: string | null,
     public type?: string | null,
     public code?: string | null,
@@ -24,6 +24,6 @@ export class Laboratory implements ILaboratory {
   ) {}
 }
 
-export function getLaboratoryIdentifier(laboratory: ILaboratory): number | undefined {
+export function getLaboratoryIdentifier(laboratory: ILaboratory): string | undefined {
   return laboratory.id;
 }

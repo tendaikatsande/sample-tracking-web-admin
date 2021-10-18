@@ -44,7 +44,7 @@ export class SampleUpdateComponent implements OnInit {
     isModifiedByHub: [],
     isModifiedByFacility: [],
     isModifiedByLaboratory: [],
-    isModifiedByCourrier: [],
+    isModifiedByCourier: [],
     createdBy: [],
     createdDate: [],
     lastModifiedBy: [],
@@ -127,7 +127,7 @@ export class SampleUpdateComponent implements OnInit {
       isModifiedByHub: sample.isModifiedByHub,
       isModifiedByFacility: sample.isModifiedByFacility,
       isModifiedByLaboratory: sample.isModifiedByLaboratory,
-      isModifiedByCourrier: sample.isModifiedByCourrier,
+      isModifiedByCourier: sample.isModifiedByCourier,
       createdBy: sample.createdBy,
       createdDate: sample.createdDate ? sample.createdDate.format(DATE_TIME_FORMAT) : null,
       lastModifiedBy: sample.lastModifiedBy,
@@ -165,7 +165,7 @@ export class SampleUpdateComponent implements OnInit {
       isModifiedByHub: this.editForm.get(['isModifiedByHub'])!.value,
       isModifiedByFacility: this.editForm.get(['isModifiedByFacility'])!.value,
       isModifiedByLaboratory: this.editForm.get(['isModifiedByLaboratory'])!.value,
-      isModifiedByCourrier: this.editForm.get(['isModifiedByCourrier'])!.value,
+      isModifiedByCourier: this.editForm.get(['isModifiedByCourier'])!.value,
       createdBy: this.editForm.get(['createdBy'])!.value,
       createdDate: this.editForm.get(['createdDate'])!.value
         ? dayjs(this.editForm.get(['createdDate'])!.value, DATE_TIME_FORMAT)

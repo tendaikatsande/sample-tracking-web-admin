@@ -11,8 +11,7 @@ import com.sampletracking.repository.TestTypeRepository;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -51,9 +50,6 @@ class TestTypeResourceIT {
 
     private static final String ENTITY_API_URL = "/api/test-types";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
-
-    private static Random random = new Random();
-    private static AtomicLong count = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private TestTypeRepository testTypeRepository;
@@ -130,7 +126,7 @@ class TestTypeResourceIT {
     @Transactional
     void createTestTypeWithExistingId() throws Exception {
         // Create the TestType with an existing ID
-        testType.setId(1L);
+        testType.setId("existing_id");
 
         int databaseSizeBeforeCreate = testTypeRepository.findAll().size();
 
@@ -148,6 +144,7 @@ class TestTypeResourceIT {
     @Transactional
     void getAllTestTypes() throws Exception {
         // Initialize the database
+        testType.setId(UUID.randomUUID().toString());
         testTypeRepository.saveAndFlush(testType);
 
         // Get all the testTypeList
@@ -155,7 +152,7 @@ class TestTypeResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(testType.getId().intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(testType.getId())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].prefix").value(hasItem(DEFAULT_PREFIX)))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
@@ -168,6 +165,7 @@ class TestTypeResourceIT {
     @Transactional
     void getTestType() throws Exception {
         // Initialize the database
+        testType.setId(UUID.randomUUID().toString());
         testTypeRepository.saveAndFlush(testType);
 
         // Get the testType
@@ -175,7 +173,7 @@ class TestTypeResourceIT {
             .perform(get(ENTITY_API_URL_ID, testType.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(testType.getId().intValue()))
+            .andExpect(jsonPath("$.id").value(testType.getId()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.prefix").value(DEFAULT_PREFIX))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
@@ -195,6 +193,7 @@ class TestTypeResourceIT {
     @Transactional
     void putNewTestType() throws Exception {
         // Initialize the database
+        testType.setId(UUID.randomUUID().toString());
         testTypeRepository.saveAndFlush(testType);
 
         int databaseSizeBeforeUpdate = testTypeRepository.findAll().size();
@@ -235,7 +234,7 @@ class TestTypeResourceIT {
     @Transactional
     void putNonExistingTestType() throws Exception {
         int databaseSizeBeforeUpdate = testTypeRepository.findAll().size();
-        testType.setId(count.incrementAndGet());
+        testType.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restTestTypeMockMvc
@@ -255,12 +254,12 @@ class TestTypeResourceIT {
     @Transactional
     void putWithIdMismatchTestType() throws Exception {
         int databaseSizeBeforeUpdate = testTypeRepository.findAll().size();
-        testType.setId(count.incrementAndGet());
+        testType.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restTestTypeMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, count.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(testType))
             )
@@ -275,7 +274,7 @@ class TestTypeResourceIT {
     @Transactional
     void putWithMissingIdPathParamTestType() throws Exception {
         int databaseSizeBeforeUpdate = testTypeRepository.findAll().size();
-        testType.setId(count.incrementAndGet());
+        testType.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restTestTypeMockMvc
@@ -291,6 +290,7 @@ class TestTypeResourceIT {
     @Transactional
     void partialUpdateTestTypeWithPatch() throws Exception {
         // Initialize the database
+        testType.setId(UUID.randomUUID().toString());
         testTypeRepository.saveAndFlush(testType);
 
         int databaseSizeBeforeUpdate = testTypeRepository.findAll().size();
@@ -325,6 +325,7 @@ class TestTypeResourceIT {
     @Transactional
     void fullUpdateTestTypeWithPatch() throws Exception {
         // Initialize the database
+        testType.setId(UUID.randomUUID().toString());
         testTypeRepository.saveAndFlush(testType);
 
         int databaseSizeBeforeUpdate = testTypeRepository.findAll().size();
@@ -365,7 +366,7 @@ class TestTypeResourceIT {
     @Transactional
     void patchNonExistingTestType() throws Exception {
         int databaseSizeBeforeUpdate = testTypeRepository.findAll().size();
-        testType.setId(count.incrementAndGet());
+        testType.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restTestTypeMockMvc
@@ -385,12 +386,12 @@ class TestTypeResourceIT {
     @Transactional
     void patchWithIdMismatchTestType() throws Exception {
         int databaseSizeBeforeUpdate = testTypeRepository.findAll().size();
-        testType.setId(count.incrementAndGet());
+        testType.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restTestTypeMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, count.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(testType))
             )
@@ -405,7 +406,7 @@ class TestTypeResourceIT {
     @Transactional
     void patchWithMissingIdPathParamTestType() throws Exception {
         int databaseSizeBeforeUpdate = testTypeRepository.findAll().size();
-        testType.setId(count.incrementAndGet());
+        testType.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restTestTypeMockMvc
@@ -421,6 +422,7 @@ class TestTypeResourceIT {
     @Transactional
     void deleteTestType() throws Exception {
         // Initialize the database
+        testType.setId(UUID.randomUUID().toString());
         testTypeRepository.saveAndFlush(testType);
 
         int databaseSizeBeforeDelete = testTypeRepository.findAll().size();
