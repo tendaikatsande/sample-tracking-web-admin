@@ -62,7 +62,7 @@ public class LaboratoryResource {
         Laboratory result = laboratoryService.save(laboratory);
         return ResponseEntity
             .created(new URI("/api/laboratories/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId()))
             .body(result);
     }
 
@@ -78,7 +78,7 @@ public class LaboratoryResource {
      */
     @PutMapping("/laboratories/{id}")
     public ResponseEntity<Laboratory> updateLaboratory(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody Laboratory laboratory
     ) throws URISyntaxException {
         log.debug("REST request to update Laboratory : {}, {}", id, laboratory);
@@ -96,7 +96,7 @@ public class LaboratoryResource {
         Laboratory result = laboratoryService.save(laboratory);
         return ResponseEntity
             .ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, laboratory.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, laboratory.getId()))
             .body(result);
     }
 
@@ -113,7 +113,7 @@ public class LaboratoryResource {
      */
     @PatchMapping(value = "/laboratories/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Laboratory> partialUpdateLaboratory(
-        @PathVariable(value = "id", required = false) final Long id,
+        @PathVariable(value = "id", required = false) final String id,
         @RequestBody Laboratory laboratory
     ) throws URISyntaxException {
         log.debug("REST request to partial update Laboratory partially : {}, {}", id, laboratory);
@@ -132,7 +132,7 @@ public class LaboratoryResource {
 
         return ResponseUtil.wrapOrNotFound(
             result,
-            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, laboratory.getId().toString())
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, laboratory.getId())
         );
     }
 
@@ -157,7 +157,7 @@ public class LaboratoryResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the laboratory, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/laboratories/{id}")
-    public ResponseEntity<Laboratory> getLaboratory(@PathVariable Long id) {
+    public ResponseEntity<Laboratory> getLaboratory(@PathVariable String id) {
         log.debug("REST request to get Laboratory : {}", id);
         Optional<Laboratory> laboratory = laboratoryService.findOne(id);
         return ResponseUtil.wrapOrNotFound(laboratory);
@@ -170,12 +170,9 @@ public class LaboratoryResource {
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
     @DeleteMapping("/laboratories/{id}")
-    public ResponseEntity<Void> deleteLaboratory(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteLaboratory(@PathVariable String id) {
         log.debug("REST request to delete Laboratory : {}", id);
         laboratoryService.delete(id);
-        return ResponseEntity
-            .noContent()
-            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-            .build();
+        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id)).build();
     }
 }

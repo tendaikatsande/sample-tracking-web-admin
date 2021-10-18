@@ -39,12 +39,12 @@ public interface PatientService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<Patient> findOne(Long id);
+    Optional<Patient> findOne(String id);
 
     /**
      * Delete the "id" patient.
      *
      * @param id the id of the entity.
      */
-    void delete(Long id);
+    void delete(String id);
 }

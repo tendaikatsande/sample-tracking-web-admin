@@ -16,7 +16,7 @@ export class SampleDeleteDialogComponent {
     this.activeModal.dismiss();
   }
 
-  confirmDelete(id: number): void {
+  confirmDelete(id: string): void {
     this.sampleService.delete(id).subscribe(() => {
       this.activeModal.close('deleted');
     });

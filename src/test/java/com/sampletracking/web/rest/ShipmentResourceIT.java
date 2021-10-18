@@ -11,8 +11,7 @@ import com.sampletracking.repository.ShipmentRepository;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.Random;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.UUID;
 import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -80,8 +79,8 @@ class ShipmentResourceIT {
     private static final Boolean DEFAULT_IS_MODIFIED_BY_LABORATORY = false;
     private static final Boolean UPDATED_IS_MODIFIED_BY_LABORATORY = true;
 
-    private static final Boolean DEFAULT_IS_MODIFIED_BY_COURRIER = false;
-    private static final Boolean UPDATED_IS_MODIFIED_BY_COURRIER = true;
+    private static final Boolean DEFAULT_IS_MODIFIED_BY_COURIER = false;
+    private static final Boolean UPDATED_IS_MODIFIED_BY_COURIER = true;
 
     private static final String DEFAULT_CREATED_BY = "AAAAAAAAAA";
     private static final String UPDATED_CREATED_BY = "BBBBBBBBBB";
@@ -97,9 +96,6 @@ class ShipmentResourceIT {
 
     private static final String ENTITY_API_URL = "/api/shipments";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
-
-    private static Random random = new Random();
-    private static AtomicLong count = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     @Autowired
     private ShipmentRepository shipmentRepository;
@@ -136,7 +132,7 @@ class ShipmentResourceIT {
             .isModifiedByHub(DEFAULT_IS_MODIFIED_BY_HUB)
             .isModifiedByFacility(DEFAULT_IS_MODIFIED_BY_FACILITY)
             .isModifiedByLaboratory(DEFAULT_IS_MODIFIED_BY_LABORATORY)
-            .isModifiedByCourrier(DEFAULT_IS_MODIFIED_BY_COURRIER)
+            .isModifiedByCourier(DEFAULT_IS_MODIFIED_BY_COURIER)
             .createdBy(DEFAULT_CREATED_BY)
             .createdDate(DEFAULT_CREATED_DATE)
             .lastModifiedBy(DEFAULT_LAST_MODIFIED_BY)
@@ -168,7 +164,7 @@ class ShipmentResourceIT {
             .isModifiedByHub(UPDATED_IS_MODIFIED_BY_HUB)
             .isModifiedByFacility(UPDATED_IS_MODIFIED_BY_FACILITY)
             .isModifiedByLaboratory(UPDATED_IS_MODIFIED_BY_LABORATORY)
-            .isModifiedByCourrier(UPDATED_IS_MODIFIED_BY_COURRIER)
+            .isModifiedByCourier(UPDATED_IS_MODIFIED_BY_COURIER)
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE)
             .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
@@ -210,7 +206,7 @@ class ShipmentResourceIT {
         assertThat(testShipment.getIsModifiedByHub()).isEqualTo(DEFAULT_IS_MODIFIED_BY_HUB);
         assertThat(testShipment.getIsModifiedByFacility()).isEqualTo(DEFAULT_IS_MODIFIED_BY_FACILITY);
         assertThat(testShipment.getIsModifiedByLaboratory()).isEqualTo(DEFAULT_IS_MODIFIED_BY_LABORATORY);
-        assertThat(testShipment.getIsModifiedByCourrier()).isEqualTo(DEFAULT_IS_MODIFIED_BY_COURRIER);
+        assertThat(testShipment.getIsModifiedByCourier()).isEqualTo(DEFAULT_IS_MODIFIED_BY_COURIER);
         assertThat(testShipment.getCreatedBy()).isEqualTo(DEFAULT_CREATED_BY);
         assertThat(testShipment.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
         assertThat(testShipment.getLastModifiedBy()).isEqualTo(DEFAULT_LAST_MODIFIED_BY);
@@ -221,7 +217,7 @@ class ShipmentResourceIT {
     @Transactional
     void createShipmentWithExistingId() throws Exception {
         // Create the Shipment with an existing ID
-        shipment.setId(1L);
+        shipment.setId("existing_id");
 
         int databaseSizeBeforeCreate = shipmentRepository.findAll().size();
 
@@ -239,6 +235,7 @@ class ShipmentResourceIT {
     @Transactional
     void getAllShipments() throws Exception {
         // Initialize the database
+        shipment.setId(UUID.randomUUID().toString());
         shipmentRepository.saveAndFlush(shipment);
 
         // Get all the shipmentList
@@ -246,7 +243,7 @@ class ShipmentResourceIT {
             .perform(get(ENTITY_API_URL + "?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(shipment.getId().intValue())))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(shipment.getId())))
             .andExpect(jsonPath("$.[*].appId").value(hasItem(DEFAULT_APP_ID)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].clientId").value(hasItem(DEFAULT_CLIENT_ID)))
@@ -263,7 +260,7 @@ class ShipmentResourceIT {
             .andExpect(jsonPath("$.[*].isModifiedByHub").value(hasItem(DEFAULT_IS_MODIFIED_BY_HUB.booleanValue())))
             .andExpect(jsonPath("$.[*].isModifiedByFacility").value(hasItem(DEFAULT_IS_MODIFIED_BY_FACILITY.booleanValue())))
             .andExpect(jsonPath("$.[*].isModifiedByLaboratory").value(hasItem(DEFAULT_IS_MODIFIED_BY_LABORATORY.booleanValue())))
-            .andExpect(jsonPath("$.[*].isModifiedByCourrier").value(hasItem(DEFAULT_IS_MODIFIED_BY_COURRIER.booleanValue())))
+            .andExpect(jsonPath("$.[*].isModifiedByCourier").value(hasItem(DEFAULT_IS_MODIFIED_BY_COURIER.booleanValue())))
             .andExpect(jsonPath("$.[*].createdBy").value(hasItem(DEFAULT_CREATED_BY)))
             .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].lastModifiedBy").value(hasItem(DEFAULT_LAST_MODIFIED_BY)))
@@ -274,6 +271,7 @@ class ShipmentResourceIT {
     @Transactional
     void getShipment() throws Exception {
         // Initialize the database
+        shipment.setId(UUID.randomUUID().toString());
         shipmentRepository.saveAndFlush(shipment);
 
         // Get the shipment
@@ -281,7 +279,7 @@ class ShipmentResourceIT {
             .perform(get(ENTITY_API_URL_ID, shipment.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$.id").value(shipment.getId().intValue()))
+            .andExpect(jsonPath("$.id").value(shipment.getId()))
             .andExpect(jsonPath("$.appId").value(DEFAULT_APP_ID))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
             .andExpect(jsonPath("$.clientId").value(DEFAULT_CLIENT_ID))
@@ -298,7 +296,7 @@ class ShipmentResourceIT {
             .andExpect(jsonPath("$.isModifiedByHub").value(DEFAULT_IS_MODIFIED_BY_HUB.booleanValue()))
             .andExpect(jsonPath("$.isModifiedByFacility").value(DEFAULT_IS_MODIFIED_BY_FACILITY.booleanValue()))
             .andExpect(jsonPath("$.isModifiedByLaboratory").value(DEFAULT_IS_MODIFIED_BY_LABORATORY.booleanValue()))
-            .andExpect(jsonPath("$.isModifiedByCourrier").value(DEFAULT_IS_MODIFIED_BY_COURRIER.booleanValue()))
+            .andExpect(jsonPath("$.isModifiedByCourier").value(DEFAULT_IS_MODIFIED_BY_COURIER.booleanValue()))
             .andExpect(jsonPath("$.createdBy").value(DEFAULT_CREATED_BY))
             .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
             .andExpect(jsonPath("$.lastModifiedBy").value(DEFAULT_LAST_MODIFIED_BY))
@@ -316,6 +314,7 @@ class ShipmentResourceIT {
     @Transactional
     void putNewShipment() throws Exception {
         // Initialize the database
+        shipment.setId(UUID.randomUUID().toString());
         shipmentRepository.saveAndFlush(shipment);
 
         int databaseSizeBeforeUpdate = shipmentRepository.findAll().size();
@@ -341,7 +340,7 @@ class ShipmentResourceIT {
             .isModifiedByHub(UPDATED_IS_MODIFIED_BY_HUB)
             .isModifiedByFacility(UPDATED_IS_MODIFIED_BY_FACILITY)
             .isModifiedByLaboratory(UPDATED_IS_MODIFIED_BY_LABORATORY)
-            .isModifiedByCourrier(UPDATED_IS_MODIFIED_BY_COURRIER)
+            .isModifiedByCourier(UPDATED_IS_MODIFIED_BY_COURIER)
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE)
             .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
@@ -375,7 +374,7 @@ class ShipmentResourceIT {
         assertThat(testShipment.getIsModifiedByHub()).isEqualTo(UPDATED_IS_MODIFIED_BY_HUB);
         assertThat(testShipment.getIsModifiedByFacility()).isEqualTo(UPDATED_IS_MODIFIED_BY_FACILITY);
         assertThat(testShipment.getIsModifiedByLaboratory()).isEqualTo(UPDATED_IS_MODIFIED_BY_LABORATORY);
-        assertThat(testShipment.getIsModifiedByCourrier()).isEqualTo(UPDATED_IS_MODIFIED_BY_COURRIER);
+        assertThat(testShipment.getIsModifiedByCourier()).isEqualTo(UPDATED_IS_MODIFIED_BY_COURIER);
         assertThat(testShipment.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testShipment.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testShipment.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
@@ -386,7 +385,7 @@ class ShipmentResourceIT {
     @Transactional
     void putNonExistingShipment() throws Exception {
         int databaseSizeBeforeUpdate = shipmentRepository.findAll().size();
-        shipment.setId(count.incrementAndGet());
+        shipment.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restShipmentMockMvc
@@ -406,12 +405,12 @@ class ShipmentResourceIT {
     @Transactional
     void putWithIdMismatchShipment() throws Exception {
         int databaseSizeBeforeUpdate = shipmentRepository.findAll().size();
-        shipment.setId(count.incrementAndGet());
+        shipment.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restShipmentMockMvc
             .perform(
-                put(ENTITY_API_URL_ID, count.incrementAndGet())
+                put(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(shipment))
             )
@@ -426,7 +425,7 @@ class ShipmentResourceIT {
     @Transactional
     void putWithMissingIdPathParamShipment() throws Exception {
         int databaseSizeBeforeUpdate = shipmentRepository.findAll().size();
-        shipment.setId(count.incrementAndGet());
+        shipment.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restShipmentMockMvc
@@ -442,6 +441,7 @@ class ShipmentResourceIT {
     @Transactional
     void partialUpdateShipmentWithPatch() throws Exception {
         // Initialize the database
+        shipment.setId(UUID.randomUUID().toString());
         shipmentRepository.saveAndFlush(shipment);
 
         int databaseSizeBeforeUpdate = shipmentRepository.findAll().size();
@@ -460,7 +460,7 @@ class ShipmentResourceIT {
             .isModifiedByHub(UPDATED_IS_MODIFIED_BY_HUB)
             .isModifiedByFacility(UPDATED_IS_MODIFIED_BY_FACILITY)
             .isModifiedByLaboratory(UPDATED_IS_MODIFIED_BY_LABORATORY)
-            .isModifiedByCourrier(UPDATED_IS_MODIFIED_BY_COURRIER)
+            .isModifiedByCourier(UPDATED_IS_MODIFIED_BY_COURIER)
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE)
             .lastModifiedBy(UPDATED_LAST_MODIFIED_BY);
@@ -493,7 +493,7 @@ class ShipmentResourceIT {
         assertThat(testShipment.getIsModifiedByHub()).isEqualTo(UPDATED_IS_MODIFIED_BY_HUB);
         assertThat(testShipment.getIsModifiedByFacility()).isEqualTo(UPDATED_IS_MODIFIED_BY_FACILITY);
         assertThat(testShipment.getIsModifiedByLaboratory()).isEqualTo(UPDATED_IS_MODIFIED_BY_LABORATORY);
-        assertThat(testShipment.getIsModifiedByCourrier()).isEqualTo(UPDATED_IS_MODIFIED_BY_COURRIER);
+        assertThat(testShipment.getIsModifiedByCourier()).isEqualTo(UPDATED_IS_MODIFIED_BY_COURIER);
         assertThat(testShipment.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testShipment.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testShipment.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
@@ -504,6 +504,7 @@ class ShipmentResourceIT {
     @Transactional
     void fullUpdateShipmentWithPatch() throws Exception {
         // Initialize the database
+        shipment.setId(UUID.randomUUID().toString());
         shipmentRepository.saveAndFlush(shipment);
 
         int databaseSizeBeforeUpdate = shipmentRepository.findAll().size();
@@ -529,7 +530,7 @@ class ShipmentResourceIT {
             .isModifiedByHub(UPDATED_IS_MODIFIED_BY_HUB)
             .isModifiedByFacility(UPDATED_IS_MODIFIED_BY_FACILITY)
             .isModifiedByLaboratory(UPDATED_IS_MODIFIED_BY_LABORATORY)
-            .isModifiedByCourrier(UPDATED_IS_MODIFIED_BY_COURRIER)
+            .isModifiedByCourier(UPDATED_IS_MODIFIED_BY_COURIER)
             .createdBy(UPDATED_CREATED_BY)
             .createdDate(UPDATED_CREATED_DATE)
             .lastModifiedBy(UPDATED_LAST_MODIFIED_BY)
@@ -563,7 +564,7 @@ class ShipmentResourceIT {
         assertThat(testShipment.getIsModifiedByHub()).isEqualTo(UPDATED_IS_MODIFIED_BY_HUB);
         assertThat(testShipment.getIsModifiedByFacility()).isEqualTo(UPDATED_IS_MODIFIED_BY_FACILITY);
         assertThat(testShipment.getIsModifiedByLaboratory()).isEqualTo(UPDATED_IS_MODIFIED_BY_LABORATORY);
-        assertThat(testShipment.getIsModifiedByCourrier()).isEqualTo(UPDATED_IS_MODIFIED_BY_COURRIER);
+        assertThat(testShipment.getIsModifiedByCourier()).isEqualTo(UPDATED_IS_MODIFIED_BY_COURIER);
         assertThat(testShipment.getCreatedBy()).isEqualTo(UPDATED_CREATED_BY);
         assertThat(testShipment.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testShipment.getLastModifiedBy()).isEqualTo(UPDATED_LAST_MODIFIED_BY);
@@ -574,7 +575,7 @@ class ShipmentResourceIT {
     @Transactional
     void patchNonExistingShipment() throws Exception {
         int databaseSizeBeforeUpdate = shipmentRepository.findAll().size();
-        shipment.setId(count.incrementAndGet());
+        shipment.setId(UUID.randomUUID().toString());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restShipmentMockMvc
@@ -594,12 +595,12 @@ class ShipmentResourceIT {
     @Transactional
     void patchWithIdMismatchShipment() throws Exception {
         int databaseSizeBeforeUpdate = shipmentRepository.findAll().size();
-        shipment.setId(count.incrementAndGet());
+        shipment.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restShipmentMockMvc
             .perform(
-                patch(ENTITY_API_URL_ID, count.incrementAndGet())
+                patch(ENTITY_API_URL_ID, UUID.randomUUID().toString())
                     .contentType("application/merge-patch+json")
                     .content(TestUtil.convertObjectToJsonBytes(shipment))
             )
@@ -614,7 +615,7 @@ class ShipmentResourceIT {
     @Transactional
     void patchWithMissingIdPathParamShipment() throws Exception {
         int databaseSizeBeforeUpdate = shipmentRepository.findAll().size();
-        shipment.setId(count.incrementAndGet());
+        shipment.setId(UUID.randomUUID().toString());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restShipmentMockMvc
@@ -630,6 +631,7 @@ class ShipmentResourceIT {
     @Transactional
     void deleteShipment() throws Exception {
         // Initialize the database
+        shipment.setId(UUID.randomUUID().toString());
         shipmentRepository.saveAndFlush(shipment);
 
         int databaseSizeBeforeDelete = shipmentRepository.findAll().size();

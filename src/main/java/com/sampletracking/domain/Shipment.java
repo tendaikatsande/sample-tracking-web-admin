@@ -18,10 +18,8 @@ public class Shipment implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
     @Column(name = "id")
-    private Long id;
+    private String id;
 
     @Column(name = "app_id")
     private String appId;
@@ -73,8 +71,8 @@ public class Shipment implements Serializable {
     @Column(name = "is_modified_by_laboratory")
     private Boolean isModifiedByLaboratory;
 
-    @Column(name = "is_modified_by_courrier")
-    private Boolean isModifiedByCourrier;
+    @Column(name = "is_modified_by_courier")
+    private Boolean isModifiedByCourier;
 
     @Column(name = "created_by")
     private String createdBy;
@@ -90,16 +88,16 @@ public class Shipment implements Serializable {
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
-    public Long getId() {
+    public String getId() {
         return this.id;
     }
 
-    public Shipment id(Long id) {
+    public Shipment id(String id) {
         this.setId(id);
         return this;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -311,17 +309,17 @@ public class Shipment implements Serializable {
         this.isModifiedByLaboratory = isModifiedByLaboratory;
     }
 
-    public Boolean getIsModifiedByCourrier() {
-        return this.isModifiedByCourrier;
+    public Boolean getIsModifiedByCourier() {
+        return this.isModifiedByCourier;
     }
 
-    public Shipment isModifiedByCourrier(Boolean isModifiedByCourrier) {
-        this.setIsModifiedByCourrier(isModifiedByCourrier);
+    public Shipment isModifiedByCourier(Boolean isModifiedByCourier) {
+        this.setIsModifiedByCourier(isModifiedByCourier);
         return this;
     }
 
-    public void setIsModifiedByCourrier(Boolean isModifiedByCourrier) {
-        this.isModifiedByCourrier = isModifiedByCourrier;
+    public void setIsModifiedByCourier(Boolean isModifiedByCourier) {
+        this.isModifiedByCourier = isModifiedByCourier;
     }
 
     public String getCreatedBy() {
@@ -416,7 +414,7 @@ public class Shipment implements Serializable {
             ", isModifiedByHub='" + getIsModifiedByHub() + "'" +
             ", isModifiedByFacility='" + getIsModifiedByFacility() + "'" +
             ", isModifiedByLaboratory='" + getIsModifiedByLaboratory() + "'" +
-            ", isModifiedByCourrier='" + getIsModifiedByCourrier() + "'" +
+            ", isModifiedByCourier='" + getIsModifiedByCourier() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +

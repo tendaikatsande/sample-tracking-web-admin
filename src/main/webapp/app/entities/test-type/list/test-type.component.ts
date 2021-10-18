@@ -57,7 +57,7 @@ export class TestTypeComponent implements OnInit {
     this.handleNavigation();
   }
 
-  trackId(index: number, item: ITestType): number {
+  trackId(index: number, item: ITestType): string {
     return item.id!;
   }
 

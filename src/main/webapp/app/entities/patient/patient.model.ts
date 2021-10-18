@@ -1,7 +1,7 @@
 import * as dayjs from 'dayjs';
 
 export interface IPatient {
-  id?: number;
+  id?: string;
   appId?: string | null;
   firstName?: string | null;
   lastName?: string | null;
@@ -21,7 +21,7 @@ export interface IPatient {
 
 export class Patient implements IPatient {
   constructor(
-    public id?: number,
+    public id?: string,
     public appId?: string | null,
     public firstName?: string | null,
     public lastName?: string | null,
@@ -40,6 +40,6 @@ export class Patient implements IPatient {
   ) {}
 }
 
-export function getPatientIdentifier(patient: IPatient): number | undefined {
+export function getPatientIdentifier(patient: IPatient): string | undefined {
   return patient.id;
 }

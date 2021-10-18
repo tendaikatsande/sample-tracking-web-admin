@@ -39,12 +39,12 @@ public interface SampleService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<Sample> findOne(Long id);
+    Optional<Sample> findOne(String id);
 
     /**
      * Delete the "id" sample.
      *
      * @param id the id of the entity.
      */
-    void delete(Long id);
+    void delete(String id);
 }

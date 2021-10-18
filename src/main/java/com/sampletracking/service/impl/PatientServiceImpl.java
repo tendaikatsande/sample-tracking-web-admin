@@ -99,13 +99,13 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<Patient> findOne(Long id) {
+    public Optional<Patient> findOne(String id) {
         log.debug("Request to get Patient : {}", id);
         return patientRepository.findById(id);
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(String id) {
         log.debug("Request to delete Patient : {}", id);
         patientRepository.deleteById(id);
     }

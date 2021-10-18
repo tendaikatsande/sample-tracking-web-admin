@@ -72,13 +72,13 @@ public class SampleTypeServiceImpl implements SampleTypeService {
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<SampleType> findOne(Long id) {
+    public Optional<SampleType> findOne(String id) {
         log.debug("Request to get SampleType : {}", id);
         return sampleTypeRepository.findById(id);
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(String id) {
         log.debug("Request to delete SampleType : {}", id);
         sampleTypeRepository.deleteById(id);
     }

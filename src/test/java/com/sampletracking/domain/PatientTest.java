@@ -11,11 +11,11 @@ class PatientTest {
     void equalsVerifier() throws Exception {
         TestUtil.equalsVerifier(Patient.class);
         Patient patient1 = new Patient();
-        patient1.setId(1L);
+        patient1.setId("id1");
         Patient patient2 = new Patient();
         patient2.setId(patient1.getId());
         assertThat(patient1).isEqualTo(patient2);
-        patient2.setId(2L);
+        patient2.setId("id2");
         assertThat(patient1).isNotEqualTo(patient2);
         patient1.setId(null);
         assertThat(patient1).isNotEqualTo(patient2);

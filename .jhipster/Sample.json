@@ -2,6 +2,10 @@
   "name": "Sample",
   "fields": [
     {
+      "fieldName": "id",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "appId",
       "fieldType": "String"
     },
@@ -98,7 +102,7 @@
       "fieldType": "Boolean"
     },
     {
-      "fieldName": "isModifiedByCourrier",
+      "fieldName": "isModifiedByCourier",
       "fieldType": "Boolean"
     },
     {

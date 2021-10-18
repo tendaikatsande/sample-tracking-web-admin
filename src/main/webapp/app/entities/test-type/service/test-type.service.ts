@@ -28,18 +28,18 @@ export class TestTypeService {
   update(testType: ITestType): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(testType);
     return this.http
-      .put<ITestType>(`${this.resourceUrl}/${getTestTypeIdentifier(testType) as number}`, copy, { observe: 'response' })
+      .put<ITestType>(`${this.resourceUrl}/${getTestTypeIdentifier(testType) as string}`, copy, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
   partialUpdate(testType: ITestType): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(testType);
     return this.http
-      .patch<ITestType>(`${this.resourceUrl}/${getTestTypeIdentifier(testType) as number}`, copy, { observe: 'response' })
+      .patch<ITestType>(`${this.resourceUrl}/${getTestTypeIdentifier(testType) as string}`, copy, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
-  find(id: number): Observable<EntityResponseType> {
+  find(id: string): Observable<EntityResponseType> {
     return this.http
       .get<ITestType>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
@@ -52,7 +52,7 @@ export class TestTypeService {
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 
-  delete(id: number): Observable<HttpResponse<{}>> {
+  delete(id: string): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 

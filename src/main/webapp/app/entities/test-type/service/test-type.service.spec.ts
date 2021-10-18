@@ -24,7 +24,7 @@ describe('TestType Service', () => {
     currentDate = dayjs();
 
     elemDefault = {
-      id: 0,
+      id: 'AAAAAAA',
       name: 'AAAAAAA',
       prefix: 'AAAAAAA',
       createdBy: 'AAAAAAA',
@@ -44,7 +44,7 @@ describe('TestType Service', () => {
         elemDefault
       );
 
-      service.find(123).subscribe(resp => (expectedResult = resp.body));
+      service.find('ABC').subscribe(resp => (expectedResult = resp.body));
 
       const req = httpMock.expectOne({ method: 'GET' });
       req.flush(returnedFromService);
@@ -54,7 +54,7 @@ describe('TestType Service', () => {
     it('should create a TestType', () => {
       const returnedFromService = Object.assign(
         {
-          id: 0,
+          id: 'ID',
           dateCreated: currentDate.format(DATE_TIME_FORMAT),
           dateModified: currentDate.format(DATE_TIME_FORMAT),
         },
@@ -79,7 +79,7 @@ describe('TestType Service', () => {
     it('should update a TestType', () => {
       const returnedFromService = Object.assign(
         {
-          id: 1,
+          id: 'BBBBBB',
           name: 'BBBBBB',
           prefix: 'BBBBBB',
           createdBy: 'BBBBBB',
@@ -136,7 +136,7 @@ describe('TestType Service', () => {
     it('should return a list of TestType', () => {
       const returnedFromService = Object.assign(
         {
-          id: 1,
+          id: 'BBBBBB',
           name: 'BBBBBB',
           prefix: 'BBBBBB',
           createdBy: 'BBBBBB',
@@ -164,7 +164,7 @@ describe('TestType Service', () => {
     });
 
     it('should delete a TestType', () => {
-      service.delete(123).subscribe(resp => (expectedResult = resp.ok));
+      service.delete('ABC').subscribe(resp => (expectedResult = resp.ok));
 
       const req = httpMock.expectOne({ method: 'DELETE' });
       req.flush({ status: 200 });
@@ -173,42 +173,42 @@ describe('TestType Service', () => {
 
     describe('addTestTypeToCollectionIfMissing', () => {
       it('should add a TestType to an empty array', () => {
-        const testType: ITestType = { id: 123 };
+        const testType: ITestType = { id: 'ABC' };
         expectedResult = service.addTestTypeToCollectionIfMissing([], testType);
         expect(expectedResult).toHaveLength(1);
         expect(expectedResult).toContain(testType);
       });
 
       it('should not add a TestType to an array that contains it', () => {
-        const testType: ITestType = { id: 123 };
+        const testType: ITestType = { id: 'ABC' };
         const testTypeCollection: ITestType[] = [
           {
             ...testType,
           },
-          { id: 456 },
+          { id: 'CBA' },
         ];
         expectedResult = service.addTestTypeToCollectionIfMissing(testTypeCollection, testType);
         expect(expectedResult).toHaveLength(2);
       });
 
       it("should add a TestType to an array that doesn't contain it", () => {
-        const testType: ITestType = { id: 123 };
-        const testTypeCollection: ITestType[] = [{ id: 456 }];
+        const testType: ITestType = { id: 'ABC' };
+        const testTypeCollection: ITestType[] = [{ id: 'CBA' }];
         expectedResult = service.addTestTypeToCollectionIfMissing(testTypeCollection, testType);
         expect(expectedResult).toHaveLength(2);
         expect(expectedResult).toContain(testType);
       });
 
       it('should add only unique TestType to an array', () => {
-        const testTypeArray: ITestType[] = [{ id: 123 }, { id: 456 }, { id: 64029 }];
-        const testTypeCollection: ITestType[] = [{ id: 123 }];
+        const testTypeArray: ITestType[] = [{ id: 'ABC' }, { id: 'CBA' }, { id: 'af89ebc5-3023-4e4f-bccb-bfe864252bee' }];
+        const testTypeCollection: ITestType[] = [{ id: 'ABC' }];
         expectedResult = service.addTestTypeToCollectionIfMissing(testTypeCollection, ...testTypeArray);
         expect(expectedResult).toHaveLength(3);
       });
 
       it('should accept varargs', () => {
-        const testType: ITestType = { id: 123 };
-        const testType2: ITestType = { id: 456 };
+        const testType: ITestType = { id: 'ABC' };
+        const testType2: ITestType = { id: 'CBA' };
         expectedResult = service.addTestTypeToCollectionIfMissing([], testType, testType2);
         expect(expectedResult).toHaveLength(2);
         expect(expectedResult).toContain(testType);
@@ -216,14 +216,14 @@ describe('TestType Service', () => {
       });
 
       it('should accept null and undefined values', () => {
-        const testType: ITestType = { id: 123 };
+        const testType: ITestType = { id: 'ABC' };
         expectedResult = service.addTestTypeToCollectionIfMissing([], null, testType, undefined);
         expect(expectedResult).toHaveLength(1);
         expect(expectedResult).toContain(testType);
       });
 
       it('should return initial array if no TestType is added', () => {
-        const testTypeCollection: ITestType[] = [{ id: 123 }];
+        const testTypeCollection: ITestType[] = [{ id: 'ABC' }];
         expectedResult = service.addTestTypeToCollectionIfMissing(testTypeCollection, undefined, null);
         expect(expectedResult).toEqual(testTypeCollection);
       });

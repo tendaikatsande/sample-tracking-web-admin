@@ -32,7 +32,7 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
-          <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="sampleTrackingApp.sample.id">Id</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col" jhiSortBy="appId">
             <span jhiTranslate="sampleTrackingApp.sample.appId">App Id</span> <fa-icon icon="sort"></fa-icon>
           </th>
@@ -107,9 +107,8 @@
             <span jhiTranslate="sampleTrackingApp.sample.isModifiedByLaboratory">Is Modified By Laboratory</span>
             <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="isModifiedByCourrier">
-            <span jhiTranslate="sampleTrackingApp.sample.isModifiedByCourrier">Is Modified By Courrier</span>
-            <fa-icon icon="sort"></fa-icon>
+          <th scope="col" jhiSortBy="isModifiedByCourier">
+            <span jhiTranslate="sampleTrackingApp.sample.isModifiedByCourier">Is Modified By Courier</span> <fa-icon icon="sort"></fa-icon>
           </th>
           <th scope="col" jhiSortBy="createdBy">
             <span jhiTranslate="sampleTrackingApp.sample.createdBy">Created By</span> <fa-icon icon="sort"></fa-icon>
@@ -155,7 +154,7 @@
           <td>{{ sample.isModifiedByHub }}</td>
           <td>{{ sample.isModifiedByFacility }}</td>
           <td>{{ sample.isModifiedByLaboratory }}</td>
-          <td>{{ sample.isModifiedByCourrier }}</td>
+          <td>{{ sample.isModifiedByCourier }}</td>
           <td>{{ sample.createdBy }}</td>
           <td>{{ sample.createdDate | formatMediumDatetime }}</td>
           <td>{{ sample.lastModifiedBy }}</td>

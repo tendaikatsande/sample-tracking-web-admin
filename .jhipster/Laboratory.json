@@ -2,6 +2,10 @@
   "name": "Laboratory",
   "fields": [
     {
+      "fieldName": "id",
+      "fieldType": "String"
+    },
+    {
       "fieldName": "name",
       "fieldType": "String"
     },

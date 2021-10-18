@@ -11,7 +11,7 @@
     -->
     <changeSet id="20211015090534-1" author="jhipster">
         <createTable tableName="shipment">
-            <column name="id" type="bigint">
+            <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="app_id" type="varchar(255)">
@@ -62,7 +62,7 @@
             <column name="is_modified_by_laboratory" type="boolean">
                 <constraints nullable="true" />
             </column>
-            <column name="is_modified_by_courrier" type="boolean">
+            <column name="is_modified_by_courier" type="boolean">
                 <constraints nullable="true" />
             </column>
             <column name="created_by" type="varchar(255)">
@@ -99,7 +99,7 @@
                   separator=";"
                   tableName="shipment"
                   usePreparedStatements="true">
-            <column name="id" type="numeric"/>
+            <column name="id" type="string"/>
             <column name="app_id" type="string"/>
             <column name="description" type="string"/>
             <column name="client_id" type="string"/>
@@ -116,7 +116,7 @@
             <column name="is_modified_by_hub" type="boolean"/>
             <column name="is_modified_by_facility" type="boolean"/>
             <column name="is_modified_by_laboratory" type="boolean"/>
-            <column name="is_modified_by_courrier" type="boolean"/>
+            <column name="is_modified_by_courier" type="boolean"/>
             <column name="created_by" type="string"/>
             <column name="created_date" type="date"/>
             <column name="last_modified_by" type="string"/>

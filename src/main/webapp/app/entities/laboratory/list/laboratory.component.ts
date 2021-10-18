@@ -57,7 +57,7 @@ export class LaboratoryComponent implements OnInit {
     this.handleNavigation();
   }
 
-  trackId(index: number, item: ILaboratory): number {
+  trackId(index: number, item: ILaboratory): string {
     return item.id!;
   }
 

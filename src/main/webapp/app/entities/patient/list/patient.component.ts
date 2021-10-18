@@ -57,7 +57,7 @@ export class PatientComponent implements OnInit {
     this.handleNavigation();
   }
 
-  trackId(index: number, item: IPatient): number {
+  trackId(index: number, item: IPatient): string {
     return item.id!;
   }
 

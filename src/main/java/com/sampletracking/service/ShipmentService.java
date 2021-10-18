@@ -39,12 +39,12 @@ public interface ShipmentService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<Shipment> findOne(Long id);
+    Optional<Shipment> findOne(String id);
 
     /**
      * Delete the "id" shipment.
      *
      * @param id the id of the entity.
      */
-    void delete(Long id);
+    void delete(String id);
 }

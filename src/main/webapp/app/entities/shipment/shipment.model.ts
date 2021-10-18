@@ -1,7 +1,7 @@
 import * as dayjs from 'dayjs';
 
 export interface IShipment {
-  id?: number;
+  id?: string;
   appId?: string | null;
   description?: string | null;
   clientId?: string | null;
@@ -18,7 +18,7 @@ export interface IShipment {
   isModifiedByHub?: boolean | null;
   isModifiedByFacility?: boolean | null;
   isModifiedByLaboratory?: boolean | null;
-  isModifiedByCourrier?: boolean | null;
+  isModifiedByCourier?: boolean | null;
   createdBy?: string | null;
   createdDate?: dayjs.Dayjs | null;
   lastModifiedBy?: string | null;
@@ -27,7 +27,7 @@ export interface IShipment {
 
 export class Shipment implements IShipment {
   constructor(
-    public id?: number,
+    public id?: string,
     public appId?: string | null,
     public description?: string | null,
     public clientId?: string | null,
@@ -44,7 +44,7 @@ export class Shipment implements IShipment {
     public isModifiedByHub?: boolean | null,
     public isModifiedByFacility?: boolean | null,
     public isModifiedByLaboratory?: boolean | null,
-    public isModifiedByCourrier?: boolean | null,
+    public isModifiedByCourier?: boolean | null,
     public createdBy?: string | null,
     public createdDate?: dayjs.Dayjs | null,
     public lastModifiedBy?: string | null,
@@ -53,10 +53,10 @@ export class Shipment implements IShipment {
     this.isModifiedByHub = this.isModifiedByHub ?? false;
     this.isModifiedByFacility = this.isModifiedByFacility ?? false;
     this.isModifiedByLaboratory = this.isModifiedByLaboratory ?? false;
-    this.isModifiedByCourrier = this.isModifiedByCourrier ?? false;
+    this.isModifiedByCourier = this.isModifiedByCourier ?? false;
   }
 }
 
-export function getShipmentIdentifier(shipment: IShipment): number | undefined {
+export function getShipmentIdentifier(shipment: IShipment): string | undefined {
   return shipment.id;
 }
